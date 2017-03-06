@@ -1,0 +1,144 @@
+package com.example.b00sti.bbeacon.bluetooth;
+
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+
+/**
+ * Created by Dominik (b00sti) Pawlik on 2017-01-26
+ */
+
+public class BlueToothManager {
+    final boolean isSecure;
+    final ConnectionCallbacks connectionCallbacks;
+
+    private final BluetoothBundle bluetoothBundle;
+
+    BluetoothSocket bluetoothSocket;
+    InputStreamWrapper inputStream;
+    OutputStreamWrapper outputStream;
+
+    private BlueToothManager(BluetoothBundle bundle,
+                             ConnectionCallbacks c, boolean isSecure) {
+        this.bluetoothBundle = bundle;
+        this.connectionCallbacks = c;
+        this.isSecure = isSecure;
+    }
+
+    public Set<BluetoothDevice> listDevices() {
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+
+        if (adapter.isEnabled()) return BluetoothAdapter.getDefaultAdapter().getBondedDevices();
+        return Collections.emptySet();
+    }
+
+    public void connect(final BluetoothDevice device) {
+
+        connectToDevice(device)
+                .map(new Function<BluetoothSocket, Object>() {
+                    @Override
+                    public Object apply(BluetoothSocket _bluetoothSocket) throws Exception {
+                        bluetoothSocket = _bluetoothSocket;
+
+                        createInputStream();
+                        createOutputStream();
+                        return new Object();
+                    }
+                }).subscribeOn(Schedulers.computation())
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object no_op) throws Exception {
+
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) {
+                        connectionCallbacks.onError(throwable.getMessage());
+                    }
+                });
+
+    }
+
+    void createInputStream() {
+        inputStream = new InputStreamWrapper(bluetoothSocket, bluetoothBundle, connectionCallbacks);
+    }
+
+    void createOutputStream() {
+        outputStream = new OutputStreamWrapper(bluetoothSocket, bluetoothBundle.charset, connectionCallbacks);
+    }
+
+    Observable<BluetoothSocket> connectToDevice(final BluetoothDevice device) {
+        return Observable.fromCallable(new Callable<BluetoothSocket>() {
+            @Override
+            public BluetoothSocket call() throws Exception {
+                try {
+                    UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+                    bluetoothSocket = isSecure ?
+                            device.createRfcommSocketToServiceRecord(uuid) :
+                            device.createInsecureRfcommSocketToServiceRecord(uuid);
+                    bluetoothSocket.connect();
+                    return bluetoothSocket;
+                } catch (IOException e) {
+                    throw new CannotConnectException(e.getMessage());
+                }
+            }
+        });
+    }
+
+    public void disconnect() {
+        try {
+            if (inputStream != null) inputStream.close();
+            if (outputStream != null) outputStream.close();
+            if (bluetoothSocket != null) bluetoothSocket.close();
+        } catch (IOException x) {
+            connectionCallbacks.onDisconnected();
+        }
+    }
+
+    public static class Builder {
+
+        final ConnectionCallbacks connectionCallbacks;
+        int bufferCapacity;
+        long bluetoothSleep;
+        String charsetString;
+        boolean isSecureCommunication;
+
+        public Builder(ConnectionCallbacks connectionCallbacks) {
+            this.connectionCallbacks = connectionCallbacks;
+        }
+
+        public void setSecureCommunication(boolean secureCommunication) {
+            isSecureCommunication = secureCommunication;
+        }
+
+        public Builder setBufferCapacity(int bufferCapacity) {
+            this.bufferCapacity = bufferCapacity;
+            return this;
+        }
+
+        public Builder setBluetoothSleep(long bluetoothSleep) {
+            this.bluetoothSleep = bluetoothSleep;
+            return this;
+        }
+
+        public Builder setCharsetString(String charsetString) {
+            this.charsetString = charsetString;
+            return this;
+        }
+
+        public BlueToothManager build() {
+            return new BlueToothManager(new BluetoothBundle(charsetString, bluetoothSleep, bufferCapacity), connectionCallbacks, isSecureCommunication);
+        }
+    }
+}
