@@ -1,4 +1,8 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'android-apt'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 25
@@ -24,8 +28,30 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
     compile project(':bskeleton')
 
+    //Rx2
+    compile "io.reactivex.rxjava2:rxjava:2.0.0"
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    //AA
+    compile "org.androidannotations:androidannotations-api:4.1.0"
+    apt "org.androidannotations:androidannotations:4.1.0"
+
+    //Eventbus
+    compile "org.greenrobot:eventbus:3.0.0"
+
+    //Lombok
+    apt "org.projectlombok:lombok:1.16.12"
+    compile "org.projectlombok:lombok:1.16.12"
+
+    //Support library
+    compile 'com.android.support:design:25.2.0'
+    compile "com.android.support:recyclerview-v7:25.2.0"
+
+    //Firebase
+    compile "com.google.firebase:firebase-database:9.4.0"
+    compile "com.google.firebase:firebase-auth:9.4.0"
 }
