@@ -228,10 +228,10 @@ public class NavigationManager {
             if (addItems) {
                 AHBottomNavigationItem item4 = new AHBottomNavigationItem(ctx.getString(R.string.tab_4),
                         ContextCompat.getDrawable(ctx, R.drawable.ic_maps_local_bar),
-                        ContextCompat.getColor(ctx, R.color.color_tab_4));
+                        ContextCompat.getColor(ctx, R.color.color_tab_3));
                 AHBottomNavigationItem item5 = new AHBottomNavigationItem(ctx.getString(R.string.tab_5),
                         ContextCompat.getDrawable(ctx, R.drawable.ic_maps_place),
-                        ContextCompat.getColor(ctx, R.color.color_tab_5));
+                        ContextCompat.getColor(ctx, R.color.color_tab_3));
 
                 ctx.bottomNavigation.addItem(item4);
                 ctx.bottomNavigation.addItem(item5);
