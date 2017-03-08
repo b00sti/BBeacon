@@ -67,7 +67,7 @@ public class NavigationManager {
                 } else {
                     showFAB(false);
                 }
-                
+
                 aHonTabSelectedListener.onTabSelected(position, wasSelected);
                 ctx.viewPager.setCurrentItem(position, false);
 

@@ -4,6 +4,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
+import com.example.b00sti.bbeacon.alarm.AlarmFragment;
+import com.example.b00sti.bbeacon.scanner.ScannerFragment;
+import com.example.b00sti.bbeacon.weather.WeatherFragment;
+
 import java.util.ArrayList;
 
 /**
@@ -11,22 +15,20 @@ import java.util.ArrayList;
  */
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
-    private ArrayList<DemoFragment> fragments = new ArrayList<>();
-    private DemoFragment currentFragment;
+    private ArrayList<BaseRefreshableFragment> fragments = new ArrayList<>();
+    private BaseRefreshableFragment currentFragment;
 
     public MainViewPagerAdapter(FragmentManager fm) {
         super(fm);
 
         fragments.clear();
-        fragments.add(DemoFragment.newInstance(0));
-        fragments.add(DemoFragment.newInstance(1));
-        fragments.add(DemoFragment.newInstance(2));
-        fragments.add(DemoFragment.newInstance(3));
-        fragments.add(DemoFragment.newInstance(4));
+        fragments.add(AlarmFragment.newInstance());
+        fragments.add(WeatherFragment.newInstance());
+        fragments.add(ScannerFragment.newInstance());
     }
 
     @Override
-    public DemoFragment getItem(int position) {
+    public BaseRefreshableFragment getItem(int position) {
         return fragments.get(position);
     }
 
@@ -38,12 +40,12 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
         if (getCurrentFragment() != object) {
-            currentFragment = ((DemoFragment) object);
+            currentFragment = ((BaseRefreshableFragment) object);
         }
         super.setPrimaryItem(container, position, object);
     }
 
-    public DemoFragment getCurrentFragment() {
+    public BaseRefreshableFragment getCurrentFragment() {
         return currentFragment;
     }
 
