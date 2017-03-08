@@ -4,8 +4,6 @@ package com.example.b00sti.bbeacon.navigation;
  * Created by Dominik (b00sti) Pawlik on 2017-02-01
  */
 
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -63,55 +61,12 @@ public class DemoFragment extends BaseRefreshableFragment {
         }
     }
 
-/*    @AfterViews
-    void init() {
-        CLog.d(TAG, "init: activity title", getActivity().getTitle());
-        if (getActivity() instanceof MainActivity) {
-            demoActivity = (MainActivity) getActivity();
-        }
-        initDemoSettings(getView());
-    }*/
-
     private void initDemoSettings(View view) {
         final MainActivity demoActivity = (MainActivity) getActivity();
-        final SwitchCompat switchColored = (SwitchCompat) view.findViewById(R.id.fragment_demo_switch_colored);
-        final SwitchCompat switchFiveItems = (SwitchCompat) view.findViewById(R.id.fragment_demo_switch_five_items);
         final SwitchCompat showHideBottomNavigation = (SwitchCompat) view.findViewById(R.id.fragment_demo_show_hide);
         final SwitchCompat showSelectedBackground = (SwitchCompat) view.findViewById(R.id.fragment_demo_selected_background);
         final SwitchCompat switchForceTitleHide = (SwitchCompat) view.findViewById(R.id.fragment_demo_force_title_hide);
-        final SwitchCompat switchTranslucentNavigation = (SwitchCompat) view.findViewById(R.id.fragment_demo_translucent_navigation);
 
-        switchColored.setChecked(demoActivity.isBottomNavigationColored());
-        switchFiveItems.setChecked(demoActivity.getBottomNavigationNbItems() == 5);
-        switchTranslucentNavigation.setChecked(getActivity()
-                .getSharedPreferences("shared", Context.MODE_PRIVATE)
-                .getBoolean("translucentNavigation", false));
-        switchTranslucentNavigation.setVisibility(
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? View.VISIBLE : View.GONE);
-
-        switchTranslucentNavigation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                getActivity()
-                        .getSharedPreferences("shared", Context.MODE_PRIVATE)
-                        .edit()
-                        .putBoolean("translucentNavigation", isChecked)
-                        .apply();
-                demoActivity.reload();
-            }
-        });
-        switchColored.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                demoActivity.updateBottomNavigationColor(isChecked);
-            }
-        });
-        switchFiveItems.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                demoActivity.updateBottomNavigationItems(isChecked);
-            }
-        });
         showHideBottomNavigation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

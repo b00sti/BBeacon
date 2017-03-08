@@ -41,15 +41,4 @@
     <color name="green_A400">#00E676</color>
     <color name="green_A700">#00C853</color>
 
-    <array name="tab_colors">
-        <item name="tab_1">@color/indigo_900</item>
-        <item name="tab_2">@color/indigo_900</item>
-        <item name="tab_3">@color/indigo_900</item>
-    </array>
-
-    <color name="color_tab_1">@color/indigo_900</color>
-    <color name="color_tab_2">@color/indigo_900</color>
-    <color name="color_tab_3">@color/indigo_900</color>
-
-
 </resources>
