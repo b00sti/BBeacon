@@ -7,27 +7,32 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
 import com.example.b00sti.bbeacon.R;
-import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
-import com.example.b00sti.bbeacon.navigation.DemoAdapter;
+import com.example.b00sti.bbeacon.base.BaseFragment;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-08
  */
 
 @EFragment(R.layout.scanner_fragment)
-public class ScannerFragment extends BaseRefreshableFragment {
+public class ScannerFragment extends BaseFragment<ScannerPresenter> implements ScannerContract.View {
 
     @ViewById(R.id.fragment_container) FrameLayout fragmentContainer;
 
     @ViewById(R.id.mainRV) RecyclerView recyclerView;
 
-    private RecyclerView.LayoutManager layoutManager;
+    @Bean
+    ScannerPresenter presenter;
+
+    @Bean
+    ScannerAdapter scannerAdapter;
 
     public static ScannerFragment newInstance() {
         return new ScannerFragment_();
@@ -38,18 +43,19 @@ public class ScannerFragment extends BaseRefreshableFragment {
         initDemoList();
     }
 
+    @Override
+    protected ScannerPresenter registerPresenter() {
+        presenter.attachView(this);
+        return presenter;
+    }
+
     private void initDemoList() {
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
-        ArrayList<String> itemsData = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            itemsData.add("Fragment Scanner" + " Item : " + i);
-        }
-
-        DemoAdapter adapter = new DemoAdapter(itemsData);
-        recyclerView.setAdapter(adapter);
+        scannerAdapter.setDataSet(new ArrayList<ScannerItem>());
+        recyclerView.setAdapter(scannerAdapter);
+        presenter.fetchData();
     }
 
     @Override
@@ -74,4 +80,26 @@ public class ScannerFragment extends BaseRefreshableFragment {
             fragmentContainer.startAnimation(fadeIn);
         }
     }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
+    public void showNoConnection() {
+
+    }
+
+    @Override
+    public void refreshData(List<ScannerItem> items) {
+        scannerAdapter.setDataSet(items);
+        scannerAdapter.notifyDataSetChanged();
+    }
+
 }
