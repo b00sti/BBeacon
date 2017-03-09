@@ -1,23 +1,32 @@
 package com.example.b00sti.bbeacon.navigation;
 
 import android.animation.Animator;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
+import com.example.b00sti.bbeacon.ui_alarm.AlarmItem;
+import com.example.b00sti.bbeacon.ui_alarm.SetAlarmInteractor;
+import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by b00sti on 06.03.2017.
@@ -25,6 +34,7 @@ import java.util.ArrayList;
 
 @EBean
 public class NavigationManager {
+    private static final String TAG = "NavigationManager";
 
     @RootContext
     MainActivity ctx;
@@ -45,6 +55,49 @@ public class NavigationManager {
         bottomNavigationItems.add(item3);
     }
 
+    private void onFabClickedOnFirstPage() {
+        new MaterialDialog.Builder(ctx)
+                .title(R.string.tab_1)
+                .content("Content")
+                .positiveText("Ok")
+                .negativeText("Cancel")
+                .input("text", null, false, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                        List<AlarmItem> items = new ArrayList<AlarmItem>();
+                        items.add(new AlarmItem(input.toString()));
+                        new SetAlarmInteractor().execute(items, new RealmUtils.OnSuccessListener() {
+                            @Override
+                            public void onSuccess() {
+                                refreshCurrentFragment();
+                            }
+                        });
+                        Toast.makeText(ctx, "On input - " + input, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Toast.makeText(ctx, "On Cancel", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private void onFabClickedOnThirdPage() {
+        Toast.makeText(ctx, "on Fab click", Toast.LENGTH_SHORT).show();
+    }
+
+    private void refreshCurrentFragment() {
+        if (currentFragment == null) {
+            currentFragment = adapter.getCurrentFragment();
+        }
+
+        currentFragment.refresh();
+        Log.d(TAG, "current fragment refreshed " + currentFragment.getClass().getName());
+    }
+
     public void initUI(final AHonTabSelectedListener aHonTabSelectedListener) {
 
         prepareNavigationItems();
@@ -58,6 +111,20 @@ public class NavigationManager {
         } else {
             showFAB(false);
         }
+
+        ctx.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i = ctx.bottomNavigation.getCurrentItem();
+                if (i == 0) {
+                    onFabClickedOnFirstPage();
+                } else if (i == 2) {
+                    onFabClickedOnThirdPage();
+                } else {
+                    Log.e(TAG, "onClick: " + "clicked fab on page where is not available");
+                }
+            }
+        });
 
         ctx.bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override

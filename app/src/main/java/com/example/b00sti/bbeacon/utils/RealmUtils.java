@@ -1,5 +1,7 @@
 package com.example.b00sti.bbeacon.utils;
 
+import android.support.annotation.Nullable;
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -29,5 +31,29 @@ public class RealmUtils {
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static <E extends RealmObject> void SaveAll(final List<E> items, @Nullable final OnSuccessListener onSuccessListener) {
+        final Realm realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                for (E item : items) {
+                    realm.copyToRealmOrUpdate(item);
+                }
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                realm.close();
+                if (onSuccessListener != null) {
+                    onSuccessListener.onSuccess();
+                }
+            }
+        });
+    }
+
+    public interface OnSuccessListener {
+        void onSuccess();
     }
 }

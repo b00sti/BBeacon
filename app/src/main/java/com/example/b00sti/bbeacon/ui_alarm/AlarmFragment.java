@@ -2,6 +2,7 @@ package com.example.b00sti.bbeacon.ui_alarm;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -23,6 +24,7 @@ import java.util.List;
 
 @EFragment(R.layout.alarm_fragment)
 public class AlarmFragment extends BaseFragment<AlarmPresenter> implements AlarmContract.View {
+    private static final String TAG = "AlarmFragment";
 
     @ViewById(R.id.fragment_container) FrameLayout fragmentContainer;
 
@@ -61,8 +63,9 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
 
     @Override
     public void refresh() {
+        Log.d(TAG, "refresh: " + recyclerView);
         if (recyclerView != null) {
-            recyclerView.smoothScrollToPosition(0);
+            presenter.fetchData();
         }
     }
 
@@ -101,6 +104,7 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
     public void refreshData(List<AlarmItem> items) {
         alarmAdapter.setDataSet(items);
         alarmAdapter.notifyDataSetChanged();
+        recyclerView.smoothScrollToPosition(0);
     }
 
 }

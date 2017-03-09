@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.ui_alarm;
+package com.example.b00sti.bbeacon.model;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -13,11 +13,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class AlarmItem extends RealmObject {
+public class Beacon extends RealmObject {
 
     @PrimaryKey
-    String text;
+    private String id;
 
-    public AlarmItem() {
+    private String name;
+
+    public Beacon() {
     }
 }

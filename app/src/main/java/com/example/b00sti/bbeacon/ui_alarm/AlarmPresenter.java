@@ -1,6 +1,7 @@
 package com.example.b00sti.bbeacon.ui_alarm;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.example.b00sti.bbeacon.base.BasePresenter;
 
@@ -17,15 +18,19 @@ import io.reactivex.functions.Consumer;
 
 @EBean
 public class AlarmPresenter extends BasePresenter<AlarmContract.View> implements AlarmContract.Presenter {
+    private static final String TAG = "AlarmPresenter";
 
     @RootContext
     Activity ctx;
 
     @Override
     public void fetchData() {
+        Log.d(TAG, "fetchData: ");
+
         addDisposable(new GetAlarmInteractor().execute().subscribe(new Consumer<List<AlarmItem>>() {
             @Override
             public void accept(List<AlarmItem> items) throws Exception {
+                Log.d(TAG, "accept: " + items.size());
                 view.refreshData(items);
             }
         }));
