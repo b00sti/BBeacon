@@ -7,7 +7,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
 import com.example.b00sti.bbeacon.R;
-import com.example.b00sti.bbeacon.navigation.BaseRefreshableFragment;
+import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
 import com.example.b00sti.bbeacon.navigation.DemoAdapter;
 
 import org.androidannotations.annotations.AfterViews;

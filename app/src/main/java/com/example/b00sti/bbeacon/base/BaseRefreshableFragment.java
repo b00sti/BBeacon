@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.navigation;
+package com.example.b00sti.bbeacon.base;
 
 import android.support.v4.app.Fragment;
 

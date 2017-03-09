@@ -12,6 +12,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
+import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
