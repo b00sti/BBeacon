@@ -7,49 +7,55 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
 import com.example.b00sti.bbeacon.R;
-import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
-import com.example.b00sti.bbeacon.navigation.DemoAdapter;
+import com.example.b00sti.bbeacon.base.BaseFragment;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-08
  */
 
 @EFragment(R.layout.weather_fragment)
-public class WeatherFragment extends BaseRefreshableFragment {
+public class WeatherFragment extends BaseFragment<WeatherPresenter> implements WeatherContract.View {
 
     @ViewById(R.id.fragment_container) FrameLayout fragmentContainer;
 
     @ViewById(R.id.mainRV) RecyclerView recyclerView;
 
-    private RecyclerView.LayoutManager layoutManager;
+    @Bean
+    WeatherPresenter presenter;
+
+    @Bean
+    WeatherAdapter weatherAdapter;
 
     public static WeatherFragment newInstance() {
         return new WeatherFragment_();
     }
 
-    @AfterViews
-    void initUI() {
-        initDemoList();
+    @Override
+    protected WeatherPresenter registerPresenter() {
+        presenter.attachView(this);
+        return presenter;
     }
 
-    private void initDemoList() {
+    @AfterViews
+    void initUI() {
+        initList();
+    }
+
+    private void initList() {
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
-        ArrayList<String> itemsData = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            itemsData.add("Fragment Weather" + " Item : " + i);
-        }
-
-        DemoAdapter adapter = new DemoAdapter(itemsData);
-        recyclerView.setAdapter(adapter);
+        weatherAdapter.setDataSet(new ArrayList<WeatherItem>());
+        recyclerView.setAdapter(weatherAdapter);
+        presenter.fetchData();
     }
 
     @Override
@@ -74,4 +80,26 @@ public class WeatherFragment extends BaseRefreshableFragment {
             fragmentContainer.startAnimation(fadeIn);
         }
     }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
+    public void showNoConnection() {
+
+    }
+
+    @Override
+    public void refreshData(List<WeatherItem> items) {
+        weatherAdapter.setDataSet(items);
+        weatherAdapter.notifyDataSetChanged();
+    }
+
 }
