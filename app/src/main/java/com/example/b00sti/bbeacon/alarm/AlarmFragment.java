@@ -7,27 +7,32 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
 import com.example.b00sti.bbeacon.R;
-import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
-import com.example.b00sti.bbeacon.navigation.DemoAdapter;
+import com.example.b00sti.bbeacon.base.BaseFragment;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-08
  */
 
 @EFragment(R.layout.alarm_fragment)
-public class AlarmFragment extends BaseRefreshableFragment {
+public class AlarmFragment extends BaseFragment<AlarmPresenter> implements AlarmContract.View {
 
     @ViewById(R.id.fragment_container) FrameLayout fragmentContainer;
 
     @ViewById(R.id.mainRV) RecyclerView recyclerView;
 
-    private RecyclerView.LayoutManager layoutManager;
+    @Bean
+    AlarmPresenter presenter;
+
+    @Bean
+    AlarmAdapter alarmAdapter;
 
     public static AlarmFragment newInstance() {
         return new AlarmFragment_();
@@ -35,21 +40,23 @@ public class AlarmFragment extends BaseRefreshableFragment {
 
     @AfterViews
     void initUI() {
-        initDemoList();
+        initList();
     }
 
-    private void initDemoList() {
+
+    @Override
+    protected AlarmPresenter registerPresenter() {
+        presenter.attachView(this);
+        return presenter;
+    }
+
+    private void initList() {
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
-        ArrayList<String> itemsData = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            itemsData.add("Fragment Alarm" + " Item : " + i);
-        }
-
-        DemoAdapter adapter = new DemoAdapter(itemsData);
-        recyclerView.setAdapter(adapter);
+        alarmAdapter.setDataSet(new ArrayList<AlarmItem>());
+        recyclerView.setAdapter(alarmAdapter);
+        presenter.fetchData();
     }
 
     @Override
@@ -74,4 +81,26 @@ public class AlarmFragment extends BaseRefreshableFragment {
             fragmentContainer.startAnimation(fadeIn);
         }
     }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
+    public void showNoConnection() {
+
+    }
+
+    @Override
+    public void refreshData(List<AlarmItem> items) {
+        alarmAdapter.setDataSet(items);
+        alarmAdapter.notifyDataSetChanged();
+    }
+
 }
