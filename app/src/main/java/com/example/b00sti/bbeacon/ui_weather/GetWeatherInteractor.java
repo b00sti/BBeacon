@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.alarm;
+package com.example.b00sti.bbeacon.ui_weather;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +10,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
  */
 
-public class GetAlarmInteractor {
+public class GetWeatherInteractor {
 
-    public Observable<List<AlarmItem>> execute() {
+    public Observable<List<WeatherItem>> execute() {
         //fake data
-        List<AlarmItem> itemsData = new ArrayList<>();
+        List<WeatherItem> itemsData = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
-            itemsData.add(new AlarmItem("Fragment Alarm as mvp - " + " Item : " + i));
+            itemsData.add(new WeatherItem("Fragment Weather as mvp - " + " Item : " + i));
         }
 
         return Observable.just(itemsData)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
+
+        //return RealmUtils.FindAllAsync(WeatherItem.class);
     }
 }

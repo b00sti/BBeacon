@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.weather;
+package com.example.b00sti.bbeacon.ui_alarm;
 
 import android.app.Activity;
 
@@ -16,16 +16,16 @@ import io.reactivex.functions.Consumer;
  */
 
 @EBean
-public class WeatherPresenter extends BasePresenter<WeatherContract.View> implements WeatherContract.Presenter {
+public class AlarmPresenter extends BasePresenter<AlarmContract.View> implements AlarmContract.Presenter {
 
     @RootContext
     Activity ctx;
 
     @Override
     public void fetchData() {
-        addDisposable(new GetWeatherInteractor().execute().subscribe(new Consumer<List<WeatherItem>>() {
+        addDisposable(new GetAlarmInteractor().execute().subscribe(new Consumer<List<AlarmItem>>() {
             @Override
-            public void accept(List<WeatherItem> items) throws Exception {
+            public void accept(List<AlarmItem> items) throws Exception {
                 view.refreshData(items);
             }
         }));

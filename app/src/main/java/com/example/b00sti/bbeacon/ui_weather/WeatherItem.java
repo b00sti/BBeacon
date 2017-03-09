@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.weather;
+package com.example.b00sti.bbeacon.ui_weather;
 
 import io.realm.RealmObject;
 import lombok.AllArgsConstructor;

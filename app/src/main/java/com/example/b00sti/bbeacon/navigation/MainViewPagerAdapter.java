@@ -4,10 +4,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-import com.example.b00sti.bbeacon.alarm.AlarmFragment;
 import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
-import com.example.b00sti.bbeacon.scanner.ScannerFragment;
-import com.example.b00sti.bbeacon.weather.WeatherFragment;
+import com.example.b00sti.bbeacon.ui_alarm.AlarmFragment;
+import com.example.b00sti.bbeacon.ui_scanner.ScannerFragment;
+import com.example.b00sti.bbeacon.ui_weather.WeatherFragment;
 
 import java.util.ArrayList;
 

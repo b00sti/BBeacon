@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.alarm;
+package com.example.b00sti.bbeacon.ui_alarm;
 
 import io.realm.RealmObject;
 import lombok.AllArgsConstructor;

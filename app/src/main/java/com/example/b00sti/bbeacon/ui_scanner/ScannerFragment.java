@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.scanner;
+package com.example.b00sti.bbeacon.ui_scanner;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

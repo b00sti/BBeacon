@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.weather;
+package com.example.b00sti.bbeacon.ui_alarm;
 
 import android.content.Context;
 import android.widget.TextView;
@@ -13,17 +13,17 @@ import org.androidannotations.annotations.ViewById;
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
  */
 
-@EViewGroup(R.layout.weather_item_view)
-public class WeatherItemView extends BaseItemView<WeatherItem> {
+@EViewGroup(R.layout.alarm_item_view)
+public class AlarmItemView extends BaseItemView<AlarmItem> {
 
     @ViewById(R.id.layout_item_demo_title) TextView textView;
 
-    public WeatherItemView(Context context) {
+    public AlarmItemView(Context context) {
         super(context);
     }
 
     @Override
-    public void bind(WeatherItem weatherItem) {
-        textView.setText(weatherItem.getText());
+    public void bind(AlarmItem alarmItem) {
+        textView.setText(alarmItem.getText());
     }
 }
