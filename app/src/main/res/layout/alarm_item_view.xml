@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -8,7 +9,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp">
 
         <RelativeLayout
@@ -20,17 +21,81 @@
                 android:layout_width="5dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:background="@color/green_200">
+                android:background="@color/colorAccent">
 
             </View>
 
-            <TextView
-                android:id="@+id/layout_item_demo_title"
+            <LinearLayout
+                android:id="@+id/topLayoutLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/sidebar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/layout_item_demo_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size_12dp"
+                        android:textSize="@dimen/font_16sp"/>
+
+                    <ImageView
+                        android:id="@+id/moreIV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/size_8dp"
+                        android:src="@drawable/ic_more_vert_black_24dp"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/timeLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/topLayoutLL"
                 android:layout_toRightOf="@+id/sidebar"
-                android:padding="16dp"
-                android:textSize="18sp"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/timeTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.55"
+                    android:padding="@dimen/size_12dp"
+                    android:text="16:09"
+                    android:textSize="40sp"/>
+
+                <com.example.b00sti.bbeacon.utils.SwitchButton
+                    android:id="@+id/switchSB"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/size_42dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/size_32dp"
+                    android:layout_marginRight="@dimen/size_32dp"
+                    android:layout_weight="0.45"
+                    android:padding="@dimen/size_12dp"
+                    app:sb_checked_color="#A36F95"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/daysTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/timeLL"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/sidebar"
+                android:gravity="center"
+                android:padding="@dimen/size_12dp"
+                android:text="MON   TUE   WED   THU   FRI   SAT   SUN"
+                android:textSize="@dimen/font_16sp"/>
 
         </RelativeLayout>
 
