@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -8,7 +10,7 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp">
 
         <RelativeLayout
@@ -20,17 +22,65 @@
                 android:layout_width="5dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:background="@color/green_900">
+                android:background="@color/colorAccent">
 
             </View>
 
-            <TextView
-                android:id="@+id/layout_item_demo_title"
+            <LinearLayout
+                android:id="@+id/topLayoutLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/sidebar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/layout_item_demo_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size_12dp"
+                        android:textSize="@dimen/font_16sp"
+                        tools:text="Keys"/>
+
+                    <ImageView
+                        android:id="@+id/enableDisableIV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/size_8dp"
+                        android:src="@drawable/ic_bluetooth_connected_indigo_800_24dp"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/strengthPB"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_48dp"
+                android:layout_below="@+id/topLayoutLL"
+                android:layout_toRightOf="@id/sidebar"
+                android:padding="@dimen/size_8dp"
+                app:rcBackgroundColor="@color/indigo_50"
+                app:rcBackgroundPadding="@dimen/size_8dp"
+                app:rcProgress="47"
+                app:rcProgressColor="@color/colorAccent"
+                app:rcRadius="@dimen/size_16dp"
+                app:rcReverse="false"/>
+
+            <TextView
+                android:id="@+id/lastVisibleTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/strengthPB"
                 android:layout_toRightOf="@+id/sidebar"
-                android:padding="16dp"
-                android:textSize="18sp"/>
+                android:padding="@dimen/size_12dp"
+                android:text="Last visible: 10:41 19/01/17"
+                android:textSize="@dimen/font_12sp"/>
 
         </RelativeLayout>
 

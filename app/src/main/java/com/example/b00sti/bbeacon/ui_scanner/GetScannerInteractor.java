@@ -16,7 +16,7 @@ public class GetScannerInteractor {
         //fake data
         List<ScannerItem> itemsData = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
-            itemsData.add(new ScannerItem("Fragment Scanner as mvp - " + " Item : " + i));
+            itemsData.add(new ScannerItem("Beacon : " + i, 111111, true, "kiedys"));
         }
 
         return Observable.just(itemsData)

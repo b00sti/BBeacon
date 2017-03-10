@@ -41,4 +41,14 @@
     <color name="green_A400">#00E676</color>
     <color name="green_A700">#00C853</color>
 
+    <array name="beaconColors">
+        <item>#F44336</item>
+        <item>#9C27B0</item>
+        <item>#2196F3</item>
+        <item>#00BCD4</item>
+        <item>#4CAF50</item>
+        <item>#FFEB3B</item>
+        <item>#FF9800</item>
+    </array>
+
 </resources>
