@@ -2,6 +2,7 @@ package com.example.b00sti.bbeacon.ui_alarm;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
     @ViewById(R.id.timeTV) TextView timeTV;
     @ViewById(R.id.switchSB) SwitchButton switchSB;
     @ViewById(R.id.daysTV) TextView daysTV;
+    @ViewById(R.id.topLayoutLL) ViewGroup topLL;
 
     @IntArrayRes(R.array.beaconColors)
     int colors[];
@@ -43,6 +45,7 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
         sidebar.setBackgroundColor(colors[a]);
         switchSB.setChecked(new Random().nextBoolean());
         switchSB.setColor(colors[a]);
+        topLL.setBackgroundColor(colors[a]);
         String time = "" + new Random().nextInt(24) + ":" + (new Random().nextInt(51) + 10);
         timeTV.setText(time);
     }

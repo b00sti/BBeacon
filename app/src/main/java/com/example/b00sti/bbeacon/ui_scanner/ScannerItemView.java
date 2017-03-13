@@ -1,7 +1,9 @@
 package com.example.b00sti.bbeacon.ui_scanner;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import com.example.b00sti.bbeacon.base.BaseItemView;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.DrawableRes;
 import org.androidannotations.annotations.res.IntArrayRes;
 
 import java.util.Random;
@@ -27,9 +30,18 @@ public class ScannerItemView extends BaseItemView<ScannerItem> {
     @ViewById(R.id.enableDisableIV) ImageView enableDisableIV;
     @ViewById(R.id.lastVisibleTV) TextView lastVisibleTV;
     @ViewById(R.id.strengthPB) RoundCornerProgressBar progressBar;
+    @ViewById(R.id.topLayoutLL) ViewGroup topLL;
 
     @IntArrayRes(R.array.beaconColors)
     int colors[];
+
+    @DrawableRes(R.drawable.ic_bluetooth_connected_indigo_800_24dp)
+    Drawable enabled;
+
+    @DrawableRes(R.drawable.ic_bluetooth_disabled_black_24dp)
+    Drawable disabled;
+
+    boolean isEnabled = true;
 
     public ScannerItemView(Context context) {
         super(context);
@@ -42,5 +54,19 @@ public class ScannerItemView extends BaseItemView<ScannerItem> {
         sidebar.setBackgroundColor(colors[a]);
         progressBar.setProgressColor(colors[a]);
         progressBar.setProgress((float) new Random().nextInt(100));
+        topLL.setBackgroundColor(colors[a]);
+
+        enableDisableIV.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isEnabled) {
+                    isEnabled = false;
+                    enableDisableIV.setImageDrawable(disabled);
+                } else {
+                    isEnabled = true;
+                    enableDisableIV.setImageDrawable(enabled);
+                }
+            }
+        });
     }
 }

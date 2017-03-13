@@ -11,7 +11,7 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_margin="@dimen/size_8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
 
             <View
                 android:id="@+id/sidebar"
-                android:layout_width="5dp"
+                android:layout_width="@dimen/size_6dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 android:background="@color/colorAccent">
@@ -50,19 +50,28 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
-                        android:padding="@dimen/size_8dp"
+                        android:layout_margin="@dimen/size_8dp"
                         android:src="@drawable/ic_bluetooth_connected_indigo_800_24dp"/>
 
                 </RelativeLayout>
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/distanceTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/topLayoutLL"
+                android:layout_toRightOf="@+id/sidebar"
+                android:padding="@dimen/size_12dp"
+                android:text="Distance: 10 m"
+                android:textSize="@dimen/font_12sp"/>
 
             <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                 android:id="@+id/strengthPB"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_48dp"
-                android:layout_below="@+id/topLayoutLL"
+                android:layout_below="@+id/distanceTV"
                 android:layout_toRightOf="@id/sidebar"
                 android:padding="@dimen/size_8dp"
                 app:rcBackgroundColor="@color/indigo_50"

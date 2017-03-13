@@ -42,13 +42,17 @@
     <color name="green_A700">#00C853</color>
 
     <array name="beaconColors">
-        <item>#F44336</item>
-        <item>#9C27B0</item>
-        <item>#2196F3</item>
-        <item>#00BCD4</item>
-        <item>#4CAF50</item>
-        <item>#FFEB3B</item>
-        <item>#FF9800</item>
+        <item>#4CAF52</item>
+        <item>#3B8386</item>
+        <item>#DE9B61</item>
+        <item>#DE6461</item>
+    </array>
+
+    <array name="beaconColors1">
+        <item>#3F52B5</item>
+        <item>#653BB5</item>
+        <item>#3087A8</item>
+        <item>#FFC841</item>
     </array>
 
 </resources>
