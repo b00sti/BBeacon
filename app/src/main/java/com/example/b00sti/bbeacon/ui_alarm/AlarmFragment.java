@@ -53,6 +53,11 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initToolbar();
+    }
 
     @Override
     protected AlarmPresenter registerPresenter() {
@@ -74,6 +79,7 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
         Log.d(TAG, "refresh: " + recyclerView);
         if (recyclerView != null) {
             presenter.fetchData();
+            initToolbar();
         }
     }
 

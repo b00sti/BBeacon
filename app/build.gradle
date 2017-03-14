@@ -17,7 +17,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -29,6 +29,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.2.0'
+
+    compile("com.google.android.gms:play-services-maps:9.4.0") {
+        force = true;
+    }
+
     testCompile 'junit:junit:4.12'
     compile project(':bskeleton')
 

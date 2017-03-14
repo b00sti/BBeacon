@@ -6,6 +6,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
+import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
 
@@ -41,6 +42,19 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
     @AfterViews
     void initUI() {
         initDemoList();
+        initToolbar();
+    }
+
+    private void initToolbar() {
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).setCollapsedTitleL("Tracked beacons");
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initToolbar();
     }
 
     @Override

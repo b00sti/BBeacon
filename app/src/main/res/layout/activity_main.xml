@@ -22,7 +22,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="center_horizontal|bottom"
             app:expandedTitleMarginBottom="@dimen/font_22sp"
-            app:expandedTitleTextAppearance="@style/TextViewLightSmall"
+            app:expandedTitleTextAppearance="@style/TextViewLightNormal"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="true">
 
