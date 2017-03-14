@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark">
+
+    <me.grantland.widget.AutofitTextView
+        android:id="@+id/timeTV"
+        style="@style/TextViewLightLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:maxLines="1"
+        android:padding="@dimen/size_24dp"
+        android:text="04:09"
+        android:textSize="88sp"/>
+
+    <TextView
+        style="@style/TextViewLightSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeTV"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:gravity="center"
+        android:text="Time to next alarm: 8h 35 min"/>
+
+</RelativeLayout>

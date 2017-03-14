@@ -7,6 +7,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
+import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
 
@@ -43,6 +44,13 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
     @AfterViews
     void initUI() {
         initList();
+        initToolbar();
+    }
+
+    private void initToolbar() {
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).setCollapsedTitleL("Next alarm: 05:43 PM, Tue ");
+        }
     }
 
 

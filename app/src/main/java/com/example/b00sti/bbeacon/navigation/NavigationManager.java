@@ -1,6 +1,7 @@
 package com.example.b00sti.bbeacon.navigation;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
@@ -17,9 +18,11 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
+import com.example.b00sti.bbeacon.base.BaseInnerViewActivity_;
 import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
 import com.example.b00sti.bbeacon.ui_alarm.AlarmItem;
 import com.example.b00sti.bbeacon.ui_alarm.SetAlarmInteractor;
+import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import org.androidannotations.annotations.EBean;
@@ -38,6 +41,7 @@ public class NavigationManager {
 
     @RootContext
     MainActivity ctx;
+
     private ArrayList<AHBottomNavigationItem> bottomNavigationItems = new ArrayList<>();
     private MainViewPagerAdapter adapter;
     private BaseRefreshableFragment currentFragment;
@@ -56,6 +60,11 @@ public class NavigationManager {
     }
 
     private void onFabClickedOnFirstPage() {
+
+        Intent intent = new Intent(ctx, BaseInnerViewActivity_.class);
+        intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.TOP_WEATHER);
+        ctx.startActivity(intent);
+
         new MaterialDialog.Builder(ctx)
                 .title(R.string.tab_1)
                 .content("Content")
@@ -94,7 +103,14 @@ public class NavigationManager {
             currentFragment = adapter.getCurrentFragment();
         }
 
-        currentFragment.refresh();
+        if (ctx != null) {
+            ctx.setNotifications();
+        }
+
+        if (currentFragment != null) {
+            currentFragment.refresh();
+        }
+
         Log.d(TAG, "current fragment refreshed " + currentFragment.getClass().getName());
     }
 
@@ -144,7 +160,7 @@ public class NavigationManager {
                 }
 
                 if (wasSelected) {
-                    currentFragment.refresh();
+                    refreshCurrentFragment();
                     return true;
                 }
 

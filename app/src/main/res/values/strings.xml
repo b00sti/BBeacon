@@ -4,5 +4,6 @@
     <string name="tab_1">Alarm</string>
     <string name="tab_2">Weather</string>
     <string name="tab_3">Scanner</string>
+    <string name="bundle_fragment">fragment</string>
 
 </resources>
