@@ -8,6 +8,7 @@ import com.example.b00sti.bbeacon.ui_alarm.AlarmFragment;
 import com.example.b00sti.bbeacon.ui_alarm.AlarmTopFragment;
 import com.example.b00sti.bbeacon.ui_others.AddNewAlarmFragment;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerFragment;
+import com.example.b00sti.bbeacon.ui_scanner.ScannerTopFragment;
 import com.example.b00sti.bbeacon.ui_weather.WeatherFragment;
 
 import org.androidannotations.annotations.EBean;
@@ -42,7 +43,7 @@ public class FragmentBuilder {
             case TOP_ALARM:
                 return AlarmTopFragment.newInstance();
             case TOP_SCANNER:
-                return EmptyFragment.newInstance();
+                return ScannerTopFragment.newInstance();
             case TOP_WEATHER:
                 return EmptyFragment.newInstance();
             case WEATHER:
