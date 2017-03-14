@@ -20,6 +20,7 @@ import org.androidannotations.annotations.res.IntArrayRes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-14
@@ -70,7 +71,8 @@ public class AddNewAlarmFragment extends Fragment {
     @Click(R.id.saveB)
     void save() {
         List<AlarmItem> items = new ArrayList<AlarmItem>();
-        items.add(new AlarmItem(titleET.getText().toString(), enabledCB.isChecked(), color));
+        String time = "" + new Random().nextInt(24) + ":" + (new Random().nextInt(51) + 10);
+        items.add(new AlarmItem(titleET.getText().toString(), enabledCB.isChecked(), color, time));
 
         new SetAlarmInteractor().execute(items, new RealmUtils.OnSuccessListener() {
             @Override

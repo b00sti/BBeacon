@@ -20,11 +20,11 @@ public class GetAlarmInteractor {
         boolean fakeData = false;
 
         if (fakeData) {
-            
-            //fake data
+
+            //fake time
             List<AlarmItem> itemsData = new ArrayList<>();
             for (int i = 0; i < 50; i++) {
-                itemsData.add(new AlarmItem("Fragment Alarm as mvp - " + " Item : " + i, false, Color.BLACK));
+                itemsData.add(new AlarmItem("Fragment Alarm as mvp - " + " Item : " + i, false, Color.BLACK, "21:21"));
             }
 
         return Observable.just(itemsData)
@@ -33,7 +33,7 @@ public class GetAlarmInteractor {
 
         } else {
 
-            //right data
+            //right time
             return RealmUtils.FindAllAsync(AlarmItem.class);
         }
 

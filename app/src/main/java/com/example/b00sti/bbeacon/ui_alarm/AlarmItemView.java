@@ -8,12 +8,12 @@ import android.widget.TextView;
 
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseItemView;
+import com.example.b00sti.bbeacon.utils.RealmUtils;
 import com.example.b00sti.bbeacon.utils.SwitchButton;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
-
-import java.util.Random;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
@@ -41,14 +41,18 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
         switchSB.setChecked(alarmItem.isEnabled);
         switchSB.setColor(alarmItem.getColor());
         topLL.setBackgroundColor(alarmItem.getColor());
-        String time = "" + new Random().nextInt(24) + ":" + (new Random().nextInt(51) + 10);
-        timeTV.setText(time);
+        timeTV.setText(alarmItem.getTime());
 
         switchSB.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 alarmItem.isEnabled = isChecked;
-                new SetAlarmInteractor().execute(alarmItem);
+                new SetAlarmInteractor().execute(alarmItem, new RealmUtils.OnSuccessListener() {
+                    @Override
+                    public void onSuccess() {
+                        EventBus.getDefault().post(new NotificationEvent());
+                    }
+                });
             }
         });
     }

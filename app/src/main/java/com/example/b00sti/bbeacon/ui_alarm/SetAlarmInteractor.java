@@ -21,6 +21,12 @@ public class SetAlarmInteractor {
         RealmUtils.SaveAll(data, null);
     }
 
+    public void execute(AlarmItem alarmItem, RealmUtils.OnSuccessListener listener) {
+        List<AlarmItem> data = new ArrayList<>();
+        data.add(alarmItem);
+        RealmUtils.SaveAll(data, listener);
+    }
+
     public void execute(List<AlarmItem> data, RealmUtils.OnSuccessListener listener) {
         RealmUtils.SaveAll(data, listener);
     }

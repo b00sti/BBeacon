@@ -16,12 +16,16 @@ import com.example.b00sti.bbeacon.navigation.NavigationManager;
 import com.example.b00sti.bbeacon.navigation.NotificationManager;
 import com.example.b00sti.bbeacon.ui_alarm.AlarmItem;
 import com.example.b00sti.bbeacon.ui_alarm.GetAlarmInteractor;
+import com.example.b00sti.bbeacon.ui_alarm.NotificationEvent;
 import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +60,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(NotificationEvent event) {
+        refreshAllViews();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

@@ -20,6 +20,7 @@ public class AlarmItem extends RealmObject {
 
     boolean isEnabled = false;
     int color;
+    String time;
 
 
     public AlarmItem() {

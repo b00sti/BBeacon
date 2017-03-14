@@ -52,7 +52,7 @@ public class OutputStreamWrapper implements Closeable {
         }).subscribe(new Consumer<Boolean>() {
             @Override
             public void accept(Boolean canWrite) throws Exception {
-                if (!canWrite) connectionCallbacks.onError("Cannot send data");
+                if (!canWrite) connectionCallbacks.onError("Cannot send time");
             }
         });
     }
@@ -68,7 +68,7 @@ public class OutputStreamWrapper implements Closeable {
                 connectionCallbacks.onError(e.getMessage());
             }
         } else {
-            connectionCallbacks.onError("Cannot send data");
+            connectionCallbacks.onError("Cannot send time");
         }
     }
 
