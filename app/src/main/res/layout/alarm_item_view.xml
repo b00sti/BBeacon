@@ -52,7 +52,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
                         android:padding="@dimen/size_8dp"
-                        android:src="@drawable/ic_more_vert_black_24dp"/>
+                        android:src="@drawable/ic_more_vert_white_24dp"/>
 
                 </RelativeLayout>
 

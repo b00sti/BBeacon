@@ -35,7 +35,7 @@ public class ScannerItemView extends BaseItemView<ScannerItem> {
     @IntArrayRes(R.array.beaconColors)
     int colors[];
 
-    @DrawableRes(R.drawable.ic_bluetooth_connected_indigo_800_24dp)
+    @DrawableRes(R.drawable.ic_bluetooth_connected_white_24dp)
     Drawable enabled;
 
     @DrawableRes(R.drawable.ic_bluetooth_disabled_black_24dp)
