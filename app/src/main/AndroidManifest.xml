@@ -23,6 +23,7 @@
             android:label="tak"
             android:noHistory="true"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat"
             android:windowSoftInputMode="stateHidden|adjustPan">
 
         </activity>

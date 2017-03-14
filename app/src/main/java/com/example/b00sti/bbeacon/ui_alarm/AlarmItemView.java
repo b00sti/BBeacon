@@ -12,7 +12,6 @@ import com.example.b00sti.bbeacon.utils.SwitchButton;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.res.IntArrayRes;
 
 import java.util.Random;
 
@@ -31,22 +30,27 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
     @ViewById(R.id.daysTV) TextView daysTV;
     @ViewById(R.id.topLayoutLL) ViewGroup topLL;
 
-    @IntArrayRes(R.array.beaconColors)
-    int colors[];
-
     public AlarmItemView(Context context) {
         super(context);
     }
 
     @Override
-    public void bind(AlarmItem alarmItem) {
+    public void bind(final AlarmItem alarmItem) {
         textView.setText(alarmItem.getText());
-        int a = new Random().nextInt(colors.length);
-        sidebar.setBackgroundColor(colors[a]);
-        switchSB.setChecked(new Random().nextBoolean());
-        switchSB.setColor(colors[a]);
-        topLL.setBackgroundColor(colors[a]);
+        sidebar.setBackgroundColor(alarmItem.getColor());
+        switchSB.setChecked(alarmItem.isEnabled);
+        switchSB.setColor(alarmItem.getColor());
+        topLL.setBackgroundColor(alarmItem.getColor());
         String time = "" + new Random().nextInt(24) + ":" + (new Random().nextInt(51) + 10);
         timeTV.setText(time);
+
+        switchSB.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                alarmItem.isEnabled = isChecked;
+                new SetAlarmInteractor().execute(alarmItem);
+            }
+        });
     }
+
 }

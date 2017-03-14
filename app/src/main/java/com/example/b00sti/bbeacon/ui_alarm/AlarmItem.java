@@ -18,6 +18,10 @@ public class AlarmItem extends RealmObject {
     @PrimaryKey
     String text;
 
+    boolean isEnabled = false;
+    int color;
+
+
     public AlarmItem() {
     }
 }

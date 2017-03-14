@@ -58,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshAllViews();
+    }
+
+    public void refreshAllViews() {
+        refreshTopFragment(bottomNavigation.getCurrentItem());
+        setNotifications();
+        navigationManager.refreshCurrentFragment();
+    }
+
     private void refreshTopFragment(int currentTab) {
         Fragment fragment;
         if (currentTab == 0) {
@@ -84,7 +96,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void accept(List<AlarmItem> alarmItems) throws Exception {
                 ArrayList<Pair<AHNotification, Integer>> notifications = new ArrayList<>();
-                notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(alarmItems.size()))), 0));
+                int size = 0;
+                for (AlarmItem alarmItem : alarmItems) {
+                    if (alarmItem.isEnabled()) {
+                        size++;
+                    }
+                }
+                notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(size))), 0));
                 notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), "2"), 2));
                 updateBottomNavigationItems(notifications);
             }

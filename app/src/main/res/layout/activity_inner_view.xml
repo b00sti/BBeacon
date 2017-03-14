@@ -9,8 +9,7 @@
         android:id="@+id/activity_inner_view_placeholder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@color/colorAccent">
+        android:layout_gravity="center">
 
     </FrameLayout>
 
