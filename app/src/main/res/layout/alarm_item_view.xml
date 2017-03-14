@@ -18,7 +18,7 @@
 
             <View
                 android:id="@+id/sidebar"
-                android:layout_width="@dimen/size_6dp"
+                android:layout_width="@dimen/size_4dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 android:background="@color/colorAccent">
@@ -37,13 +37,13 @@
 
                     <TextView
                         android:id="@+id/layout_item_demo_title"
+                        style="@style/TextViewLightNormal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@+id/moreIV"
                         android:gravity="center"
-                        android:padding="@dimen/size_12dp"
-                        android:text="Work"
-                        android:textSize="@dimen/font_16sp"/>
+                        android:padding="@dimen/size_8dp"
+                        android:text="Work"/>
 
                     <ImageView
                         android:id="@+id/moreIV"

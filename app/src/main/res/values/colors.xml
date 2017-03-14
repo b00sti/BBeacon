@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/indigo_500</color>
-    <color name="colorPrimaryDark">@color/indigo_700</color>
+    <color name="colorPrimary">@color/indigo_700</color>
+    <color name="colorPrimaryDark">@color/indigo_900</color>
     <color name="colorPrimaryLight">@color/indigo_100</color>
 
     <color name="colorAccent">#4CAF50</color>
@@ -41,18 +41,18 @@
     <color name="green_A400">#00E676</color>
     <color name="green_A700">#00C853</color>
 
-    <array name="beaconColors">
+    <array name="beaconColors1">
         <item>#4CAF52</item>
         <item>#3B8386</item>
         <item>#DE9B61</item>
         <item>#DE6461</item>
     </array>
 
-    <array name="beaconColors1">
+    <array name="beaconColors">
         <item>#3F52B5</item>
         <item>#653BB5</item>
         <item>#3087A8</item>
-        <item>#FFC841</item>
+        <!--<item>#FFC841</item>-->
     </array>
 
 </resources>
