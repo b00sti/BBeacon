@@ -42,19 +42,12 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
     @AfterViews
     void initUI() {
         initDemoList();
-        initToolbar();
     }
 
     private void initToolbar() {
         if (getActivity() instanceof MainActivity) {
             ((MainActivity) getActivity()).setCollapsedTitleL("Tracked beacons");
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        initToolbar();
     }
 
     @Override
@@ -89,6 +82,7 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
 
     @Override
     public void willBeDisplayed() {
+        initToolbar();
         if (fragmentContainer != null) {
             Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
             fragmentContainer.startAnimation(fadeIn);

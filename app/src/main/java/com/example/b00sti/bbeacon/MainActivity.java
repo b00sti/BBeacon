@@ -1,7 +1,10 @@
 package com.example.b00sti.bbeacon;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     @ViewById(R.id.floating_action_button) public FloatingActionButton floatingActionButton;
     @ViewById(R.id.activity_top_placeholder) public FrameLayout frameLayout;
     @ViewById(R.id.collapsedTitleL) public CollapsingToolbarLayout collapsedTitleL;
+    @ViewById(R.id.appBarL) public AppBarLayout appBarLayout;
+
 
     @Bean
     NavigationManager navigationManager;
@@ -57,9 +62,28 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(int position, boolean wasSelected) {
                 refreshTopFragment(position);
                 setNotifications();
+                if (position == 2) {
+                    dragInAppBar(false);
+                } else {
+                    dragInAppBar(true);
+                }
             }
         });
 
+    }
+
+    private void dragInAppBar(final boolean drag) {
+        if (appBarLayout != null) {
+            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
+            AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();
+            behavior.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
+                @Override
+                public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+                    return drag;
+                }
+            });
+            params.setBehavior(behavior);
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -169,4 +193,5 @@ public class MainActivity extends AppCompatActivity {
     public int getBottomNavigationNbItems() {
         return navigationManager.getBottomNavigationNbItems();
     }
+
 }

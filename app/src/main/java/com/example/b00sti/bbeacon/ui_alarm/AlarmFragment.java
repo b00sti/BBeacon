@@ -44,19 +44,12 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
     @AfterViews
     void initUI() {
         initList();
-        initToolbar();
     }
 
-    private void initToolbar() {
+    public void refreshToolbar() {
         if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).setCollapsedTitleL("Next alarm: 05:43 PM, Tue ");
+            ((MainActivity) getActivity()).setCollapsedTitleL("Next alarm: Jogging");
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        initToolbar();
     }
 
     @Override
@@ -79,7 +72,6 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
         Log.d(TAG, "refresh: " + recyclerView);
         if (recyclerView != null) {
             presenter.fetchData();
-            initToolbar();
         }
     }
 
@@ -93,6 +85,7 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
 
     @Override
     public void willBeDisplayed() {
+        refreshToolbar();
         if (fragmentContainer != null) {
             Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
             fragmentContainer.startAnimation(fadeIn);

@@ -148,6 +148,12 @@ public class NavigationManager {
 
         currentFragment = adapter.getCurrentFragment();
 
+        if (currentFragment != null) {
+            currentFragment.willBeDisplayed();
+        } else {
+            Log.d(TAG, "initUI: ");
+        }
+        
     }
 
     private void showFAB(boolean show) {
