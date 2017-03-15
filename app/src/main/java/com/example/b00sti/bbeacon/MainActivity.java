@@ -20,6 +20,8 @@ import com.example.b00sti.bbeacon.navigation.NotificationManager;
 import com.example.b00sti.bbeacon.ui_alarm.AlarmItem;
 import com.example.b00sti.bbeacon.ui_alarm.GetAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.NotificationEvent;
+import com.example.b00sti.bbeacon.ui_scanner.GetScannerInteractor;
+import com.example.b00sti.bbeacon.ui_scanner.ScannerItem;
 import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
 import org.androidannotations.annotations.AfterViews;
@@ -33,7 +35,12 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.functions.Consumer;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.observers.DefaultObserver;
+import io.reactivex.schedulers.Schedulers;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
@@ -137,26 +144,66 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setNotifications() {
-        new GetAlarmInteractor().execute().subscribe(new Consumer<List<AlarmItem>>() {
-            @Override
-            public void accept(List<AlarmItem> alarmItems) throws Exception {
-                ArrayList<Pair<AHNotification, Integer>> notifications = new ArrayList<>();
-                int size = 0;
-                for (AlarmItem alarmItem : alarmItems) {
-                    if (alarmItem.isEnabled()) {
-                        size++;
+        Observable.zip(
+                new GetAlarmInteractor().execute(),
+                new GetScannerInteractor().execute(),
+                new BiFunction<List<AlarmItem>, List<ScannerItem>, ArrayList<Pair<AHNotification, Integer>>>() {
+                    @Override
+                    public ArrayList<Pair<AHNotification, Integer>> apply(List<AlarmItem> alarmItems, List<ScannerItem> scannerItems) throws Exception {
+
+                        ArrayList<Pair<AHNotification, Integer>> notifications = new ArrayList<>();
+                        int sizeAlarms = 0;
+                        for (AlarmItem alarmItem : alarmItems) {
+                            if (alarmItem.isEnabled()) {
+                                sizeAlarms++;
+                            }
+                        }
+
+                        if (sizeAlarms == 0) {
+                            notifications.add(new Pair<>(new AHNotification(), 0));
+                        } else {
+                            notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeAlarms))), 0));
+                        }
+
+                        int sizeScanner = 0;
+                        for (ScannerItem scanner : scannerItems) {
+                            if (scanner.isEnabled()) {
+                                sizeScanner++;
+                            }
+                        }
+
+                        if (sizeScanner == 0) {
+                            notifications.add(new Pair<>(new AHNotification(), 2));
+                        } else {
+                            notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeScanner))), 2));
+                        }
+
+                        return notifications;
                     }
                 }
+        ).take(1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(notificationObserver());
+    }
 
-                if (size == 0) {
-                    notifications.add(new Pair<>(new AHNotification(), 0));
-                } else {
-                    notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(size))), 0));
-                }
-                notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), "2"), 2));
-                updateBottomNavigationItems(notifications);
+    private Observer<ArrayList<Pair<AHNotification, Integer>>> notificationObserver() {
+        return new DefaultObserver<ArrayList<Pair<AHNotification, Integer>>>() {
+            @Override
+            public void onNext(ArrayList<Pair<AHNotification, Integer>> value) {
+                updateBottomNavigationItems(value);
             }
-        });
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
     }
 
     /**

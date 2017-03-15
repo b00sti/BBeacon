@@ -10,11 +10,14 @@ import android.widget.TextView;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseItemView;
+import com.example.b00sti.bbeacon.ui_alarm.NotificationEvent;
+import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.DrawableRes;
 import org.androidannotations.annotations.res.IntArrayRes;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
@@ -72,7 +75,12 @@ public class ScannerItemView extends BaseItemView<ScannerItem> {
                     scannerItem.setEnabled(true);
                     enableDisableIV.setImageDrawable(enabled);
                 }
-                new SetScannerInteractor().execute(scannerItem);
+                new SetScannerInteractor().execute(scannerItem, new RealmUtils.OnSuccessListener() {
+                    @Override
+                    public void onSuccess() {
+                        EventBus.getDefault().post(new NotificationEvent());
+                    }
+                });
             }
         });
     }
