@@ -68,7 +68,7 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
     @Override
     public void refresh() {
         if (recyclerView != null) {
-            recyclerView.smoothScrollToPosition(0);
+            presenter.fetchData();
         }
     }
 

@@ -16,8 +16,6 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.DrawableRes;
 import org.androidannotations.annotations.res.IntArrayRes;
 
-import java.util.Random;
-
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
  */
@@ -48,24 +46,33 @@ public class ScannerItemView extends BaseItemView<ScannerItem> {
     }
 
     @Override
-    public void bind(ScannerItem scannerItem) {
+    public void bind(final ScannerItem scannerItem) {
         textView.setText(scannerItem.getText());
-        int a = new Random().nextInt(colors.length);
-        sidebar.setBackgroundColor(colors[a]);
-        progressBar.setProgressColor(colors[a]);
-        progressBar.setProgress((float) new Random().nextInt(100));
-        topLL.setBackgroundColor(colors[a]);
+        sidebar.setBackgroundColor(scannerItem.getColor());
+        progressBar.setProgressColor(scannerItem.getColor());
+        progressBar.setProgress(scannerItem.getRange());
+        topLL.setBackgroundColor(scannerItem.getColor());
+
+        isEnabled = scannerItem.isEnabled();
+        if (isEnabled) {
+            enableDisableIV.setImageDrawable(enabled);
+        } else {
+            enableDisableIV.setImageDrawable(disabled);
+        }
 
         enableDisableIV.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isEnabled) {
                     isEnabled = false;
+                    scannerItem.setEnabled(false);
                     enableDisableIV.setImageDrawable(disabled);
                 } else {
                     isEnabled = true;
+                    scannerItem.setEnabled(true);
                     enableDisableIV.setImageDrawable(enabled);
                 }
+                new SetScannerInteractor().execute(scannerItem);
             }
         });
     }

@@ -20,6 +20,7 @@ public class ScannerItem extends RealmObject {
     int color;
     boolean enabled;
     String lastVisible;
+    int range;
 
     public ScannerItem() {
     }

@@ -8,7 +8,6 @@ import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
-import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
@@ -59,7 +58,9 @@ public class NavigationManager {
     }
 
     private void onFabClickedOnThirdPage() {
-        Toast.makeText(ctx, "on Fab click", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ctx, BaseInnerViewActivity_.class);
+        intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.ADD_NEW_BEACON);
+        ctx.startActivity(intent);
     }
 
     public void refreshCurrentFragment() {

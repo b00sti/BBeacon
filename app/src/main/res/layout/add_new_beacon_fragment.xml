@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="@dimen/activity_horizontal_margin">
+
+    <EditText
+        android:id="@+id/titleET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_12dp"
+        android:hint="Title"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/selectColorB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_12dp"
+        android:text="Select color"/>
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/enabledCB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_12dp"
+        android:text="Enabled"/>
+
+    <EditText
+        android:id="@+id/rangeET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_12dp"
+        android:hint="Range in percent"
+        android:inputType="number"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/saveB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_12dp"
+        android:background="@color/colorAccent"
+        android:text="Save"/>
+
+</LinearLayout>
