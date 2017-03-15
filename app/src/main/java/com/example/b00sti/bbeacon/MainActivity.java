@@ -123,7 +123,12 @@ public class MainActivity extends AppCompatActivity {
                         size++;
                     }
                 }
-                notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(size))), 0));
+
+                if (size == 0) {
+                    notifications.add(new Pair<>(new AHNotification(), 0));
+                } else {
+                    notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(size))), 0));
+                }
                 notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), "2"), 2));
                 updateBottomNavigationItems(notifications);
             }
