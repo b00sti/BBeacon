@@ -10,10 +10,10 @@
               android:name="com.google.android.gms.maps.SupportMapFragment"
               android:layout_width="match_parent"
               android:layout_height="250dp"
-              map:cameraTargetLat="50.0829"
-              map:cameraTargetLng="19.91"
-              map:cameraTilt="30"
-              map:cameraZoom="10"/>
+              map:cameraTargetLat="50.061667"
+              map:cameraTargetLng="19.937222"
+              map:cameraTilt="75"
+              map:cameraZoom="10.75"/>
 
     <View
         android:layout_width="wrap_content"
