@@ -44,6 +44,7 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
     @AfterViews
     void initUI() {
         initList();
+        refreshToolbar();
     }
 
     public void refreshToolbar() {
