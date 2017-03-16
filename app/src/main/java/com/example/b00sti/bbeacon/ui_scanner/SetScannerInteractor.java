@@ -10,6 +10,7 @@ import java.util.List;
  */
 
 public class SetScannerInteractor {
+
     public void execute(List<ScannerItem> data) {
         RealmUtils.SaveAll(data, null);
     }
