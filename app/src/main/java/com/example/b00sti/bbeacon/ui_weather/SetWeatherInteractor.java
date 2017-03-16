@@ -2,7 +2,6 @@ package com.example.b00sti.bbeacon.ui_weather;
 
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,16 +14,12 @@ public class SetWeatherInteractor {
         RealmUtils.SaveAll(data, null);
     }
 
-    public void execute(WeatherItem scannerItem) {
-        List<WeatherItem> data = new ArrayList<>();
-        data.add(scannerItem);
-        RealmUtils.SaveAll(data, null);
+    public void execute(WeatherItem weatherItem) {
+        RealmUtils.SaveAll(weatherItem, null);
     }
 
-    public void execute(WeatherItem scannerItem, RealmUtils.OnSuccessListener listener) {
-        List<WeatherItem> data = new ArrayList<>();
-        data.add(scannerItem);
-        RealmUtils.SaveAll(data, listener);
+    public void execute(WeatherItem weatherItem, RealmUtils.OnSuccessListener listener) {
+        RealmUtils.SaveAll(weatherItem, listener);
     }
 
     public void execute(List<WeatherItem> data, RealmUtils.OnSuccessListener listener) {

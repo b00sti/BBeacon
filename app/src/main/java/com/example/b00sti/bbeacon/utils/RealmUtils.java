@@ -2,6 +2,7 @@ package com.example.b00sti.bbeacon.utils;
 
 import android.support.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -31,6 +32,12 @@ public class RealmUtils {
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static <E extends RealmObject> void SaveAll(final E item, @Nullable final OnSuccessListener onSuccessListener) {
+        List<E> list = new ArrayList<>();
+        list.add(item);
+        RealmUtils.SaveAll(list, onSuccessListener);
     }
 
     public static <E extends RealmObject> void SaveAll(final List<E> items, @Nullable final OnSuccessListener onSuccessListener) {

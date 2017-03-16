@@ -2,7 +2,6 @@ package com.example.b00sti.bbeacon.ui_alarm;
 
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,15 +15,11 @@ public class SetAlarmInteractor {
     }
 
     public void execute(AlarmItem alarmItem) {
-        List<AlarmItem> data = new ArrayList<>();
-        data.add(alarmItem);
-        RealmUtils.SaveAll(data, null);
+        RealmUtils.SaveAll(alarmItem, null);
     }
 
     public void execute(AlarmItem alarmItem, RealmUtils.OnSuccessListener listener) {
-        List<AlarmItem> data = new ArrayList<>();
-        data.add(alarmItem);
-        RealmUtils.SaveAll(data, listener);
+        RealmUtils.SaveAll(alarmItem, listener);
     }
 
     public void execute(List<AlarmItem> data, RealmUtils.OnSuccessListener listener) {
