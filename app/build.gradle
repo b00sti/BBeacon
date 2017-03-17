@@ -66,4 +66,5 @@ dependencies {
     compile 'com.afollestad.material-dialogs:core:0.9.4.1'
     compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
     compile 'me.grantland:autofittextview:0.2.0'
+    compile 'com.diogobernardino:williamchart:2.4.0'
 }
