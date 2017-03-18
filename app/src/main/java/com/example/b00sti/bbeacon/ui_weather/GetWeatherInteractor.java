@@ -15,7 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class GetWeatherInteractor {
 
     public Observable<List<WeatherItem>> execute() {
-        boolean fakeData = false;
+        boolean fakeData = true;
 
         if (fakeData) {
             //fake data

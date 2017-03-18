@@ -1,7 +1,6 @@
 package com.example.b00sti.bbeacon.ui_weather;
 
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class WeatherItem extends RealmObject {
 
-    @PrimaryKey
     String text;
 
     public WeatherItem() {
