@@ -2,6 +2,7 @@ package com.example.b00sti.bbeacon.ui_weather;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,8 +15,6 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.DrawableRes;
 import org.androidannotations.annotations.res.IntArrayRes;
-
-import java.util.Random;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
@@ -32,6 +31,7 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
     @ViewById(R.id.daysTV) TextView daysTV;
     @ViewById(R.id.textView2) TextView textView2;
     @ViewById(R.id.textView1) TextView textView1;
+    @ViewById(R.id.card_view) CardView card_view;
 
     @IntArrayRes(R.array.beaconColors)
     int colors[];
@@ -42,16 +42,19 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
     @DrawableRes(R.drawable.ic_priority_high_red_900_24dp)
     Drawable alarm;
 
+    Context context;
+
     public WeatherItemView(Context context) {
         super(context);
+        this.context = context;
     }
 
     @Override
     public void bind(WeatherItem weatherItem) {
         textView.setText(weatherItem.getText());
-        int i = new Random().nextInt(colors.length);
-        topLL.setBackgroundColor(colors[i]);
-        sidebar.setBackgroundColor(colors[i]);
+        int color = weatherItem.getColor();
+        topLL.setBackgroundColor(color);
+        sidebar.setBackgroundColor(color);
         timeTV.setText(weatherItem.getTime());
         daysTV.setText(weatherItem.getDays());
         textView1.setText(weatherItem.getPressure());
@@ -60,7 +63,9 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
             daysTV.setCompoundDrawablesWithIntrinsicBounds(desc, null, alarm, null);
         } else {
             daysTV.setCompoundDrawablesWithIntrinsicBounds(desc, null, null, null);
-
         }
+
+        (new LineCardOne(card_view, context, color)).init();
+
     }
 }

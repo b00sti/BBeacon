@@ -1,5 +1,7 @@
 package com.example.b00sti.bbeacon.ui_weather;
 
+import android.graphics.Color;
+
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import java.util.ArrayList;
@@ -14,8 +16,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class GetWeatherInteractor {
 
+/*    <item>#3F52B5</item>
+    <item>#653BB5</item>
+    <item>#3087A8</item>*/
+
     public Observable<List<WeatherItem>> execute() {
         boolean fakeData = true;
+        int color1 = Color.parseColor("#3F52B5");
+        int color2 = Color.parseColor("#653BB5");
+        int color3 = Color.parseColor("#3087A8");
 
         if (fakeData) {
             //fake data
@@ -26,7 +35,8 @@ public class GetWeatherInteractor {
                     "Open window !",
                     "50 %",
                     "1020 hPa",
-                    false
+                    false,
+                    color1
             );
             itemsData.add(weatherItem1);
 
@@ -35,7 +45,8 @@ public class GetWeatherInteractor {
                     "Check air conditioner !",
                     "65 %",
                     "1017 hPa",
-                    true
+                    true,
+                    color2
             );
             itemsData.add(weatherItem2);
 
@@ -44,7 +55,8 @@ public class GetWeatherInteractor {
                     "My flowers are thirsty ?",
                     "24 %",
                     "1000 hPa",
-                    false
+                    false,
+                    color3
             );
             itemsData.add(weatherItem3);
 
@@ -53,7 +65,8 @@ public class GetWeatherInteractor {
                     "Is too cold ?",
                     "85 %",
                     "1023 hPa",
-                    true
+                    true,
+                    color1
             );
             itemsData.add(weatherItem4);
 
@@ -62,7 +75,8 @@ public class GetWeatherInteractor {
                     "Check it!",
                     "77 %",
                     "997 hPa",
-                    false
+                    false,
+                    color2
             );
             itemsData.add(weatherItem5);
 

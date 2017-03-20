@@ -22,6 +22,7 @@ public class WeatherItem extends RealmObject {
     String humidity;
     String pressure;
     boolean isAlarm;
+    int color;
 
     public WeatherItem() {
     }

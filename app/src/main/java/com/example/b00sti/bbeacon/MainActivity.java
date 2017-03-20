@@ -178,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
                             notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeScanner))), 2));
                         }
 
+                        notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(2))), 1));
+
                         return notifications;
                     }
                 }
