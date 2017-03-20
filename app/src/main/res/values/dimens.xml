@@ -31,4 +31,8 @@
     <dimen name="size_2dp">2dp</dimen>
     <dimen name="size_1dp">1dp</dimen>
 
+    <dimen name="image_width">120dp</dimen>
+    <dimen name="image_final_width">32dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
+
 </resources>
