@@ -9,7 +9,7 @@
         android:id="@+id/topTopHeaderRL"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="@color/colorPrimary900"
+        android:background="@android:color/transparent"
         app:layout_collapseMode="parallax"
         app:layout_collapseParallaxMultiplier="0.1">
 
@@ -129,7 +129,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_gravity="bottom|center_horizontal"
-        android:background="@color/colorPrimaryDark"
+        android:background="@android:color/transparent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_collapseMode="parallax"

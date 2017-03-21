@@ -10,8 +10,8 @@
         android:id="@+id/appBarL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:expanded="true">
+        <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsedTitleL"
@@ -19,11 +19,11 @@
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
+            app:contentScrim="@android:color/transparent"
             app:expandedTitleGravity="center_horizontal|bottom"
             app:expandedTitleMarginBottom="@dimen/font_22sp"
             app:expandedTitleTextAppearance="@style/TextViewLightNormal"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:titleEnabled="true"
             >
 
@@ -37,7 +37,7 @@
                              android:id="@+id/activityTopPlaceholderFL"
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
-                             android:background="@color/colorDarkBackground"
+                             android:background="@android:color/transparent"
                              app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                     <LinearLayout
@@ -45,7 +45,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <View
                             android:layout_width="match_parent"
@@ -65,7 +65,9 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"/>
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:layout_collapseMode="parallax"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -74,13 +76,14 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarWithCircle"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@color/colorPrimaryDark"
-        android:paddingTop="24dp"
+        android:layout_height="82dp"
+        android:background="@color/colorPrimary"
         app:layout_anchor="@id/headerBelowToolbar"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:title=""
         >
+        <!--
+                app:theme="@style/ThemeOverlay.AppCompat.Dark"
+        -->
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -128,8 +131,7 @@
         android:id="@+id/mainViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        app:behavior_overlapTop="50dp"
+        android:clipToPadding="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <android.support.design.widget.FloatingActionButton

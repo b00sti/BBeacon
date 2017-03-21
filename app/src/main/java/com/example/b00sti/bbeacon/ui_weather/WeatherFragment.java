@@ -61,7 +61,7 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
 
     public void refreshToolbar() {
         if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).configureToolbar(true, "");
+            ((MainActivity) getActivity()).configureToolbar(true, "Weather");
         }
     }
 

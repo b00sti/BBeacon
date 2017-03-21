@@ -1,5 +1,6 @@
 package com.example.b00sti.bbeacon;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -161,15 +163,15 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     private void chooseToolbar(boolean isWeather) {
         if (isWeather) {
-            circleImageView.setVisibility(View.VISIBLE);
-            illusoryLL.setVisibility(View.VISIBLE);
-            toolbarWithCircle.setVisibility(View.VISIBLE);
-            toolbar.setVisibility(View.GONE);
+            //circleImageView.setVisibility(View.VISIBLE);
+            //illusoryLL.setVisibility(View.VISIBLE);
+            //toolbarWithCircle.setVisibility(View.VISIBLE);
+            //toolbar.setVisibility(View.GONE);
         } else {
-            circleImageView.setVisibility(View.GONE);
-            illusoryLL.setVisibility(View.GONE);
-            toolbar.setVisibility(View.VISIBLE);
-            toolbarWithCircle.setVisibility(View.GONE);
+            //circleImageView.setVisibility(View.GONE);
+            //illusoryLL.setVisibility(View.GONE);
+            //toolbar.setVisibility(View.VISIBLE);
+            //toolbarWithCircle.setVisibility(View.GONE);
         }
 
     }
@@ -304,19 +306,50 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         int maxScroll = appBarLayout.getTotalScrollRange();
         float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
 
-        handleAlphaOnTitle(percentage);
-        handleToolbarTitleVisibility(percentage);
+        if (verticalOffset == 0) {
+            //toolbar.setVisibility(View.VISIBLE);
+            collapsedTitleL.setVisibility(View.VISIBLE);
+            handleAlphaOnTitle(percentage);
+            handleToolbarTitleVisibility(percentage);
+            Log.d("hmm", "onOffsetChanged: a " + collapsedTitleL.getVisibility());
+            Log.d("hmm", "onOffsetChanged: a " + toolbarWithCircle.getVisibility());
+        } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+            //toolbar.setVisibility(View.GONE);
+            //collapsedTitleL.setVisibility(View.INVISIBLE);
+            //collapsedTitleL.setBackgroundColor(getResources().getColor(R.color.cardview_dark_background));
+            //collapsedTitleL.setTitleEnabled(false);
+            //toolbar.setBackgroundColor(getResources().getColor(R.color.cardview_dark_background));
+            handleAlphaOnTitle(percentage);
+            handleToolbarTitleVisibility(percentage);
+            collapsedTitleL.setTitleEnabled(false);
+            collapsedTitleL.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            appBarLayout.setBackgroundColor(Color.TRANSPARENT);
+
+            Log.d("hmm", "onOffsetChanged: b " + collapsedTitleL.getVisibility());
+            Log.d("hmm", "onOffsetChanged: b " + toolbarWithCircle.getVisibility());
+        } else {
+            //toolbar.setVisibility(View.VISIBLE);
+            collapsedTitleL.setVisibility(View.VISIBLE);
+            handleAlphaOnTitle(percentage);
+            handleToolbarTitleVisibility(percentage);
+            Log.d("hmm", "onOffsetChanged: c " + collapsedTitleL.getVisibility());
+            Log.d("hmm", "onOffsetChanged: c " + toolbarWithCircle.getVisibility());
+        }
+
+//        collapsedTitleL.setTitleEnabled(false);
+/*        handleAlphaOnTitle(percentage);
+        handleToolbarTitleVisibility(percentage);*/
     }
 
     private void handleToolbarTitleVisibility(float percentage) {
         if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
-            if (!mIsTheTitleVisible && topFragment != null && topFragment instanceof OnAnimationToolbar) {
+            if (!mIsTheTitleVisible) { //&& topFragment != null && topFragment instanceof OnAnimationToolbar) {
                 showTitleToolbar(View.VISIBLE);
                 mIsTheTitleVisible = true;
             }
 
         } else {
-            if (mIsTheTitleVisible && topFragment != null && topFragment instanceof OnAnimationToolbar) {
+            if (mIsTheTitleVisible) {// && topFragment != null && topFragment instanceof OnAnimationToolbar) {
                 showTitleToolbar(View.INVISIBLE);
                 mIsTheTitleVisible = false;
             }
@@ -325,14 +358,13 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     private void handleAlphaOnTitle(float percentage) {
         if (percentage >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
-            if (mIsTheTitleContainerVisible && topFragment != null && topFragment instanceof OnAnimationToolbar) {
+            if (mIsTheTitleContainerVisible) { // && topFragment != null && topFragment instanceof OnAnimationToolbar) {
                 ((OnAnimationToolbar) topFragment).animeTitleLayout(View.INVISIBLE);
                 mIsTheTitleContainerVisible = false;
             }
 
         } else {
-
-            if (!mIsTheTitleContainerVisible && topFragment != null && topFragment instanceof OnAnimationToolbar) {
+            if (!mIsTheTitleContainerVisible) { // && topFragment != null && topFragment instanceof OnAnimationToolbar) {
                 ((OnAnimationToolbar) topFragment).animeTitleLayout(View.VISIBLE);
                 mIsTheTitleContainerVisible = true;
             }
