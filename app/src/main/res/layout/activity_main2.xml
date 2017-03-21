@@ -33,7 +33,7 @@
 
                 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                              xmlns:app="http://schemas.android.com/apk/res-auto"
-                             android:id="@+id/activity_top_placeholder"
+                             android:id="@+id/activityTopPlaceholderFL"
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
                              android:background="@color/colorDarkBackground"
@@ -53,13 +53,13 @@
     </android.support.design.widget.AppBarLayout>
 
     <com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager
-        android:id="@+id/view_pager"
+        android:id="@+id/mainViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floating_action_button"
+        android:id="@+id/mainFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
@@ -69,7 +69,7 @@
         app:useCompatPadding="true"/>
 
     <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

@@ -12,9 +12,8 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
@@ -27,7 +26,10 @@ import com.example.b00sti.bbeacon.ui_alarm.GetAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.NotificationEvent;
 import com.example.b00sti.bbeacon.ui_scanner.GetScannerInteractor;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerItem;
+import com.example.b00sti.bbeacon.ui_weather.OnAnimationToolbar;
+import com.example.b00sti.bbeacon.ui_weather.WeatherTopFragment;
 import com.example.b00sti.bbeacon.utils.FragmentBuilder;
+import com.example.bskeleton.basics.AnimUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -40,6 +42,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -52,48 +55,42 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
-    private static final int ALPHA_ANIMATIONS_DURATION = 200;
-    @ViewById(R.id.view_pager) public AHBottomNavigationViewPager viewPager;
-    @ViewById(R.id.bottom_navigation) public AHBottomNavigation bottomNavigation;
-    @ViewById(R.id.floating_action_button) public FloatingActionButton floatingActionButton;
-    @ViewById(R.id.activity_top_placeholder) public FrameLayout frameLayout;
+
+    @ViewById(R.id.mainViewPager) public AHBottomNavigationViewPager viewPager;
+    @ViewById(R.id.bottomNavigation) public AHBottomNavigation bottomNavigation;
+    @ViewById(R.id.mainFAB) public FloatingActionButton floatingActionButton;
+    @ViewById(R.id.activityTopPlaceholderFL) public FrameLayout frameLayout;
     @ViewById(R.id.collapsedTitleL) public CollapsingToolbarLayout collapsedTitleL;
     @ViewById(R.id.appBarL) public AppBarLayout appBarLayout;
+    @ViewById(R.id.toolbar) public Toolbar toolbar;
+    @ViewById(R.id.toolbarWithCircle) public Toolbar toolbarWithCircle;
+    @ViewById(R.id.titleToolbarWithCircleTV) TextView titleToolbarWithCircle;
+    @ViewById(R.id.illusoryLL) ViewGroup illusoryLL;
+    @ViewById(R.id.circleToolbarIconIV) CircleImageView circleImageView;
+
     @Bean
     NavigationManager navigationManager;
     @Bean
     FragmentBuilder fragmentBuilder;
+    Fragment topFragment;
+
     private boolean mIsTheTitleVisible = false;
     private boolean mIsTheTitleContainerVisible = true;
-    private LinearLayout mTitleContainer;
-    private TextView mTitle;
-    private AppBarLayout mAppBarLayout;
-    private Toolbar mToolbar;
-
-    public static void startAlphaAnimation(View v, long duration, int visibility) {
-        AlphaAnimation alphaAnimation = (visibility == View.VISIBLE)
-                ? new AlphaAnimation(0f, 1f)
-                : new AlphaAnimation(1f, 0f);
-
-        alphaAnimation.setDuration(duration);
-        alphaAnimation.setFillAfter(true);
-        v.startAnimation(alphaAnimation);
-    }
 
     @AfterViews
     void init() {
-        refreshTopFragment(0);
-        setNotifications();
+        appBarLayout.addOnOffsetChangedListener(this);
 
-        bindActivity();
-        mAppBarLayout.addOnOffsetChangedListener(this);
-        startAlphaAnimation(mTitle, 0, View.INVISIBLE);
+        refreshTopFragment(0);
+        configureToolbar();
+        setNotifications();
 
         navigationManager.initUI(new NavigationManager.AHonTabSelectedListener() {
             @Override
             public void onTabSelected(int position, boolean wasSelected) {
                 refreshTopFragment(position);
                 setNotifications();
+                configureToolbar();
                 if (position == 2) {
                     dragInAppBar(false);
                 } else {
@@ -102,13 +99,6 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             }
         });
 
-    }
-
-    private void bindActivity() {
-        mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        mTitle = (TextView) findViewById(R.id.main_textview_title);
-        mTitleContainer = (LinearLayout) findViewById(R.id.main_linearlayout_title);
-        mAppBarLayout = (AppBarLayout) findViewById(R.id.appBarL);
     }
 
     private void dragInAppBar(final boolean drag) {
@@ -150,28 +140,62 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     public void refreshAllViews() {
         refreshTopFragment(bottomNavigation.getCurrentItem());
+        configureToolbar();
         setNotifications();
         navigationManager.refreshCurrentFragment();
     }
 
-    private void refreshTopFragment(int currentTab) {
-        Fragment fragment;
-        if (currentTab == 0) {
-            fragment = fragmentBuilder.newFragment(FragmentBuilder.TOP_ALARM);
-        } else if (currentTab == 1) {
-            fragment = fragmentBuilder.newFragment(FragmentBuilder.TOP_WEATHER);
-        } else if (currentTab == 2) {
-            fragment = fragmentBuilder.newFragment(FragmentBuilder.TOP_SCANNER);
+    private void configureToolbar() {
+        int currentTab = bottomNavigation.getCurrentItem();
+        showTitleToolbar(View.INVISIBLE);
+        if (currentTab == 1) {
+            chooseToolbar(true);
         } else {
-            fragment = fragmentBuilder.newFragment(FragmentBuilder.EMPTY);
+            chooseToolbar(false);
+        }
+    }
+
+    private void showTitleToolbar(int visible) {
+        AnimUtils.startAlphaAnimation(titleToolbarWithCircle, WeatherTopFragment.ALPHA_ANIMATIONS_DURATION, visible);
+    }
+
+    private void chooseToolbar(boolean isWeather) {
+        if (isWeather) {
+            circleImageView.setVisibility(View.VISIBLE);
+            illusoryLL.setVisibility(View.VISIBLE);
+            toolbarWithCircle.setVisibility(View.VISIBLE);
+            toolbar.setVisibility(View.GONE);
+        } else {
+            circleImageView.setVisibility(View.GONE);
+            illusoryLL.setVisibility(View.GONE);
+            toolbar.setVisibility(View.VISIBLE);
+            toolbarWithCircle.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void refreshTopFragment(int currentTab) {
+        if (currentTab == 0) {
+            topFragment = fragmentBuilder.newFragment(FragmentBuilder.TOP_ALARM);
+        } else if (currentTab == 1) {
+            topFragment = fragmentBuilder.newFragment(FragmentBuilder.TOP_WEATHER);
+        } else if (currentTab == 2) {
+            topFragment = fragmentBuilder.newFragment(FragmentBuilder.TOP_SCANNER);
+        } else {
+            topFragment = fragmentBuilder.newFragment(FragmentBuilder.EMPTY);
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activity_top_placeholder, fragment);
+        transaction.replace(R.id.activityTopPlaceholderFL, topFragment);
         transaction.commit();
     }
 
-    public void setCollapsedTitleL(String titleL) {
+    public void configureToolbar(boolean isWeather, String titleL) {
+        if (isWeather) {
+            chooseToolbar(true);
+        } else {
+            chooseToolbar(false);
+        }
         collapsedTitleL.setTitle(titleL);
     }
 
@@ -286,16 +310,14 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     private void handleToolbarTitleVisibility(float percentage) {
         if (percentage >= PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR) {
-
-            if (!mIsTheTitleVisible) {
-                startAlphaAnimation(mTitle, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
+            if (!mIsTheTitleVisible && topFragment != null && topFragment instanceof OnAnimationToolbar) {
+                showTitleToolbar(View.VISIBLE);
                 mIsTheTitleVisible = true;
             }
 
         } else {
-
-            if (mIsTheTitleVisible) {
-                startAlphaAnimation(mTitle, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
+            if (mIsTheTitleVisible && topFragment != null && topFragment instanceof OnAnimationToolbar) {
+                showTitleToolbar(View.INVISIBLE);
                 mIsTheTitleVisible = false;
             }
         }
@@ -303,15 +325,15 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     private void handleAlphaOnTitle(float percentage) {
         if (percentage >= PERCENTAGE_TO_HIDE_TITLE_DETAILS) {
-            if (mIsTheTitleContainerVisible) {
-                startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.INVISIBLE);
+            if (mIsTheTitleContainerVisible && topFragment != null && topFragment instanceof OnAnimationToolbar) {
+                ((OnAnimationToolbar) topFragment).animeTitleLayout(View.INVISIBLE);
                 mIsTheTitleContainerVisible = false;
             }
 
         } else {
 
-            if (!mIsTheTitleContainerVisible) {
-                startAlphaAnimation(mTitleContainer, ALPHA_ANIMATIONS_DURATION, View.VISIBLE);
+            if (!mIsTheTitleContainerVisible && topFragment != null && topFragment instanceof OnAnimationToolbar) {
+                ((OnAnimationToolbar) topFragment).animeTitleLayout(View.VISIBLE);
                 mIsTheTitleContainerVisible = true;
             }
         }

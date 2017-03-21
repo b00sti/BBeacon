@@ -16,10 +16,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class GetWeatherInteractor {
 
-/*    <item>#3F52B5</item>
-    <item>#653BB5</item>
-    <item>#3087A8</item>*/
-
     public Observable<List<WeatherItem>> execute() {
         boolean fakeData = true;
         int color1 = Color.parseColor("#3F52B5");

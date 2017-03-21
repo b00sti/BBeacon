@@ -23,6 +23,8 @@ import org.androidannotations.annotations.RootContext;
 
 import java.util.ArrayList;
 
+import lombok.Getter;
+
 /**
  * Created by b00sti on 06.03.2017.
  */
@@ -36,6 +38,8 @@ public class NavigationManager {
 
     private ArrayList<AHBottomNavigationItem> bottomNavigationItems = new ArrayList<>();
     private MainViewPagerAdapter adapter;
+
+    @Getter
     private BaseRefreshableFragment currentFragment;
 
     NavigationManager() {

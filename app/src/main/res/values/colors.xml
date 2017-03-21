@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/indigo_700</color>
+    <color name="colorPrimary">@color/indigo_900</color>
     <color name="colorPrimaryDark">@color/indigo_900</color>
     <color name="colorPrimaryLight">@color/indigo_100</color>
 

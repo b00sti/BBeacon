@@ -27,10 +27,10 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
     @ViewById(R.id.sidebar) View sidebar;
     @ViewById(R.id.moreIV) ImageView moreIV;
     @ViewById(R.id.topLayoutLL) ViewGroup topLL;
-    @ViewById(R.id.timeTV) TextView timeTV;
+    @ViewById(R.id.tempValueTV) TextView timeTV;
     @ViewById(R.id.daysTV) TextView daysTV;
-    @ViewById(R.id.textView2) TextView textView2;
-    @ViewById(R.id.textView1) TextView textView1;
+    @ViewById(R.id.humidityTV) TextView textView2;
+    @ViewById(R.id.pressureTV) TextView textView1;
     @ViewById(R.id.card_view) CardView card_view;
 
     @IntArrayRes(R.array.beaconColors)

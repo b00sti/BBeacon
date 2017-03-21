@@ -25,7 +25,7 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
     @ViewById(R.id.layout_item_demo_title) TextView textView;
     @ViewById(R.id.sidebar) View sidebar;
     @ViewById(R.id.moreIV) ImageView moreIV;
-    @ViewById(R.id.timeTV) TextView timeTV;
+    @ViewById(R.id.tempValueTV) TextView timeTV;
     @ViewById(R.id.switchSB) SwitchButton switchSB;
     @ViewById(R.id.daysTV) TextView daysTV;
     @ViewById(R.id.topLayoutLL) ViewGroup topLL;

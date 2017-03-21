@@ -6,6 +6,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
+import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
 
@@ -58,6 +59,12 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
         presenter.fetchData();
     }
 
+    public void refreshToolbar() {
+        if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).configureToolbar(true, "");
+        }
+    }
+
     @Override
     public void refresh() {
         if (recyclerView != null) {
@@ -75,6 +82,7 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
 
     @Override
     public void willBeDisplayed() {
+        refreshToolbar();
         if (fragmentContainer != null) {
             Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
             fragmentContainer.startAnimation(fadeIn);

@@ -67,7 +67,7 @@
                 android:orientation="horizontal">
 
                 <me.grantland.widget.AutofitTextView
-                    android:id="@+id/timeTV"
+                    android:id="@+id/tempValueTV"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

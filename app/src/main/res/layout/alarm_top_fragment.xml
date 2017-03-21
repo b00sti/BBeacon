@@ -5,7 +5,7 @@
                 android:background="@color/colorPrimaryDark">
 
     <me.grantland.widget.AutofitTextView
-        android:id="@+id/timeTV"
+        android:id="@+id/tempValueTV"
         style="@style/TextViewLightLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         style="@style/TextViewLightSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/timeTV"
+        android:layout_below="@+id/tempValueTV"
         android:layout_marginBottom="?attr/actionBarSize"
         android:gravity="center"
         android:text="Time to next alarm: 8h 35 min"/>
