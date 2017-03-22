@@ -30,7 +30,6 @@ import org.androidannotations.annotations.res.IntArrayRes;
 public class ScannerTopFragment extends Fragment implements OnMapReadyCallback {
     private static final String TAG = "ScannerTopFragment";
 
-    //@FragmentById(R.id.map) SupportMapFragment supportMapFragment;
     @IntArrayRes(R.array.beaconColors)
     int colors[];
 
