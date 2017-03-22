@@ -12,7 +12,7 @@
               android:layout_height="match_parent"
               android:layout_above="@+id/toolbarView"
               android:layout_alignParentTop="true"
-              map:cameraTargetLat="50.061667"
+              map:cameraTargetLat="50.051667"
               map:cameraTargetLng="19.937222"
               map:cameraTilt="75"
               map:cameraZoom="10.75"/>
