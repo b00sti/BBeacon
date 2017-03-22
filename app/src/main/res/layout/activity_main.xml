@@ -22,8 +22,8 @@
             android:fitsSystemWindows="true"
             app:contentScrim="@color/colorPrimary"
             app:expandedTitleGravity="center_horizontal|bottom"
-            app:expandedTitleMarginBottom="@dimen/font_22sp"
-            app:expandedTitleTextAppearance="@style/TextViewLightNormal"
+            app:expandedTitleMarginBottom="22dp"
+            app:expandedTitleTextAppearance="@style/TextViewLightLarge"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:titleEnabled="true"
             >

@@ -17,7 +17,7 @@
         android:textSize="88sp"/>
 
     <TextView
-        style="@style/TextViewLightSmall"
+        style="@style/TextViewLightNormal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tempValueTV"
