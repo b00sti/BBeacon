@@ -49,7 +49,7 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
 
     public void refreshToolbar() {
         if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).configureToolbar(false, "Next alarm: Jogging");
+            ((MainActivity) getActivity()).configureToolbar("Next alarm: Jogging");
         }
     }
 

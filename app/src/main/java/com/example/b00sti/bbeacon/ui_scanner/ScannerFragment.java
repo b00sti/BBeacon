@@ -46,7 +46,7 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
 
     private void initToolbar() {
         if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).configureToolbar(false, "Tracked beacons");
+            ((MainActivity) getActivity()).configureToolbar("Tracked beacons");
         }
     }
 

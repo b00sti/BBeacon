@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 @EFragment(R.layout.weather_fragment)
-public class WeatherFragment extends BaseFragment<WeatherPresenter> implements WeatherContract.View {
+public class WeatherFragment extends BaseFragment<WeatherPresenter> implements WeatherContract.View, OnAnimationToolbar {
 
     @ViewById(R.id.fragment_container) FrameLayout fragmentContainer;
 
@@ -60,8 +60,12 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
     }
 
     public void refreshToolbar() {
+        refreshToolbar("Krowodrza");
+    }
+
+    public void refreshToolbar(String title) {
         if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).configureToolbar(true, "Weather");
+            ((MainActivity) getActivity()).configureToolbar(title);
         }
     }
 
@@ -110,4 +114,8 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
         weatherAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void setCollapsedTitleLayout(String title) {
+        refreshToolbar(title);
+    }
 }
