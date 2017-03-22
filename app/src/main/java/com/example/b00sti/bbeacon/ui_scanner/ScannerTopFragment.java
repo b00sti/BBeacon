@@ -61,8 +61,8 @@ public class ScannerTopFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        double lat = 50.00;
-        double lng = 19.9;
+        double lat = 50.051667;
+        double lng = 19.93;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
@@ -72,8 +72,8 @@ public class ScannerTopFragment extends Fragment implements OnMapReadyCallback {
                             .position(new LatLng(lat, lng))
                             .icon(getMarkerIconFromDrawable(markerIcon)));
 
-            lat = lat + 0.025;
-            lng = lng + 0.025;
+            lat = lat + 0.005;
+            lng = lng + 0.005;
             markerIcon.setTint(colors[2]);
 
             googleMap.addMarker(
@@ -81,8 +81,8 @@ public class ScannerTopFragment extends Fragment implements OnMapReadyCallback {
                             .position(new LatLng(lat, lng))
                             .icon(getMarkerIconFromDrawable(markerIcon)));
 
-            lat = lat + 0.025;
-            lng = lng + 0.025;
+            lat = lat + 0.005;
+            lng = lng + 0.005;
             markerIcon.setTint(colors[1]);
 
             googleMap.addMarker(
@@ -90,8 +90,8 @@ public class ScannerTopFragment extends Fragment implements OnMapReadyCallback {
                             .position(new LatLng(lat, lng))
                             .icon(getMarkerIconFromDrawable(markerIcon)));
 
-            lat = lat - 0.043;
-            lng = lng + 0.01;
+            lat = lat - 0.013;
+            lng = lng + 0.002;
             markerIcon.setTint(colors[2]);
 
             googleMap.addMarker(
@@ -99,8 +99,8 @@ public class ScannerTopFragment extends Fragment implements OnMapReadyCallback {
                             .position(new LatLng(lat, lng))
                             .icon(getMarkerIconFromDrawable(markerIcon)));
 
-            lat = lat + 0.03;
-            lng = lng - 0.06;
+            lat = lat + 0.003;
+            lng = lng - 0.006;
             markerIcon.setTint(colors[0]);
 
             googleMap.addMarker(
@@ -111,6 +111,35 @@ public class ScannerTopFragment extends Fragment implements OnMapReadyCallback {
             lat = lat + 0.02;
             lng = lng + 0.015;
             markerIcon.setTint(colors[1]);
+
+            googleMap.addMarker(
+                    new MarkerOptions()
+                            .position(new LatLng(lat, lng))
+                            .icon(getMarkerIconFromDrawable(markerIcon)));
+
+            lat = lat - 0.017;
+            lng = lng - 0.019;
+            markerIcon.setTint(colors[2]);
+
+            googleMap.addMarker(
+                    new MarkerOptions()
+                            .position(new LatLng(lat, lng))
+                            .icon(getMarkerIconFromDrawable(markerIcon)));
+
+
+            lat = lat + 0.012;
+            lng = lng + 0.015;
+            markerIcon.setTint(colors[1]);
+
+            googleMap.addMarker(
+                    new MarkerOptions()
+                            .position(new LatLng(lat, lng))
+                            .icon(getMarkerIconFromDrawable(markerIcon)));
+
+
+            lat = lat - 0.016;
+            lng = lng - 0.02;
+            markerIcon.setTint(colors[0]);
 
             googleMap.addMarker(
                     new MarkerOptions()
