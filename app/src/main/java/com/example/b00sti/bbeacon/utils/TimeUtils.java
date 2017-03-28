@@ -1,7 +1,9 @@
 package com.example.b00sti.bbeacon.utils;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-28
@@ -38,4 +40,24 @@ public class TimeUtils {
 
         return builder.toString();
     }
+    public static String twoDatesBetweenTime(long oldtime) {
+        int day;
+        int hh;
+        int mm;
+
+        Date cDate = new Date();
+        Long timeDiff = oldtime - cDate.getTime();
+        day = (int) TimeUnit.MILLISECONDS.toDays(timeDiff);
+        hh = (int) (TimeUnit.MILLISECONDS.toHours(timeDiff) - TimeUnit.DAYS.toHours(day));
+        mm = (int) (TimeUnit.MILLISECONDS.toMinutes(timeDiff) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff)));
+        if(day==0) {
+            return hh + " h " + mm + " min";
+        }
+        else if(hh==0) {
+            return mm + " min";
+        } else {
+            return day + " days " + hh + " h " + mm + " min";
+        }
+    }
+
 }

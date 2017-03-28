@@ -1,10 +1,11 @@
 package com.example.b00sti.bbeacon.ui_alarm;
 
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.example.b00sti.bbeacon.R;
+import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
+import com.example.b00sti.bbeacon.utils.TimeUtils;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -29,7 +30,7 @@ import static com.example.b00sti.bbeacon.ui_weather.WeatherTopFragment.TAG;
  */
 
 @EFragment(R.layout.alarm_top_fragment)
-public class AlarmTopFragment extends Fragment {
+public class AlarmTopFragment extends BaseRefreshableFragment {
 
     @ViewById(R.id.tempValueTV) TextView timeTV;
     @ViewById(R.id.toNextAlarmTV) TextView toNextAlarmTV;
@@ -51,7 +52,6 @@ public class AlarmTopFragment extends Fragment {
                             @Override
                             public void accept(Long aLong) throws Exception {
                                 setActualTimeToUI();
-                                setToNextAlarmToUI();
                             }
                         }));
     }
@@ -75,11 +75,26 @@ public class AlarmTopFragment extends Fragment {
     }
 
     private String prepareToNextAlarm() {
-        return String.format(toNextAlarm, "7h 33min");
+        final Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        String result;
+
+        AlarmItem alarmItem = new GetNextAlarmInteractor().execute();
+        if (alarmItem.getTime() != null) {
+            String segments[] = alarmItem.getTime().split(":");
+
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.valueOf(segments[0]));
+            calendar.set(Calendar.MINUTE, Integer.valueOf(segments[1]));
+            String time = TimeUtils.twoDatesBetweenTime(calendar.getTimeInMillis());
+            result = String.format(toNextAlarm, time);
+        } else {
+            result = String.format(toNextAlarm, "none");
+        }
+
+        return result;
     }
 
     private String prepareActualTime() {
-
         Calendar c = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
@@ -91,5 +106,20 @@ public class AlarmTopFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         compositeDisposable.dispose();
+    }
+
+    @Override
+    public void refresh() {
+        setToNextAlarmToUI();
+    }
+
+    @Override
+    public void willBeHidden() {
+
+    }
+
+    @Override
+    public void willBeDisplayed() {
+
     }
 }

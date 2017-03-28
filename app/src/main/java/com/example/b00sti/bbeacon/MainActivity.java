@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
+import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
 import com.example.b00sti.bbeacon.navigation.NavigationManager;
 import com.example.b00sti.bbeacon.navigation.NotificationManager;
 import com.example.b00sti.bbeacon.ui_alarm.AlarmItem;
@@ -59,18 +60,19 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     NavigationManager navigationManager;
     @Bean
     FragmentBuilder fragmentBuilder;
+    Fragment topFragment;
 
     @AfterViews
     void init() {
         appBarLayout.addOnOffsetChangedListener(this);
 
-        refreshTopFragment(0);
+        setupTopFragment(0);
         setNotifications();
 
         navigationManager.initUI(new NavigationManager.AHonTabSelectedListener() {
             @Override
             public void onTabSelected(int position, boolean wasSelected) {
-                refreshTopFragment(position);
+                setupTopFragment(position);
                 setNotifications();
                 if (position == 2) {
                     dragInAppBar(false);
@@ -122,11 +124,10 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     public void refreshAllViews() {
         refreshTopFragment(bottomNavigation.getCurrentItem());
         setNotifications();
-        navigationManager.refreshCurrentFragment();
+        //navigationManager.refreshCurrentFragment();
     }
 
-    private void refreshTopFragment(int currentTab) {
-        Fragment topFragment;
+    private void setupTopFragment(int currentTab) {
         if (currentTab == 0) {
             topFragment = fragmentBuilder.newFragment(FragmentBuilder.TOP_ALARM);
         } else if (currentTab == 1) {
@@ -140,6 +141,12 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.activityTopPlaceholderFL, topFragment);
         transaction.commit();
+    }
+
+    private void refreshTopFragment(int currentTab) {
+        if(topFragment instanceof BaseRefreshableFragment) {
+         ((BaseRefreshableFragment) topFragment).refresh();
+        }
     }
 
     public void configureToolbar(String titleL) {

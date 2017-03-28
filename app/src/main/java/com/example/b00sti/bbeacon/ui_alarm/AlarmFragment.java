@@ -111,8 +111,6 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
     @Override
     public void refreshData(List<AlarmItem> items) {
         alarmAdapter.setDataSet(items);
-        alarmAdapter.notifyDataSetChanged();
-        recyclerView.smoothScrollToPosition(0);
     }
 
 }

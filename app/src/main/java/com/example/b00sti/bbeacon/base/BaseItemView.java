@@ -14,4 +14,5 @@ public abstract class BaseItemView<P> extends LinearLayout {
     }
 
     public abstract void bind(P p);
+
 }

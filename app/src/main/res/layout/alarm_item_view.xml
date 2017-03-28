@@ -90,6 +90,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_42dp"
                         android:layout_gravity="center"
+                        app:sb_enable_effect="true"
+                        app:sb_effect_duration="100"
+                        app:sb_shadow_effect="true"
                         app:sb_checked_color="#A36F95"/>
 
                 </LinearLayout>

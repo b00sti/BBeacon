@@ -12,7 +12,7 @@ import org.androidannotations.annotations.EFragment;
  * Created by Dominik (b00sti) Pawlik on 2016-11-03
  */
 @EFragment
-public abstract class BaseFragment<P extends BasePresenter> extends BaseRefreshableFragment {
+public abstract class BaseFragment<P extends BasePresenter> extends BaseRefreshableFragmentWithToolbar {
     private static final String TAG = "BaseFragment";
 
     public P presenter;

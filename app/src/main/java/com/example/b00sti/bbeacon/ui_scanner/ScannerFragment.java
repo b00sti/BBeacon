@@ -110,4 +110,8 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
         scannerAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void refreshToolbar() {
+
+    }
 }

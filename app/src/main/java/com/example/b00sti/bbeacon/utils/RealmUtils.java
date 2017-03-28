@@ -34,6 +34,14 @@ public class RealmUtils {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public static <E extends RealmObject> List<E> FindAll(Class<E> clazz) {
+        final Realm realm = Realm.getDefaultInstance();
+        final RealmResults<E> all = realm.where(clazz).findAll();
+        final List<E> list = realm.copyFromRealm(all);
+        realm.close();
+        return list;
+    }
+
     public static <E extends RealmObject> void SaveAll(final E item, @Nullable final OnSuccessListener onSuccessListener) {
         List<E> list = new ArrayList<>();
         list.add(item);

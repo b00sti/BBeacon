@@ -8,13 +8,15 @@ import android.widget.TextView;
 
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseItemView;
-import com.example.b00sti.bbeacon.utils.RealmUtils;
 import com.example.b00sti.bbeacon.utils.SwitchButton;
 import com.example.b00sti.bbeacon.utils.TimeUtils;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
-import org.greenrobot.eventbus.EventBus;
+
+interface OnSwitchClicked {
+    void refreshAdapter(boolean isChecked);
+}
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
@@ -31,8 +33,14 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
     @ViewById(R.id.daysTV) TextView daysTV;
     @ViewById(R.id.topLayoutLL) ViewGroup topLL;
 
+    private OnSwitchClicked onSwitchClicked;
+
     public AlarmItemView(Context context) {
         super(context);
+    }
+
+    public void setOnSwitchClicked(OnSwitchClicked onSwitchClicked) {
+        this.onSwitchClicked = onSwitchClicked;
     }
 
     @Override
@@ -47,15 +55,8 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
         switchSB.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                alarmItem.isEnabled = isChecked;
-                new SetAlarmInteractor().execute(alarmItem, new RealmUtils.OnSuccessListener() {
-                    @Override
-                    public void onSuccess() {
-                        EventBus.getDefault().post(new NotificationEvent());
-                    }
-                });
+                onSwitchClicked.refreshAdapter(isChecked);
             }
         });
     }
-
 }

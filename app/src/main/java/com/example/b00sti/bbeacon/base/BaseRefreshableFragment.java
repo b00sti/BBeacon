@@ -15,4 +15,5 @@ public abstract class BaseRefreshableFragment extends Fragment {
     public abstract void willBeHidden();
 
     public abstract void willBeDisplayed();
+
 }
