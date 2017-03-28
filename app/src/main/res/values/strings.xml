@@ -6,4 +6,7 @@
     <string name="tab_3">Scanner</string>
     <string name="bundle_fragment">fragment</string>
 
+    <string name="time_to_next_alarm">Time to next alarm: %s</string>
+    <string name="next_alarm">Next alarm: %s</string>
+
 </resources>

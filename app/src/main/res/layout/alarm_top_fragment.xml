@@ -17,6 +17,7 @@
         android:textSize="88sp"/>
 
     <TextView
+        android:id="@+id/toNextAlarmTV"
         style="@style/TextViewLightNormal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

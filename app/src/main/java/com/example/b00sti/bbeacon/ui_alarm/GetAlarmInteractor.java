@@ -24,7 +24,7 @@ public class GetAlarmInteractor {
             //fake time
             List<AlarmItem> itemsData = new ArrayList<>();
             for (int i = 0; i < 50; i++) {
-                itemsData.add(new AlarmItem("Fragment Alarm as mvp - " + " Item : " + i, false, Color.BLACK, "21:21"));
+                itemsData.add(new AlarmItem("Fragment Alarm as mvp - " + " Item : " + i, false, Color.BLACK, System.currentTimeMillis()));
             }
 
         return Observable.just(itemsData)

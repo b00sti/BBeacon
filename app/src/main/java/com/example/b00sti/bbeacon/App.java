@@ -24,7 +24,7 @@ public class App extends BaseApp<LastRealmMigration> {
 
     @Override
     protected int setRealmSchemaVersion() {
-        return 1;
+        return 3;
     }
 
 }

@@ -41,7 +41,7 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
         switchSB.setChecked(alarmItem.isEnabled);
         switchSB.setColor(alarmItem.getColor());
         topLL.setBackgroundColor(alarmItem.getColor());
-        timeTV.setText(alarmItem.getTime());
+        timeTV.setText(alarmItem.getTime() + "");
 
         switchSB.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
