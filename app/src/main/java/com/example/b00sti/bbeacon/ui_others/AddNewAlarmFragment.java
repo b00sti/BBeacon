@@ -1,10 +1,12 @@
 package com.example.b00sti.bbeacon.ui_others;
 
+import android.app.TimePickerDialog;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.b00sti.bbeacon.R;
@@ -19,6 +21,7 @@ import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.res.IntArrayRes;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -31,6 +34,7 @@ public class AddNewAlarmFragment extends Fragment {
     @ViewById(R.id.titleET) EditText titleET;
     @ViewById(R.id.selectColorB) AppCompatButton selectColorB;
     @ViewById(R.id.enabledCB) CheckBox enabledCB;
+    @ViewById(R.id.timeB) AppCompatButton timeB;
     @ViewById(R.id.saveB) AppCompatButton saveB;
 
     @IntArrayRes(R.array.beaconColors)
@@ -38,6 +42,8 @@ public class AddNewAlarmFragment extends Fragment {
 
     @ColorRes(R.color.colorPrimaryDark)
     int color;
+
+    String time;
 
     public static AddNewAlarmFragment newInstance() {
         return new AddNewAlarmFragment_();
@@ -67,10 +73,27 @@ public class AddNewAlarmFragment extends Fragment {
                 .show();
     }
 
+    @Click(R.id.timeB)
+    void onTimeClicked() {
+        Calendar calendar = Calendar.getInstance();
+        TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                time = hourOfDay + ":" + minute;
+            }
+        };
+
+        new TimePickerDialog(getActivity(),
+                t,
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                true)
+                .show();
+    }
+
     @Click(R.id.saveB)
     void save() {
         List<AlarmItem> items = new ArrayList<AlarmItem>();
-        items.add(new AlarmItem(titleET.getText().toString(), enabledCB.isChecked(), color, System.currentTimeMillis()));
+        items.add(new AlarmItem(titleET.getText().toString(), enabledCB.isChecked(), color, time));
 
         new SetAlarmInteractor().execute(items, new RealmUtils.OnSuccessListener() {
             @Override

@@ -27,6 +27,13 @@
         android:text="Enabled"/>
 
     <android.support.v7.widget.AppCompatButton
+        android:id="@+id/timeB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="Add time"/>
+
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/saveB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

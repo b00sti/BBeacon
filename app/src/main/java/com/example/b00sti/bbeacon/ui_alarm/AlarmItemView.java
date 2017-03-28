@@ -10,6 +10,7 @@ import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseItemView;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 import com.example.b00sti.bbeacon.utils.SwitchButton;
+import com.example.b00sti.bbeacon.utils.TimeUtils;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -41,7 +42,7 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
         switchSB.setChecked(alarmItem.isEnabled);
         switchSB.setColor(alarmItem.getColor());
         topLL.setBackgroundColor(alarmItem.getColor());
-        timeTV.setText(alarmItem.getTime() + "");
+        timeTV.setText(TimeUtils.getTimeWith0(alarmItem.getTime()));
 
         switchSB.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
