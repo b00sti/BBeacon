@@ -1,5 +1,6 @@
 package com.example.b00sti.bbeacon.ui_alarm.top;
 
+import android.support.v4.util.Pair;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -79,17 +80,11 @@ public class AlarmTopFragment extends BaseRefreshableFragment {
     }
 
     private String prepareToNextAlarm() {
-        final Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
         String result;
-
-        AlarmItem alarmItem = new GetNextAlarmInteractor().execute();
+        Pair<AlarmItem, Long> pair = new GetNextAlarmInteractor().executeToGetTime();
+        AlarmItem alarmItem = pair.first;
         if (alarmItem.getTime() != null) {
-            String segments[] = alarmItem.getTime().split(":");
-
-            calendar.set(Calendar.HOUR_OF_DAY, Integer.valueOf(segments[0]));
-            calendar.set(Calendar.MINUTE, Integer.valueOf(segments[1]));
-            String time = TimeUtils.twoDatesBetweenTime(calendar.getTimeInMillis());
+            String time = TimeUtils.twoDatesBetweenTime(pair.second);
             result = String.format(toNextAlarm, time);
         } else {
             result = String.format(toNextAlarm, "none");
