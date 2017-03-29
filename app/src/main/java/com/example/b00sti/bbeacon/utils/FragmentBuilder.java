@@ -4,9 +4,9 @@ import android.support.annotation.IntDef;
 import android.support.v4.app.Fragment;
 
 import com.example.b00sti.bbeacon.base.EmptyFragment;
-import com.example.b00sti.bbeacon.ui_alarm.AlarmFragment;
-import com.example.b00sti.bbeacon.ui_alarm.AlarmTopFragment;
-import com.example.b00sti.bbeacon.ui_others.AddNewAlarmFragment;
+import com.example.b00sti.bbeacon.ui_alarm.add.AddNewAlarmFragment;
+import com.example.b00sti.bbeacon.ui_alarm.main.AlarmFragment;
+import com.example.b00sti.bbeacon.ui_alarm.top.AlarmTopFragment;
 import com.example.b00sti.bbeacon.ui_others.AddNewBeaconFragment;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerFragment;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerTopFragment;

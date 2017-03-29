@@ -4,8 +4,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
-import com.example.b00sti.bbeacon.ui_alarm.AlarmFragment;
+import com.example.b00sti.bbeacon.base.BaseRefreshableFragmentWithToolbar;
+import com.example.b00sti.bbeacon.ui_alarm.main.AlarmFragment;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerFragment;
 import com.example.b00sti.bbeacon.ui_weather.WeatherFragment;
 
@@ -16,8 +16,8 @@ import java.util.ArrayList;
  */
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
-    private ArrayList<BaseRefreshableFragment> fragments = new ArrayList<>();
-    private BaseRefreshableFragment currentFragment;
+    private ArrayList<BaseRefreshableFragmentWithToolbar> fragments = new ArrayList<>();
+    private BaseRefreshableFragmentWithToolbar currentFragment;
 
     public MainViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -26,10 +26,12 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
         fragments.add(AlarmFragment.newInstance());
         fragments.add(WeatherFragment.newInstance());
         fragments.add(ScannerFragment.newInstance());
+
+        currentFragment = fragments.get(0);
     }
 
     @Override
-    public BaseRefreshableFragment getItem(int position) {
+    public BaseRefreshableFragmentWithToolbar getItem(int position) {
         return fragments.get(position);
     }
 
@@ -41,12 +43,12 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
         if (getCurrentFragment() != object) {
-            currentFragment = ((BaseRefreshableFragment) object);
+            currentFragment = ((BaseRefreshableFragmentWithToolbar) object);
         }
         super.setPrimaryItem(container, position, object);
     }
 
-    public BaseRefreshableFragment getCurrentFragment() {
+    public BaseRefreshableFragmentWithToolbar getCurrentFragment() {
         return currentFragment;
     }
 

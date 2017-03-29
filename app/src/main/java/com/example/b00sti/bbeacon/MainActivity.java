@@ -19,9 +19,9 @@ import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
 import com.example.b00sti.bbeacon.navigation.NavigationManager;
 import com.example.b00sti.bbeacon.navigation.NotificationManager;
-import com.example.b00sti.bbeacon.ui_alarm.AlarmItem;
-import com.example.b00sti.bbeacon.ui_alarm.GetAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.NotificationEvent;
+import com.example.b00sti.bbeacon.ui_alarm.interactors.GetAlarmInteractor;
+import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.ui_scanner.GetScannerInteractor;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerItem;
 import com.example.b00sti.bbeacon.ui_weather.OnAnimationToolbar;
@@ -47,6 +47,7 @@ import io.reactivex.schedulers.Schedulers;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+    private static final String TAG = "MainActivity";
 
     @ViewById(R.id.mainViewPager) public AHBottomNavigationViewPager viewPager;
     @ViewById(R.id.bottomNavigation) public AHBottomNavigation bottomNavigation;
@@ -118,13 +119,24 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     @Override
     protected void onResume() {
         super.onResume();
-        refreshAllViews();
+        refreshAllViews(true);
+    }
+
+    public void refreshAllViews(boolean withMainFragment) {
+        refreshTopFragment(bottomNavigation.getCurrentItem());
+        setNotifications();
+
+        if (navigationManager.getCurrentFragment() != null) {
+            navigationManager.getCurrentFragment().refreshToolbar();
+        }
+
+        if (withMainFragment) {
+            navigationManager.refreshCurrentFragment();
+        }
     }
 
     public void refreshAllViews() {
-        refreshTopFragment(bottomNavigation.getCurrentItem());
-        setNotifications();
-        //navigationManager.refreshCurrentFragment();
+        refreshAllViews(false);
     }
 
     private void setupTopFragment(int currentTab) {

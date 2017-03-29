@@ -15,7 +15,7 @@ import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseInnerViewActivity_;
-import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
+import com.example.b00sti.bbeacon.base.BaseRefreshableFragmentWithToolbar;
 import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
 import org.androidannotations.annotations.EBean;
@@ -40,7 +40,7 @@ public class NavigationManager {
     private MainViewPagerAdapter adapter;
 
     @Getter
-    private BaseRefreshableFragment currentFragment;
+    private BaseRefreshableFragmentWithToolbar currentFragment;
 
     NavigationManager() {
     }
@@ -88,6 +88,7 @@ public class NavigationManager {
     public void initUI(final AHonTabSelectedListener aHonTabSelectedListener) {
 
         prepareNavigationItems();
+
         ctx.bottomNavigation.setColored(true);
         ctx.bottomNavigation.addItems(bottomNavigationItems);
 
@@ -156,7 +157,7 @@ public class NavigationManager {
         if (currentFragment != null) {
             currentFragment.willBeDisplayed();
         } else {
-            Log.d(TAG, "initUI: ");
+            Log.d(TAG, "initUI: currentFragment is null");
         }
         
     }

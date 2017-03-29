@@ -1,10 +1,12 @@
-package com.example.b00sti.bbeacon.ui_alarm;
+package com.example.b00sti.bbeacon.ui_alarm.top;
 
 import android.util.Log;
 import android.widget.TextView;
 
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
+import com.example.b00sti.bbeacon.ui_alarm.interactors.GetNextAlarmInteractor;
+import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.utils.TimeUtils;
 
 import org.androidannotations.annotations.AfterViews;
@@ -32,6 +34,8 @@ import static com.example.b00sti.bbeacon.ui_weather.WeatherTopFragment.TAG;
 @EFragment(R.layout.alarm_top_fragment)
 public class AlarmTopFragment extends BaseRefreshableFragment {
 
+    public static final int INTERVAL_TO_REFRESH_TIME = 5;
+
     @ViewById(R.id.tempValueTV) TextView timeTV;
     @ViewById(R.id.toNextAlarmTV) TextView toNextAlarmTV;
     @StringRes(R.string.time_to_next_alarm) String toNextAlarm;
@@ -47,7 +51,7 @@ public class AlarmTopFragment extends BaseRefreshableFragment {
         setActualTimeToUI();
         setToNextAlarmToUI();
         compositeDisposable.add(
-                Observable.interval(10, TimeUnit.SECONDS)
+                Observable.interval(INTERVAL_TO_REFRESH_TIME, TimeUnit.SECONDS)
                         .subscribe(new Consumer<Long>() {
                             @Override
                             public void accept(Long aLong) throws Exception {
@@ -99,7 +103,6 @@ public class AlarmTopFragment extends BaseRefreshableFragment {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
         return dateFormat.format(c.getTime());
-
     }
 
     @Override

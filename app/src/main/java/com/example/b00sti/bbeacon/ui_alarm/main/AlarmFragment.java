@@ -1,8 +1,7 @@
-package com.example.b00sti.bbeacon.ui_alarm;
+package com.example.b00sti.bbeacon.ui_alarm.main;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -10,11 +9,13 @@ import android.widget.FrameLayout;
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
+import com.example.b00sti.bbeacon.ui_alarm.interactors.GetNextAlarmInteractor;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,8 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
     private static final String TAG = "AlarmFragment";
 
     @ViewById(R.id.fragment_container) FrameLayout fragmentContainer;
-
     @ViewById(R.id.mainRV) RecyclerView recyclerView;
+    @StringRes(R.string.next_alarm) String nextAlarm;
 
     @Bean
     AlarmPresenter presenter;
@@ -45,12 +46,6 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
     void initUI() {
         initList();
         refreshToolbar();
-    }
-
-    public void refreshToolbar() {
-        if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).configureToolbar("Next alarm: Jogging");
-        }
     }
 
     @Override
@@ -70,7 +65,6 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
 
     @Override
     public void refresh() {
-        Log.d(TAG, "refresh: " + recyclerView);
         if (recyclerView != null) {
             presenter.fetchData();
         }
@@ -113,4 +107,18 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
         alarmAdapter.setDataSet(items);
     }
 
+    @Override
+    public void refreshToolbar() {
+        if (getActivity() instanceof MainActivity) {
+            AlarmItem alarmItem = new GetNextAlarmInteractor().execute();
+            String alarmTitle;
+            if (alarmItem.getText() != null) {
+                alarmTitle = alarmItem.getText();
+            } else {
+                alarmTitle = "none";
+            }
+            String result = String.format(nextAlarm, alarmTitle);
+            ((MainActivity) getActivity()).configureToolbar(result);
+        }
+    }
 }

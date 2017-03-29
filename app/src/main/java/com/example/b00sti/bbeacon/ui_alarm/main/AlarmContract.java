@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.ui_alarm;
+package com.example.b00sti.bbeacon.ui_alarm.main;
 
 import java.util.List;
 

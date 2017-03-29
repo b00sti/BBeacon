@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.ui_alarm;
+package com.example.b00sti.bbeacon.ui_alarm.main;
 
 import android.content.Context;
 import android.view.View;
@@ -13,10 +13,6 @@ import com.example.b00sti.bbeacon.utils.TimeUtils;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
-
-interface OnSwitchClicked {
-    void refreshAdapter(boolean isChecked);
-}
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
@@ -33,14 +29,14 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
     @ViewById(R.id.daysTV) TextView daysTV;
     @ViewById(R.id.topLayoutLL) ViewGroup topLL;
 
-    private OnSwitchClicked onSwitchClicked;
+    private OnSwitchClickedListener onSwitchClickedListener;
 
     public AlarmItemView(Context context) {
         super(context);
     }
 
-    public void setOnSwitchClicked(OnSwitchClicked onSwitchClicked) {
-        this.onSwitchClicked = onSwitchClicked;
+    public void setOnSwitchClickedListener(OnSwitchClickedListener onSwitchClickedListener) {
+        this.onSwitchClickedListener = onSwitchClickedListener;
     }
 
     @Override
@@ -55,7 +51,9 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
         switchSB.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                onSwitchClicked.refreshAdapter(isChecked);
+                if (onSwitchClickedListener != null) {
+                    onSwitchClickedListener.refreshAdapter(isChecked);
+                }
             }
         });
     }

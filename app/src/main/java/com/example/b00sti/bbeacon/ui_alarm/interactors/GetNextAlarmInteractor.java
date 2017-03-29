@@ -1,5 +1,6 @@
-package com.example.b00sti.bbeacon.ui_alarm;
+package com.example.b00sti.bbeacon.ui_alarm.interactors;
 
+import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import java.util.Calendar;
@@ -21,7 +22,7 @@ public class GetNextAlarmInteractor {
         int nearestHour = 24;
         int nearestMin = 60;
         for (AlarmItem alarmItem : items) {
-            if (alarmItem.isEnabled) {
+            if (alarmItem.isEnabled()) {
                 String segments[] = alarmItem.getTime().split(":");
                     if (Integer.valueOf(segments[0]) < nearestHour || Integer.valueOf(segments[0]) == nearestHour && Integer.valueOf(segments[1]) < nearestMin) {
                         nearestHour = Integer.valueOf(segments[0]);

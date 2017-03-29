@@ -1,9 +1,10 @@
-package com.example.b00sti.bbeacon.ui_alarm;
+package com.example.b00sti.bbeacon.ui_alarm.main;
 
 import android.app.Activity;
 import android.util.Log;
 
 import com.example.b00sti.bbeacon.base.BasePresenter;
+import com.example.b00sti.bbeacon.ui_alarm.interactors.GetAlarmInteractor;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;

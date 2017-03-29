@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.ui_alarm;
+package com.example.b00sti.bbeacon.ui_alarm.main;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.ui_others;
+package com.example.b00sti.bbeacon.ui_alarm.add;
 
 import android.app.TimePickerDialog;
 import android.support.v4.app.Fragment;
@@ -10,8 +10,8 @@ import android.widget.TimePicker;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.b00sti.bbeacon.R;
-import com.example.b00sti.bbeacon.ui_alarm.AlarmItem;
-import com.example.b00sti.bbeacon.ui_alarm.SetAlarmInteractor;
+import com.example.b00sti.bbeacon.ui_alarm.interactors.SetAlarmInteractor;
+import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import org.androidannotations.annotations.Click;

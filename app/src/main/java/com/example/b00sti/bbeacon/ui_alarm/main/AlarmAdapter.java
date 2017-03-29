@@ -1,10 +1,12 @@
-package com.example.b00sti.bbeacon.ui_alarm;
+package com.example.b00sti.bbeacon.ui_alarm.main;
 
 import android.content.Context;
 import android.view.ViewGroup;
 
 import com.example.b00sti.bbeacon.base.BaseAdapter;
 import com.example.b00sti.bbeacon.base.ViewWrapper;
+import com.example.b00sti.bbeacon.ui_alarm.NotificationEvent;
+import com.example.b00sti.bbeacon.ui_alarm.interactors.SetAlarmInteractor;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import org.androidannotations.annotations.EBean;
@@ -30,7 +32,7 @@ public class AlarmAdapter extends BaseAdapter<AlarmItem, AlarmItemView> {
     public void onBindViewHolder(final ViewWrapper<AlarmItemView> holder, final int position) {
         AlarmItemView alarmItemView = holder.getView();
         AlarmItem alarmItem = dataSet.get(position);
-        alarmItemView.setOnSwitchClicked(new OnSwitchClicked() {
+        alarmItemView.setOnSwitchClickedListener(new OnSwitchClickedListener() {
             @Override
             public void refreshAdapter(boolean isChecked) {
                 AlarmItem item = dataSet.get(position);
