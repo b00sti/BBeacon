@@ -30,7 +30,7 @@ public class AddNewBeaconFragment extends Fragment {
 
     @ViewById(R.id.titleET) EditText titleET;
     @ViewById(R.id.rangeET) EditText rangeET;
-    @ViewById(R.id.selectColorB) AppCompatButton selectColorB;
+    @ViewById(R.id.selectBeaconTV) AppCompatButton selectColorB;
     @ViewById(R.id.enabledCB) CheckBox enabledCB;
     @ViewById(R.id.saveB) AppCompatButton saveB;
 
@@ -44,7 +44,7 @@ public class AddNewBeaconFragment extends Fragment {
         return new AddNewBeaconFragment_();
     }
 
-    @Click(R.id.selectColorB)
+    @Click(R.id.selectBeaconTV)
     void selectColor() {
         ArrayList<String> strings = new ArrayList<>();
         for (int i : colors) {

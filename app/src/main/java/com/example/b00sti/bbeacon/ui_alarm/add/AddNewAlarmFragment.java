@@ -2,9 +2,7 @@ package com.example.b00sti.bbeacon.ui_alarm.add;
 
 import android.app.TimePickerDialog;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.AppCompatButton;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
@@ -13,6 +11,7 @@ import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.ui_alarm.interactors.SetAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
+import com.example.b00sti.bbeacon.utils.SwitchButton;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
@@ -24,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import me.grantland.widget.AutofitTextView;
+
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-14
  */
@@ -32,10 +33,14 @@ import java.util.List;
 public class AddNewAlarmFragment extends Fragment {
 
     @ViewById(R.id.titleET) EditText titleET;
-    @ViewById(R.id.selectColorB) AppCompatButton selectColorB;
-    @ViewById(R.id.enabledCB) CheckBox enabledCB;
-    @ViewById(R.id.timeB) AppCompatButton timeB;
-    @ViewById(R.id.saveB) AppCompatButton saveB;
+    @ViewById(R.id.switchSB) SwitchButton switchSB;
+    @ViewById(R.id.selectedTimeTV) AutofitTextView selectedTimeTV;
+
+    /*
+    @ViewById(R.id.selectBeaconTV) AppCompatButton selectColorB;
+    @ViewById(R.id.selectedTimeTV) TextView selectedTimeTV;
+    @ViewById(R.id.doneIV) ImageView doneIV;
+    */
 
     @IntArrayRes(R.array.beaconColors)
     int colors[];
@@ -49,7 +54,7 @@ public class AddNewAlarmFragment extends Fragment {
         return new AddNewAlarmFragment_();
     }
 
-    @Click(R.id.selectColorB)
+    @Click(R.id.selectBeaconTV)
     void selectColor() {
         ArrayList<String> strings = new ArrayList<>();
         for (int i : colors) {
@@ -73,12 +78,13 @@ public class AddNewAlarmFragment extends Fragment {
                 .show();
     }
 
-    @Click(R.id.timeB)
+    @Click(R.id.selectedTimeTV)
     void onTimeClicked() {
         Calendar calendar = Calendar.getInstance();
         TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 time = hourOfDay + ":" + minute;
+                selectedTimeTV.setText(time);
             }
         };
 
@@ -90,10 +96,15 @@ public class AddNewAlarmFragment extends Fragment {
                 .show();
     }
 
-    @Click(R.id.saveB)
+    @Click(R.id.cancelIV)
+    void cancel() {
+        getActivity().finish();
+    }
+
+    @Click(R.id.doneIV)
     void save() {
         List<AlarmItem> items = new ArrayList<AlarmItem>();
-        items.add(new AlarmItem(titleET.getText().toString(), enabledCB.isChecked(), color, time));
+        items.add(new AlarmItem(titleET.getText().toString(), switchSB.isChecked(), color, time));
 
         new SetAlarmInteractor().execute(items, new RealmUtils.OnSuccessListener() {
             @Override
