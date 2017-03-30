@@ -59,6 +59,7 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         alarmAdapter.setDataSet(new ArrayList<AlarmItem>());
+        alarmAdapter.setView(this);
         recyclerView.setAdapter(alarmAdapter);
         presenter.fetchData();
     }

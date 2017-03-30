@@ -25,6 +25,10 @@ public class AlarmAdapter extends BaseAdapter<AlarmItem, AlarmItemView> {
     @Bean
     AlarmAdapterPresenter presenter;
 
+    public void setView(AlarmContract.View view) {
+        presenter.attachView(view);
+    }
+
     @Override
     protected AlarmItemView onCreateItemView(ViewGroup parent, int viewType) {
         return AlarmItemView_.build(ctx);

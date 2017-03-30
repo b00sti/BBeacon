@@ -12,8 +12,4 @@ interface AlarmAdapterContract {
 
     void onRemoveClick(final AlarmItem alarmItem, int position);
 
-    interface View {
-
-    }
-
 }
