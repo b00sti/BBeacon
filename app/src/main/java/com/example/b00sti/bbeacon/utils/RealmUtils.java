@@ -62,10 +62,13 @@ public class RealmUtils {
         });
     }
 
-    public static <E extends RealmObject> E Find(Class<E> clazz, String fieldTitle, String fieldValue) {
+    public static <E extends RealmObject> E Find(Class<E> clazz, String fieldTitle, long fieldValue) {
         final Realm realm = Realm.getDefaultInstance();
         final E first = realm.where(clazz).equalTo(fieldTitle, fieldValue).findFirst();
-        E result = realm.copyFromRealm(first);
+        E result = null;
+        if (first != null) {
+            result = realm.copyFromRealm(first);
+        }
         realm.close();
         return result;
     }

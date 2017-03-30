@@ -1,14 +1,17 @@
 package com.example.b00sti.bbeacon.ui_alarm.add;
 
 import android.app.TimePickerDialog;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.b00sti.bbeacon.R;
+import com.example.b00sti.bbeacon.ui_alarm.interactors.GetAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.interactors.SetAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
@@ -42,6 +45,7 @@ public class AddNewAlarmFragment extends Fragment {
     @ViewById(R.id.selectedTimeTV) AutofitTextView selectedTimeTV;
     @ViewById(R.id.timeToNextTV) TextView timeToNextTV;
 
+
     /*
     @ViewById(R.id.selectBeaconTV) AppCompatButton selectColorB;
     @ViewById(R.id.selectedTimeTV) TextView selectedTimeTV;
@@ -55,6 +59,7 @@ public class AddNewAlarmFragment extends Fragment {
     int color;
 
     String time;
+    AlarmItem alarmItem = null;
 
     public static AddNewAlarmFragment newInstance() {
         return new AddNewAlarmFragment_();
@@ -62,10 +67,26 @@ public class AddNewAlarmFragment extends Fragment {
 
     @AfterViews
     void initUI() {
-        time = getCurrentTime();
-        switchSB.setChecked(true);
-        selectedTimeTV.setText(time);
-        timeToNextTV.setText(getTimeToAlarm());
+        Bundle bundle = getArguments();
+
+        if (bundle.containsKey("id")) {
+            long id = bundle.getLong("id");
+            alarmItem = new GetAlarmInteractor().execute(id);
+        }
+
+        if (alarmItem != null) {
+            time = alarmItem.getTime();
+            switchSB.setChecked(alarmItem.isEnabled());
+            selectedTimeTV.setText(time);
+            timeToNextTV.setText(getTimeToAlarm());
+            titleET.setText(alarmItem.getText());
+        } else {
+            time = getCurrentTime();
+            switchSB.setChecked(true);
+            selectedTimeTV.setText(time);
+            timeToNextTV.setText(getTimeToAlarm());
+        }
+
     }
 
     private String getTimeToAlarm() {
@@ -148,14 +169,31 @@ public class AddNewAlarmFragment extends Fragment {
 
     @Click(R.id.doneIV)
     void save() {
-        AlarmItem alarmItem = new AlarmItem(titleET.getText().toString(), color, time, switchSB.isChecked());
 
-        new SetAlarmInteractor().executeWithId(alarmItem, new RealmUtils.OnSuccessListener() {
-            @Override
-            public void onSuccess() {
-                getActivity().finish();
-            }
-        });
+        if (alarmItem != null) {
+            alarmItem.setEnabled(switchSB.isChecked());
+            alarmItem.setColor(color);
+            alarmItem.setText(titleET.getText().toString());
+            alarmItem.setTime(time);
+
+            new SetAlarmInteractor().execute(alarmItem, new RealmUtils.OnSuccessListener() {
+                @Override
+                public void onSuccess() {
+                    getActivity().finish();
+                    Toast.makeText(getActivity(), "Alarm updated...", Toast.LENGTH_LONG).show();
+                }
+            });
+
+        } else {
+            alarmItem = new AlarmItem(titleET.getText().toString(), color, time, switchSB.isChecked());
+
+            new SetAlarmInteractor().executeWithId(alarmItem, new RealmUtils.OnSuccessListener() {
+                @Override
+                public void onSuccess() {
+                    getActivity().finish();
+                }
+            });
+        }
     }
 
 }

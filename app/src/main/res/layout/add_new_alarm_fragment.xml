@@ -62,7 +62,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_12dp"
             android:hint="Title"
-            android:imeOptions="actionDone"/>
+            android:imeOptions="actionDone"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/selectBeaconTV"

@@ -30,6 +30,14 @@ public class FragmentSwitcherParams {
         tag = targetFragment.getClass().getName();
     }
 
+    public FragmentSwitcherParams(@NonNull FragmentManager fragmentManager, @NonNull Fragment targetFragment, int frameId, Bundle bundle) {
+        this.fragmentManager = fragmentManager;
+        this.fragment = targetFragment;
+        this.frameId = frameId;
+        this.bundle = bundle;
+        tag = targetFragment.getClass().getName();
+    }
+
     @NonNull
     public FragmentManager getFragmentManager() {
         return fragmentManager;

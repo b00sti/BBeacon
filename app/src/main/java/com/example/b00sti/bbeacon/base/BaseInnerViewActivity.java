@@ -1,6 +1,8 @@
 package com.example.b00sti.bbeacon.base;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -68,7 +70,7 @@ public class BaseInnerViewActivity extends AppCompatActivity {
         int fragmentId;
         if (intent.hasExtra(getString(R.string.bundle_fragment))) {
             fragmentId = intent.getIntExtra(getString(R.string.bundle_fragment), -1);
-            switchToFragment(fragmentId);
+            switchToFragment(fragmentId, intent.getExtras());
         }
     }
 
@@ -76,9 +78,14 @@ public class BaseInnerViewActivity extends AppCompatActivity {
         return fragmentBuilder.newFragment(fragmentId);
     }
 
-    private void switchToFragment(int fragmentId) {
+    private void switchToFragment(int fragmentId, @Nullable Bundle bundle) {
         Fragment fragment = setFragment(fragmentId);
         Log.d(TAG, "switchToFragment: " + fragment.getTag());
-        FragmentSwitcher.switchFragment(new FragmentSwitcherParams(getSupportFragmentManager(), fragment, R.id.activity_inner_view_placeholder));
+
+        if (bundle != null) {
+            FragmentSwitcher.switchFragment(new FragmentSwitcherParams(getSupportFragmentManager(), fragment, R.id.activity_inner_view_placeholder, bundle));
+        } else {
+            FragmentSwitcher.switchFragment(new FragmentSwitcherParams(getSupportFragmentManager(), fragment, R.id.activity_inner_view_placeholder));
+        }
     }
 }

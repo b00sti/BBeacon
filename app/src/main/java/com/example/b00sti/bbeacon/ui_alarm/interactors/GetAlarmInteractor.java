@@ -37,4 +37,8 @@ public class GetAlarmInteractor {
 
     }
 
+    public AlarmItem execute(long id) {
+        return RealmUtils.Find(AlarmItem.class, "id", id);
+    }
+
 }
