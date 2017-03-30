@@ -207,12 +207,13 @@ public class AddNewAlarmFragment extends Fragment {
             }
         };
 
-        new TimePickerDialog(getActivity(),
+        TimePickerDialog timePicker = new TimePickerDialog(getActivity(),
                 t,
                 calendar.get(Calendar.HOUR_OF_DAY),
                 calendar.get(Calendar.MINUTE),
-                true)
-                .show();
+                true);
+        timePicker.setTitle("");
+        timePicker.show();
     }
 
     @Click(R.id.cancelIV)
