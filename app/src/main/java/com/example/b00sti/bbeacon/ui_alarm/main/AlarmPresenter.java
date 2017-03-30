@@ -27,7 +27,7 @@ public class AlarmPresenter extends BasePresenter<AlarmContract.View> implements
     @RootContext
     Activity ctx;
 
-    @StringRes(R.string.next_alarm) private String nextAlarm;
+    @StringRes(R.string.next_alarm) String nextAlarm;
 
     @Override
     public String getTitleToRefreshToolbar() {

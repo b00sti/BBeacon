@@ -18,6 +18,10 @@ public class AlarmContract {
 
         void refreshData(List<AlarmItem> items);
 
+        AlarmAdapter getAdapter();
+
+        void onEmptyDataSet(boolean isEmpty);
+
     }
 
     public interface Presenter {

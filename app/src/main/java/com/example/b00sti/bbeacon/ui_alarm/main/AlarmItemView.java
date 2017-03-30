@@ -14,6 +14,8 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.ColorRes;
 
+import lombok.Setter;
+
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
  */
@@ -41,25 +43,14 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
     @ColorRes(android.R.color.primary_text_light)
     int colorDeactivatedDay;
 
+    @Setter
+    OnClickListener onDeleteClickListener;
+
+    @Setter
+    SwitchButton.OnCheckedChangeListener onCheckedChangeListener;
+
     public AlarmItemView(Context context) {
         super(context);
-    }
-
-    public void setOnSwitchClickedListener(final OnSwitchClickedListener onSwitchClickedListener) {
-
-        switchSB.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (onSwitchClickedListener != null) {
-                    onSwitchClickedListener.refreshAdapter(isChecked);
-                }
-            }
-        });
-
-    }
-
-    public void afterDeleteClick(OnClickListener onClickListener) {
-        moreIV.setOnClickListener(onClickListener);
     }
 
     @Override
@@ -77,6 +68,8 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
         configureDay(alarmItem, 4, day5TV);
         configureDay(alarmItem, 5, day6TV);
         configureDay(alarmItem, 6, day7TV);
+        moreIV.setOnClickListener(onDeleteClickListener);
+        switchSB.setOnCheckedChangeListener(onCheckedChangeListener);
     }
 
     private void configureDay(AlarmItem alarmItem, int i, TextView textView) {

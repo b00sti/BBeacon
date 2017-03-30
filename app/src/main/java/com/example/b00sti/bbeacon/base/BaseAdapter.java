@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-07
  */
 
 public abstract class BaseAdapter<T, V extends View> extends RecyclerView.Adapter<ViewWrapper<V>> {
 
+    @Getter
     protected List<T> dataSet = new ArrayList<>();
     protected Context context;
 
