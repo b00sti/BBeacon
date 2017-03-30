@@ -22,6 +22,8 @@ public class AlarmContract {
 
     public interface Presenter {
 
+        String getTitleToRefreshToolbar();
+
         void fetchData();
 
     }

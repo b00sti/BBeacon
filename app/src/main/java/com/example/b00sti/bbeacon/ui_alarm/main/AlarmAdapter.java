@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseAdapter;
 import com.example.b00sti.bbeacon.base.BaseInnerViewActivity_;
+import com.example.b00sti.bbeacon.base.OnEmptyDataSetListener;
 import com.example.b00sti.bbeacon.base.ViewWrapper;
 import com.example.b00sti.bbeacon.ui_alarm.NotificationEvent;
 import com.example.b00sti.bbeacon.ui_alarm.interactors.RemoveAlarmInteractor;
@@ -20,6 +21,8 @@ import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 import org.greenrobot.eventbus.EventBus;
 
+import lombok.Setter;
+
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
  */
@@ -29,6 +32,9 @@ public class AlarmAdapter extends BaseAdapter<AlarmItem, AlarmItemView> {
 
     @RootContext
     Context ctx;
+
+    @Setter
+    OnEmptyDataSetListener onEmptyListener;
 
     @Override
     protected AlarmItemView onCreateItemView(ViewGroup parent, int viewType) {
@@ -75,6 +81,9 @@ public class AlarmAdapter extends BaseAdapter<AlarmItem, AlarmItemView> {
                     new RemoveAlarmInteractor().execute(alarmItem);
                     dataSet.remove(alarmItem);
                     notifyItemRemoved(position);
+                    if (dataSet.isEmpty() && onEmptyListener != null) {
+                        onEmptyListener.onEmptyDataSet(true);
+                    }
                 }
             }
         });

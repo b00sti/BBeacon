@@ -2,20 +2,21 @@ package com.example.b00sti.bbeacon.ui_alarm.main;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
-import com.example.b00sti.bbeacon.ui_alarm.interactors.GetNextAlarmInteractor;
+import com.example.b00sti.bbeacon.base.OnEmptyDataSetListener;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.res.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +26,12 @@ import java.util.List;
  */
 
 @EFragment(R.layout.alarm_fragment)
-public class AlarmFragment extends BaseFragment<AlarmPresenter> implements AlarmContract.View {
+public class AlarmFragment extends BaseFragment<AlarmPresenter> implements AlarmContract.View, OnEmptyDataSetListener {
     private static final String TAG = "AlarmFragment";
 
     @ViewById(R.id.fragment_container) FrameLayout fragmentContainer;
     @ViewById(R.id.mainRV) RecyclerView recyclerView;
-    @StringRes(R.string.next_alarm) String nextAlarm;
+    @ViewById(R.id.noAvailableTV) TextView noAvailableTV;
 
     @Bean
     AlarmPresenter presenter;
@@ -59,6 +60,7 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         alarmAdapter.setDataSet(new ArrayList<AlarmItem>());
+        alarmAdapter.setOnEmptyListener(this);
         recyclerView.setAdapter(alarmAdapter);
         presenter.fetchData();
     }
@@ -104,21 +106,31 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
 
     @Override
     public void refreshData(List<AlarmItem> items) {
-        alarmAdapter.setDataSet(items);
+        if (items.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            noAvailableTV.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            noAvailableTV.setVisibility(View.GONE);
+            alarmAdapter.setDataSet(items);
+        }
     }
 
     @Override
     public void refreshToolbar() {
         if (getActivity() instanceof MainActivity) {
-            AlarmItem alarmItem = new GetNextAlarmInteractor().execute();
-            String alarmTitle;
-            if (alarmItem.getText() != null) {
-                alarmTitle = alarmItem.getText();
-            } else {
-                alarmTitle = "none";
-            }
-            String result = String.format(nextAlarm, alarmTitle);
-            ((MainActivity) getActivity()).configureToolbar(result);
+            ((MainActivity) getActivity()).configureToolbar(presenter.getTitleToRefreshToolbar());
+        }
+    }
+
+    @Override
+    public void onEmptyDataSet(boolean isEmpty) {
+        if (isEmpty) {
+            recyclerView.setVisibility(View.GONE);
+            noAvailableTV.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            noAvailableTV.setVisibility(View.GONE);
         }
     }
 }
