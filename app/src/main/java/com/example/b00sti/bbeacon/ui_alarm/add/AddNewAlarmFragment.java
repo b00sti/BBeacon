@@ -44,13 +44,13 @@ public class AddNewAlarmFragment extends Fragment {
     @ViewById(R.id.switchSB) SwitchButton switchSB;
     @ViewById(R.id.selectedTimeTV) AutofitTextView selectedTimeTV;
     @ViewById(R.id.timeToNextTV) TextView timeToNextTV;
-
-
-    /*
-    @ViewById(R.id.selectBeaconTV) AppCompatButton selectColorB;
-    @ViewById(R.id.selectedTimeTV) TextView selectedTimeTV;
-    @ViewById(R.id.doneIV) ImageView doneIV;
-    */
+    @ViewById(R.id.day1TV) TextView day1TV;
+    @ViewById(R.id.day2TV) TextView day2TV;
+    @ViewById(R.id.day3TV) TextView day3TV;
+    @ViewById(R.id.day4TV) TextView day4TV;
+    @ViewById(R.id.day5TV) TextView day5TV;
+    @ViewById(R.id.day6TV) TextView day6TV;
+    @ViewById(R.id.day7TV) TextView day7TV;
 
     @IntArrayRes(R.array.beaconColors)
     int colors[];
@@ -58,8 +58,15 @@ public class AddNewAlarmFragment extends Fragment {
     @ColorRes(R.color.colorPrimaryDark)
     int color;
 
+    @ColorRes(R.color.colorAccent)
+    int colorActivatedDay;
+
+    @ColorRes(android.R.color.primary_text_light)
+    int colorDeactivatedDay;
+
     String time;
     AlarmItem alarmItem = null;
+    boolean[] days = new boolean[7];
 
     public static AddNewAlarmFragment newInstance() {
         return new AddNewAlarmFragment_();
@@ -75,12 +82,58 @@ public class AddNewAlarmFragment extends Fragment {
         }
 
         if (alarmItem != null) {
+
+            for (int i = 0; i < 7; i++) {
+                days[i] = alarmItem.getIsEnabledRepeat().get(i).isEnabled();
+            }
+
             time = alarmItem.getTime();
             switchSB.setChecked(alarmItem.isEnabled());
             selectedTimeTV.setText(time);
             timeToNextTV.setText(getTimeToAlarm());
             titleET.setText(alarmItem.getText());
+
+            if (alarmItem.getIsEnabledRepeat().get(0).isEnabled()) {
+                day1TV.setTextColor(colorActivatedDay);
+            } else {
+                day1TV.setTextColor(colorDeactivatedDay);
+            }
+            if (alarmItem.getIsEnabledRepeat().get(1).isEnabled()) {
+                day2TV.setTextColor(colorActivatedDay);
+            } else {
+                day2TV.setTextColor(colorDeactivatedDay);
+            }
+            if (alarmItem.getIsEnabledRepeat().get(2).isEnabled()) {
+                day3TV.setTextColor(colorActivatedDay);
+            } else {
+                day3TV.setTextColor(colorDeactivatedDay);
+            }
+            if (alarmItem.getIsEnabledRepeat().get(3).isEnabled()) {
+                day4TV.setTextColor(colorActivatedDay);
+            } else {
+                day4TV.setTextColor(colorDeactivatedDay);
+            }
+            if (alarmItem.getIsEnabledRepeat().get(4).isEnabled()) {
+                day5TV.setTextColor(colorActivatedDay);
+            } else {
+                day5TV.setTextColor(colorDeactivatedDay);
+            }
+            if (alarmItem.getIsEnabledRepeat().get(5).isEnabled()) {
+                day6TV.setTextColor(colorActivatedDay);
+            } else {
+                day6TV.setTextColor(colorDeactivatedDay);
+            }
+            if (alarmItem.getIsEnabledRepeat().get(6).isEnabled()) {
+                day7TV.setTextColor(colorActivatedDay);
+            } else {
+                day7TV.setTextColor(colorDeactivatedDay);
+            }
         } else {
+
+            for (int i = 0; i < 7; i++) {
+                days[i] = false;
+            }
+
             time = getCurrentTime();
             switchSB.setChecked(true);
             selectedTimeTV.setText(time);
@@ -149,7 +202,7 @@ public class AddNewAlarmFragment extends Fragment {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 time = hourOfDay + ":" + minute;
                 time = TimeUtils.getTimeWith0(time);
-                selectedTimeTV.setText(TimeUtils.getTimeWith0(time));
+                selectedTimeTV.setText(time);
                 timeToNextTV.setText(getTimeToAlarm());
             }
         };
@@ -167,6 +220,41 @@ public class AddNewAlarmFragment extends Fragment {
         getActivity().finish();
     }
 
+    @Click(R.id.day1TV)
+    void setDay1TV() {
+        configureDay(0, day1TV);
+    }
+
+    @Click(R.id.day2TV)
+    void setDay2TV() {
+        configureDay(1, day2TV);
+    }
+
+    @Click(R.id.day3TV)
+    void setDay3TV() {
+        configureDay(2, day3TV);
+    }
+
+    @Click(R.id.day4TV)
+    void setDay4TV() {
+        configureDay(3, day4TV);
+    }
+
+    @Click(R.id.day5TV)
+    void setDay5TV() {
+        configureDay(4, day5TV);
+    }
+
+    @Click(R.id.day6TV)
+    void setDay6TV() {
+        configureDay(5, day6TV);
+    }
+
+    @Click(R.id.day7TV)
+    void setDay7TV() {
+        configureDay(6, day7TV);
+    }
+
     @Click(R.id.doneIV)
     void save() {
 
@@ -175,6 +263,7 @@ public class AddNewAlarmFragment extends Fragment {
             alarmItem.setColor(color);
             alarmItem.setText(titleET.getText().toString());
             alarmItem.setTime(time);
+            setDaysToRepeat();
 
             new SetAlarmInteractor().execute(alarmItem, new RealmUtils.OnSuccessListener() {
                 @Override
@@ -186,6 +275,7 @@ public class AddNewAlarmFragment extends Fragment {
 
         } else {
             alarmItem = new AlarmItem(titleET.getText().toString(), color, time, switchSB.isChecked());
+            setDaysToRepeat();
 
             new SetAlarmInteractor().executeWithId(alarmItem, new RealmUtils.OnSuccessListener() {
                 @Override
@@ -193,6 +283,22 @@ public class AddNewAlarmFragment extends Fragment {
                     getActivity().finish();
                 }
             });
+        }
+    }
+
+    private void configureDay(int i, TextView textView) {
+        if (days[i]) {
+            days[i] = false;
+            textView.setTextColor(colorDeactivatedDay);
+        } else {
+            days[i] = true;
+            textView.setTextColor(colorActivatedDay);
+        }
+    }
+
+    private void setDaysToRepeat() {
+        for (int i = 0; i < 7; i++) {
+            alarmItem.getIsEnabledRepeat().get(i).setEnabled(days[i]);
         }
     }
 

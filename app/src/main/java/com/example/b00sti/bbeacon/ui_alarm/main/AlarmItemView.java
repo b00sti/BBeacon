@@ -12,6 +12,7 @@ import com.example.b00sti.bbeacon.utils.SwitchButton;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.ColorRes;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
@@ -26,6 +27,19 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
     @ViewById(R.id.tempValueTV) TextView timeTV;
     @ViewById(R.id.switchSB) SwitchButton switchSB;
     @ViewById(R.id.topLayoutLL) ViewGroup topLL;
+    @ViewById(R.id.day1TV) TextView day1TV;
+    @ViewById(R.id.day2TV) TextView day2TV;
+    @ViewById(R.id.day3TV) TextView day3TV;
+    @ViewById(R.id.day4TV) TextView day4TV;
+    @ViewById(R.id.day5TV) TextView day5TV;
+    @ViewById(R.id.day6TV) TextView day6TV;
+    @ViewById(R.id.day7TV) TextView day7TV;
+
+    @ColorRes(R.color.colorAccent)
+    int colorActivatedDay;
+
+    @ColorRes(android.R.color.primary_text_light)
+    int colorDeactivatedDay;
 
     public AlarmItemView(Context context) {
         super(context);
@@ -56,5 +70,20 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
         switchSB.setColor(alarmItem.getColor());
         topLL.setBackgroundColor(alarmItem.getColor());
         timeTV.setText(alarmItem.getTime());
+        configureDay(alarmItem, 0, day1TV);
+        configureDay(alarmItem, 1, day2TV);
+        configureDay(alarmItem, 2, day3TV);
+        configureDay(alarmItem, 3, day4TV);
+        configureDay(alarmItem, 4, day5TV);
+        configureDay(alarmItem, 5, day6TV);
+        configureDay(alarmItem, 6, day7TV);
+    }
+
+    private void configureDay(AlarmItem alarmItem, int i, TextView textView) {
+        if (alarmItem.getIsEnabledRepeat().get(i).isEnabled()) {
+            textView.setTextColor(colorActivatedDay);
+        } else {
+            textView.setTextColor(colorDeactivatedDay);
+        }
     }
 }
