@@ -127,6 +127,7 @@ public class AddNewAlarmFragment extends Fragment {
         TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 time = hourOfDay + ":" + minute;
+                time = TimeUtils.getTimeWith0(time);
                 selectedTimeTV.setText(TimeUtils.getTimeWith0(time));
                 timeToNextTV.setText(getTimeToAlarm());
             }

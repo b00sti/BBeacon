@@ -52,6 +52,13 @@ public class AlarmAdapter extends BaseAdapter<AlarmItem, AlarmItemView> {
             }
         });
 
+        alarmItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+
         alarmItemView.afterDeleteClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
