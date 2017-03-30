@@ -27,4 +27,8 @@ public class SetAlarmInteractor {
         RealmUtils.SaveAll(data, listener);
     }
 
+    public void executeWithId(AlarmItem alarmItem, RealmUtils.OnSuccessListener listener) {
+        RealmUtils.SaveAllWithId(alarmItem, listener);
+    }
+
 }

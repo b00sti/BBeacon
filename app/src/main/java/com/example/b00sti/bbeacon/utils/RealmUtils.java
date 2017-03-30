@@ -2,6 +2,8 @@ package com.example.b00sti.bbeacon.utils;
 
 import android.support.annotation.Nullable;
 
+import com.example.b00sti.bbeacon.ui_alarm.main.SetIdInterface;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,10 +44,70 @@ public class RealmUtils {
         return list;
     }
 
+    public static <E extends RealmObject> void Remove(final Class<E> clazz, final String fieldTitle, final long fieldValue) {
+        final Realm realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                final E first = realm.where(clazz).equalTo(fieldTitle, fieldValue).findFirst();
+                if (first != null) {
+                    first.deleteFromRealm();
+                }
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                realm.close();
+            }
+        });
+    }
+
+    public static <E extends RealmObject> E Find(Class<E> clazz, String fieldTitle, String fieldValue) {
+        final Realm realm = Realm.getDefaultInstance();
+        final E first = realm.where(clazz).equalTo(fieldTitle, fieldValue).findFirst();
+        E result = realm.copyFromRealm(first);
+        realm.close();
+        return result;
+    }
+
+    public static <E extends RealmObject> List<E> FindAll(Class<E> clazz, String fieldTitle, String fieldValue) {
+        final Realm realm = Realm.getDefaultInstance();
+        final RealmResults<E> all = realm.where(clazz).equalTo(fieldTitle, fieldValue).findAll();
+        final List<E> list = realm.copyFromRealm(all);
+        realm.close();
+        return list;
+    }
+
     public static <E extends RealmObject> void SaveAll(final E item, @Nullable final OnSuccessListener onSuccessListener) {
         List<E> list = new ArrayList<>();
         list.add(item);
         RealmUtils.SaveAll(list, onSuccessListener);
+    }
+
+    public static <E extends RealmObject> void RemoveAll(final E item, @Nullable final OnSuccessListener onSuccessListener) {
+        List<E> list = new ArrayList<>();
+        list.add(item);
+        RealmUtils.RemoveAll(list, onSuccessListener);
+    }
+
+    public static <E extends RealmObject> void RemoveAll(final List<E> items, @Nullable final OnSuccessListener onSuccessListener) {
+        final Realm realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                for (E item : items) {
+                    item.deleteFromRealm();
+                }
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                realm.close();
+                if (onSuccessListener != null) {
+                    onSuccessListener.onSuccess();
+                }
+            }
+        });
     }
 
     public static <E extends RealmObject> void SaveAll(final List<E> items, @Nullable final OnSuccessListener onSuccessListener) {
@@ -54,6 +116,43 @@ public class RealmUtils {
             @Override
             public void execute(Realm realm) {
                 for (E item : items) {
+                    realm.copyToRealmOrUpdate(item);
+                }
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                realm.close();
+                if (onSuccessListener != null) {
+                    onSuccessListener.onSuccess();
+                }
+            }
+        });
+    }
+
+    public static <E extends RealmObject> void SaveAllWithId(E item, OnSuccessListener onSuccessListener) {
+        List<E> list = new ArrayList<>();
+        list.add(item);
+        RealmUtils.SaveAllWithId(list, onSuccessListener);
+    }
+
+    public static <E extends RealmObject> void SaveAllWithId(final List<E> items, @Nullable final OnSuccessListener onSuccessListener) {
+        final Realm realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                for (E item : items) {
+                    long primaryKeyValue;
+                    Number e = realm.where(item.getClass()).max("id");
+                    if (e != null) {
+                        primaryKeyValue = e.longValue();
+                        primaryKeyValue = primaryKeyValue + 1;
+
+                        if (item instanceof SetIdInterface) {
+                            ((SetIdInterface) item).setManualId(primaryKeyValue);
+                        }
+
+                    }
                     realm.copyToRealmOrUpdate(item);
                 }
             }

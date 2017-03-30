@@ -47,12 +47,12 @@
 
                     <ImageView
                         android:id="@+id/moreIV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerInParent="true"
-                        android:padding="@dimen/size_8dp"
-                        android:src="@drawable/ic_more_vert_white_24dp"/>
+                        android:layout_marginEnd="@dimen/size_8dp"
+                        android:src="@drawable/ic_delete_white_24dp"/>
 
                 </RelativeLayout>
 
@@ -90,27 +90,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/size_42dp"
                         android:layout_gravity="center"
-                        app:sb_enable_effect="true"
+                        app:sb_checked_color="#A36F95"
                         app:sb_effect_duration="100"
-                        app:sb_shadow_effect="true"
-                        app:sb_checked_color="#A36F95"/>
+                        app:sb_enable_effect="true"
+                        app:sb_shadow_effect="true"/>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/daysTV"
+            <include
+                layout="@layout/reapeting_days"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/timeLL"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@+id/sidebar"
-                android:gravity="center"
-                android:maxLines="1"
-                android:padding="@dimen/size_12dp"
-                android:text="MON   TUE   WED   THU   FRI   SAT   SUN"
-                android:textSize="@dimen/font_16sp"/>
+                android:layout_toRightOf="@+id/sidebar"/>
 
         </RelativeLayout>
 

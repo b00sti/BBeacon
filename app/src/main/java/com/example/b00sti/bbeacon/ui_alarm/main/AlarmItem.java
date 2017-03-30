@@ -4,6 +4,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 /**
@@ -13,15 +14,28 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class AlarmItem extends RealmObject {
+public class AlarmItem extends RealmObject implements SetIdInterface {
 
     @PrimaryKey
-    String text;
+    long id;
 
-    boolean isEnabled = false;
+    @NonNull String text;
     int color;
-    String time;
+    @NonNull String time;
+    boolean isEnabled = false;
 
     public AlarmItem() {
+    }
+
+    public AlarmItem(String text, int color, String time, boolean isEnabled) {
+        this.text = text;
+        this.color = color;
+        this.time = time;
+        this.isEnabled = isEnabled;
+    }
+
+    @Override
+    public void setManualId(long id) {
+        setId(id);
     }
 }

@@ -1,7 +1,5 @@
 package com.example.b00sti.bbeacon.ui_alarm.interactors;
 
-import android.graphics.Color;
-
 import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
@@ -25,7 +23,7 @@ public class GetAlarmInteractor {
             //fake time
             List<AlarmItem> itemsData = new ArrayList<>();
             for (int i = 0; i < 50; i++) {
-                itemsData.add(new AlarmItem("Fragment Alarm as mvp - " + " Item : " + i, false, Color.BLACK, "18:18"));
+/*                itemsData.add(new AlarmItem("Fragment Alarm as mvp - " + " Item : " + i, false, Color.BLACK, "18:18"));*/
             }
 
         return Observable.just(itemsData)

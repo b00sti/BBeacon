@@ -26,17 +26,27 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
     @ViewById(R.id.moreIV) ImageView moreIV;
     @ViewById(R.id.tempValueTV) TextView timeTV;
     @ViewById(R.id.switchSB) SwitchButton switchSB;
-    @ViewById(R.id.daysTV) TextView daysTV;
     @ViewById(R.id.topLayoutLL) ViewGroup topLL;
-
-    private OnSwitchClickedListener onSwitchClickedListener;
 
     public AlarmItemView(Context context) {
         super(context);
     }
 
-    public void setOnSwitchClickedListener(OnSwitchClickedListener onSwitchClickedListener) {
-        this.onSwitchClickedListener = onSwitchClickedListener;
+    public void setOnSwitchClickedListener(final OnSwitchClickedListener onSwitchClickedListener) {
+
+        switchSB.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+                if (onSwitchClickedListener != null) {
+                    onSwitchClickedListener.refreshAdapter(isChecked);
+                }
+            }
+        });
+
+    }
+
+    public void afterDeleteClick(OnClickListener onClickListener) {
+        moreIV.setOnClickListener(onClickListener);
     }
 
     @Override
@@ -47,14 +57,5 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
         switchSB.setColor(alarmItem.getColor());
         topLL.setBackgroundColor(alarmItem.getColor());
         timeTV.setText(TimeUtils.getTimeWith0(alarmItem.getTime()));
-
-        switchSB.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (onSwitchClickedListener != null) {
-                    onSwitchClickedListener.refreshAdapter(isChecked);
-                }
-            }
-        });
     }
 }

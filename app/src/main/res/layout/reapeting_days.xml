@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/daysTV"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxLines="1"
+    android:orientation="horizontal"
+    android:padding="@dimen/size_12dp"
+    android:weightSum="7"
+    tools:showIn="@layout/add_new_alarm_fragment">
+
+    <TextView
+        android:id="@+id/day1TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="MON"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/font_20sp"/>
+
+    <TextView
+        android:id="@+id/day2TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="TUE"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/font_20sp"/>
+
+    <TextView
+        android:id="@+id/day3TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="WED"
+        android:textSize="@dimen/font_20sp"/>
+
+    <TextView
+        android:id="@+id/day4TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="THU"
+        android:textSize="@dimen/font_20sp"/>
+
+    <TextView
+        android:id="@+id/day5TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="FRI"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/font_20sp"/>
+
+    <TextView
+        android:id="@+id/day6TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="SAT"
+        android:textSize="@dimen/font_20sp"/>
+
+    <TextView
+        android:id="@+id/day7TV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="SUN"
+        android:textSize="@dimen/font_20sp"/>
+
+</LinearLayout>

@@ -1,11 +1,14 @@
 package com.example.b00sti.bbeacon.ui_alarm.main;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.b00sti.bbeacon.base.BaseAdapter;
 import com.example.b00sti.bbeacon.base.ViewWrapper;
 import com.example.b00sti.bbeacon.ui_alarm.NotificationEvent;
+import com.example.b00sti.bbeacon.ui_alarm.interactors.RemoveAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.interactors.SetAlarmInteractor;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
@@ -31,15 +34,15 @@ public class AlarmAdapter extends BaseAdapter<AlarmItem, AlarmItemView> {
     @Override
     public void onBindViewHolder(final ViewWrapper<AlarmItemView> holder, final int position) {
         AlarmItemView alarmItemView = holder.getView();
-        AlarmItem alarmItem = dataSet.get(position);
+        final AlarmItem alarmItem = dataSet.get(position);
+
         alarmItemView.setOnSwitchClickedListener(new OnSwitchClickedListener() {
             @Override
             public void refreshAdapter(boolean isChecked) {
-                AlarmItem item = dataSet.get(position);
-                if (item.isEnabled != isChecked) {
-                    item.setEnabled(isChecked);
+                if (alarmItem.isEnabled != isChecked) {
+                    alarmItem.setEnabled(isChecked);
 
-                    new SetAlarmInteractor().execute(item, new RealmUtils.OnSuccessListener() {
+                    new SetAlarmInteractor().execute(alarmItem, new RealmUtils.OnSuccessListener() {
                         @Override
                         public void onSuccess() {
                            EventBus.getDefault().post(new NotificationEvent());
@@ -48,6 +51,20 @@ public class AlarmAdapter extends BaseAdapter<AlarmItem, AlarmItemView> {
                 }
             }
         });
+
+        alarmItemView.afterDeleteClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (alarmItem.isEnabled()) {
+                    Toast.makeText(context, "First disable alarm !", Toast.LENGTH_LONG).show();
+                } else {
+                    new RemoveAlarmInteractor().execute(alarmItem);
+                    dataSet.remove(alarmItem);
+                    notifyItemRemoved(position);
+                }
+            }
+        });
+
         alarmItemView.bind(alarmItem);
     }
 }

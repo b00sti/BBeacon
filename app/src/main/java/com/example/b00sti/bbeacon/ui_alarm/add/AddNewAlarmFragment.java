@@ -26,7 +26,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 import me.grantland.widget.AutofitTextView;
@@ -95,7 +94,7 @@ public class AddNewAlarmFragment extends Fragment {
         Calendar c = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
-        return TimeUtils.getTimeWith0(dateFormat.format(c.getTime()));
+        return dateFormat.format(c.getTime());//TimeUtils.getTimeWith0(dateFormat.format(c.getTime()));
     }
 
     @Click(R.id.selectBeaconTV)
@@ -148,10 +147,9 @@ public class AddNewAlarmFragment extends Fragment {
 
     @Click(R.id.doneIV)
     void save() {
-        List<AlarmItem> items = new ArrayList<AlarmItem>();
-        items.add(new AlarmItem(titleET.getText().toString(), switchSB.isChecked(), color, time));
+        AlarmItem alarmItem = new AlarmItem(titleET.getText().toString(), color, time, switchSB.isChecked());
 
-        new SetAlarmInteractor().execute(items, new RealmUtils.OnSuccessListener() {
+        new SetAlarmInteractor().executeWithId(alarmItem, new RealmUtils.OnSuccessListener() {
             @Override
             public void onSuccess() {
                 getActivity().finish();
