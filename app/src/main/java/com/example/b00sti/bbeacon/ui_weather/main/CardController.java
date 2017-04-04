@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.b00sti.bbeacon.ui_weather;
+package com.example.b00sti.bbeacon.ui_weather.main;
 
 import android.os.Handler;
 import android.support.v7.widget.CardView;

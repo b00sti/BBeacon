@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import com.example.b00sti.bbeacon.base.BaseRefreshableFragmentWithToolbar;
 import com.example.b00sti.bbeacon.ui_alarm.main.AlarmFragment;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerFragment;
-import com.example.b00sti.bbeacon.ui_weather.WeatherFragment;
+import com.example.b00sti.bbeacon.ui_weather.main.WeatherFragment;
 
 import java.util.ArrayList;
 

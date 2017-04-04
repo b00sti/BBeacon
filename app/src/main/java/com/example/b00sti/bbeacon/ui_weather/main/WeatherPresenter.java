@@ -1,8 +1,9 @@
-package com.example.b00sti.bbeacon.ui_weather;
+package com.example.b00sti.bbeacon.ui_weather.main;
 
 import android.app.Activity;
 
 import com.example.b00sti.bbeacon.base.BasePresenter;
+import com.example.b00sti.bbeacon.ui_weather.interactors.GetWeatherInteractor;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;

@@ -24,7 +24,7 @@ import com.example.b00sti.bbeacon.ui_alarm.interactors.GetAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.ui_scanner.GetScannerInteractor;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerItem;
-import com.example.b00sti.bbeacon.ui_weather.OnAnimationToolbar;
+import com.example.b00sti.bbeacon.ui_weather.main.OnAnimationToolbar;
 import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
 import org.androidannotations.annotations.AfterViews;

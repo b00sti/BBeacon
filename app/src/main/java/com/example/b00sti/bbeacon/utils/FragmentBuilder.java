@@ -10,8 +10,8 @@ import com.example.b00sti.bbeacon.ui_alarm.top.AlarmTopFragment;
 import com.example.b00sti.bbeacon.ui_others.AddNewBeaconFragment;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerFragment;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerTopFragment;
-import com.example.b00sti.bbeacon.ui_weather.WeatherFragment;
-import com.example.b00sti.bbeacon.ui_weather.WeatherTopFragment;
+import com.example.b00sti.bbeacon.ui_weather.main.WeatherFragment;
+import com.example.b00sti.bbeacon.ui_weather.top.WeatherTopFragment;
 
 import org.androidannotations.annotations.EBean;
 

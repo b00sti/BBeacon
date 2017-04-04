@@ -26,7 +26,7 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 
-import static com.example.b00sti.bbeacon.ui_weather.WeatherTopFragment.TAG;
+import static com.example.b00sti.bbeacon.ui_weather.top.WeatherTopFragment.TAG;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-14

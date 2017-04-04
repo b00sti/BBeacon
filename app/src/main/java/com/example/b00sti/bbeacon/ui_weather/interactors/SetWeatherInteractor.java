@@ -1,5 +1,6 @@
-package com.example.b00sti.bbeacon.ui_weather;
+package com.example.b00sti.bbeacon.ui_weather.interactors;
 
+import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import java.util.List;

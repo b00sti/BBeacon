@@ -1,10 +1,11 @@
-package com.example.b00sti.bbeacon.ui_weather;
+package com.example.b00sti.bbeacon.ui_weather.main;
 
 import android.content.Context;
 import android.view.ViewGroup;
 
 import com.example.b00sti.bbeacon.base.BaseAdapter;
 import com.example.b00sti.bbeacon.base.ViewWrapper;
+import com.example.b00sti.bbeacon.ui_weather.WeatherItemView_;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;

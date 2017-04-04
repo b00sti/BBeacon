@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.ui_weather;
+package com.example.b00sti.bbeacon.ui_weather.main;
 
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
