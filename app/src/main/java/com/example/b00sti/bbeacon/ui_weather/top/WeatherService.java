@@ -11,5 +11,5 @@ import retrofit2.http.Query;
 public interface WeatherService {
 
     @GET("weather?")
-    Observable<WeatherFromOWM> getWeatherFromOWM(@Query("lat") Double lat, @Query("lon") Double lon, @Query("APPID") String id);
+    Observable<WeatherFromOWM> getWeatherFromOWM(@Query("lat") Double lat, @Query("lon") Double lon, @Query("APPID") String id, @Query("units") String units);
 }

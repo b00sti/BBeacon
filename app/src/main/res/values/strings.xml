@@ -8,5 +8,8 @@
 
     <string name="time_to_next_alarm">Time to next alarm: %s</string>
     <string name="next_alarm">Next alarm: %s</string>
+    <string name="pressure">%s hPa</string>
+    <string name="humidity">%s %%</string>
+    <string name="wind_speed">%s m/s</string>
 
 </resources>

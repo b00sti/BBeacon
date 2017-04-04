@@ -156,8 +156,8 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     }
 
     private void refreshTopFragment(int currentTab) {
-        if(topFragment instanceof BaseRefreshableFragment) {
-         ((BaseRefreshableFragment) topFragment).refresh();
+        if (topFragment instanceof BaseRefreshableFragment) {
+            ((BaseRefreshableFragment) topFragment).refresh();
         }
     }
 
@@ -268,15 +268,14 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 
-        Fragment fragment = navigationManager.getCurrentFragment();
+        Fragment fragment = topFragment;
         if (fragment instanceof OnAnimationToolbar) {
             if (verticalOffset == 0) {
-                ((OnAnimationToolbar) fragment).setCollapsedTitleLayout("Krowodrza");
-                collapsedTitleL.setTitle("Krowodrza");
+                collapsedTitleL.setTitle(((OnAnimationToolbar) fragment).setExpandedTitleLayout());
             } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                ((OnAnimationToolbar) fragment).setCollapsedTitleLayout("Krowodrza    17 \u2103");
+                ((OnAnimationToolbar) fragment).setCollapsedTitleLayout();
             } else {
-                ((OnAnimationToolbar) fragment).setCollapsedTitleLayout("Krowodrza");
+                ((OnAnimationToolbar) fragment).setExpandedTitleLayout();
             }
         }
 

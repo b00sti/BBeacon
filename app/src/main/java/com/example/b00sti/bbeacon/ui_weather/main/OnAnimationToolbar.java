@@ -5,5 +5,8 @@ package com.example.b00sti.bbeacon.ui_weather.main;
  */
 
 public interface OnAnimationToolbar {
-    void setCollapsedTitleLayout(String title);
+    String setCollapsedTitleLayout();
+
+    String setExpandedTitleLayout();
+
 }
