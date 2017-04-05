@@ -63,6 +63,10 @@ dependencies {
 
     //Maps
     compile("com.google.android.gms:play-services-maps:9.4.0")
+    compile 'com.google.android.gms:play-services-location:9.4.0'
+
+    //Picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
     //Support library
     compile 'com.android.support:design:25.3.0'

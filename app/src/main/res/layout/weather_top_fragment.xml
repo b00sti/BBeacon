@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:orientation="vertical">
@@ -31,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:padding="@dimen/size_8dp"
-                android:text="17"
+                android:text="-"
                 android:textSize="75sp"/>
 
             <TextView
@@ -89,8 +90,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/size_8dp"
-                android:text="1020 hPa"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                tools:text="1020 hPa"/>
 
         </LinearLayout>
 
@@ -114,8 +115,8 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/imageView"
                 android:padding="@dimen/size_8dp"
-                android:text="80 %"
-                android:textSize="14sp"/>/>
+                android:textSize="14sp"
+                tools:text="80 %"/>
 
         </LinearLayout>
 
@@ -138,8 +139,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/size_8dp"
-                android:text="1.5 m/s"
-                android:textSize="14sp"/>/>
+                android:textSize="14sp"
+                tools:text="1.5 m/s"/>/>
 
         </LinearLayout>
 
