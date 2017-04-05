@@ -197,6 +197,15 @@ public class AddNewAlarmFragment extends Fragment {
 
     @Click(R.id.selectedTimeTV)
     void onTimeClicked() {
+        getTimeFromUser();
+    }
+
+    @Click(R.id.timeToNextTV)
+    void onTimeToNextAlarmClicked() {
+        getTimeFromUser();
+    }
+
+    private void getTimeFromUser() {
         Calendar calendar = Calendar.getInstance();
         TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
