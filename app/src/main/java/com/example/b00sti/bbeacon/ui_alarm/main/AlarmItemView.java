@@ -3,7 +3,6 @@ package com.example.b00sti.bbeacon.ui_alarm.main;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.b00sti.bbeacon.R;
@@ -25,7 +24,7 @@ public class AlarmItemView extends BaseItemView<AlarmItem> {
 
     @ViewById(R.id.layout_item_demo_title) TextView textView;
     @ViewById(R.id.sidebar) View sidebar;
-    @ViewById(R.id.moreIV) ImageView moreIV;
+    @ViewById(R.id.moreIV) ViewGroup moreIV;
     @ViewById(R.id.tempValueTV) TextView timeTV;
     @ViewById(R.id.switchSB) SwitchButton switchSB;
     @ViewById(R.id.topLayoutLL) ViewGroup topLL;
