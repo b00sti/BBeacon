@@ -55,6 +55,18 @@ public class LineCardOne extends CardController {
         mChart = (LineChartView) card.findViewById(R.id.chart1);
     }
 
+    public LineCardOne(CardView card, Context context, int color, int idChart) {
+
+        super(card);
+
+        mContext = context;
+        this.color = color;
+        for (int x = 0; x < mValues[0].length; x++) {
+            float a = Math.round(new Random().nextFloat() * 200 + 100.f);
+            mValues[0][x] = a / 10;
+        }
+        mChart = (LineChartView) card.findViewById(idChart);
+    }
 
     @Override
     public void show(Runnable action) {

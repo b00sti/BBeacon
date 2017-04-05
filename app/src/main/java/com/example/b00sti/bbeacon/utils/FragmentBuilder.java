@@ -10,6 +10,7 @@ import com.example.b00sti.bbeacon.ui_alarm.top.AlarmTopFragment;
 import com.example.b00sti.bbeacon.ui_others.AddNewBeaconFragment;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerFragment;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerTopFragment;
+import com.example.b00sti.bbeacon.ui_weather.details.WeatherDetailsFragment;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherFragment;
 import com.example.b00sti.bbeacon.ui_weather.top.WeatherTopFragment;
 
@@ -32,6 +33,7 @@ public class FragmentBuilder {
     public static final int SCANNER = 5;
     public static final int ADD_NEW_ALARM = 6;
     public static final int ADD_NEW_BEACON = 7;
+    public static final int WEATHER_DETAILS = 8;
     public static final int EMPTY = 100;
 
     public Fragment newFragment(@FragBuild int fragmentId) {
@@ -55,6 +57,8 @@ public class FragmentBuilder {
                 return AddNewAlarmFragment.newInstance();
             case ADD_NEW_BEACON:
                 return AddNewBeaconFragment.newInstance();
+            case WEATHER_DETAILS:
+                return WeatherDetailsFragment.newInstance();
             default:
                 return EmptyFragment.newInstance();
         }
@@ -70,7 +74,8 @@ public class FragmentBuilder {
             SCANNER,
             EMPTY,
             ADD_NEW_ALARM,
-            ADD_NEW_BEACON
+            ADD_NEW_BEACON,
+            WEATHER_DETAILS
     })
     public @interface FragBuild {
     }
