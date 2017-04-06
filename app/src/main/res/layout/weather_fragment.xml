@@ -9,4 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <TextView
+        android:id="@+id/noAvailableTV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:paddingTop="@dimen/size_128dp"
+        android:text="No alarms weather data, first configure or enable scanning your beacons..."
+        android:textSize="@dimen/font_18sp"
+        android:visibility="gone"/>
+
 </FrameLayout>

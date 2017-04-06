@@ -22,7 +22,7 @@ public class GetScannerInteractor {
             //fake time
             List<ScannerItem> itemsData = new ArrayList<>();
             for (int i = 0; i < 50; i++) {
-                itemsData.add(new ScannerItem("Beacon : " + i, 111111, true, "kiedys", 33));
+                itemsData.add(new ScannerItem("" + i, "Beacon : " + i, 111111, true, "kiedys", 33));
             }
 
             return Observable.just(itemsData)

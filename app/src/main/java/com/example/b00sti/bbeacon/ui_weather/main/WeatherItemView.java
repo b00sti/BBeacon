@@ -27,8 +27,8 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
     @ViewById(R.id.sidebar) View sidebar;
     @ViewById(R.id.moreIV) ImageView moreIV;
     @ViewById(R.id.topLayoutLL) ViewGroup topLL;
-    @ViewById(R.id.tempValueTV) TextView timeTV;
-    @ViewById(R.id.daysTV) TextView daysTV;
+    @ViewById(R.id.tempValueTV) TextView tempTV;
+    @ViewById(R.id.messageTV) TextView messageTV;
     @ViewById(R.id.humidityTV) TextView textView2;
     @ViewById(R.id.pressureTV) TextView textView1;
     @ViewById(R.id.card_view) CardView card_view;
@@ -51,18 +51,18 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
 
     @Override
     public void bind(WeatherItem weatherItem) {
-        textView.setText(weatherItem.getText());
+        textView.setText(weatherItem.getTitle());
         int color = weatherItem.getColor();
         topLL.setBackgroundColor(color);
         sidebar.setBackgroundColor(color);
-        timeTV.setText(weatherItem.getTime());
-        daysTV.setText(weatherItem.getDays());
+        tempTV.setText(weatherItem.getTemp());
+        messageTV.setText(weatherItem.getMessage());
         textView1.setText(weatherItem.getPressure());
         textView2.setText(weatherItem.getHumidity());
         if (weatherItem.isAlarm) {
-            daysTV.setCompoundDrawablesWithIntrinsicBounds(desc, null, alarm, null);
+            messageTV.setCompoundDrawablesWithIntrinsicBounds(desc, null, alarm, null);
         } else {
-            daysTV.setCompoundDrawablesWithIntrinsicBounds(desc, null, null, null);
+            messageTV.setCompoundDrawablesWithIntrinsicBounds(desc, null, null, null);
         }
 
         (new LineCardOne(card_view, context, color)).init();

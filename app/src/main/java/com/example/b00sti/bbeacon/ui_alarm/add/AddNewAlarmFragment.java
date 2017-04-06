@@ -168,7 +168,7 @@ public class AddNewAlarmFragment extends Fragment {
         Calendar c = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
-        return dateFormat.format(c.getTime());//TimeUtils.getTimeWith0(dateFormat.format(c.getTime()));
+        return dateFormat.format(c.getTime());//TimeUtils.getTimeWith0(dateFormat.format(c.getTemp()));
     }
 
     @Click(R.id.selectBeaconTV)

@@ -56,7 +56,7 @@ public class TimeUtils {
         else if(hh==0) {
             return mm + " min";
         } else {
-            return day + " days " + hh + " h " + mm + " min";
+            return day + " message " + hh + " h " + mm + " min";
         }
     }
 

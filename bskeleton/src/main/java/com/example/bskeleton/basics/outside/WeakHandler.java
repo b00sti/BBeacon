@@ -41,7 +41,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * <p>
  * Original implementation of Handlers always keeps hard reference to handler in queue of execution.
  * If you create anonymous handler and post delayed message into it, it will keep all parent class
- * for that time in memory even if it could be cleaned.
+ * for that temp in memory even if it could be cleaned.
  * <p>
  * This implementation is trickier, it will keep WeakReferences to runnables and messages,
  * and GC could collect them once WeakHandler instance is not referenced any more
@@ -125,18 +125,18 @@ public class WeakHandler {
 
     /**
      * Causes the Runnable r to be added to the message queue, to be run
-     * at a specific time given by <var>uptimeMillis</var>.
-     * <b>The time-base is {@link android.os.SystemClock#uptimeMillis}.</b>
+     * at a specific temp given by <var>uptimeMillis</var>.
+     * <b>The temp-base is {@link android.os.SystemClock#uptimeMillis}.</b>
      * The runnable will be run on the thread to which this handler is attached.
      *
      * @param r            The Runnable that will be executed.
-     * @param uptimeMillis The absolute time at which the callback should run,
-     *                     using the {@link android.os.SystemClock#uptimeMillis} time-base.
+     * @param uptimeMillis The absolute temp at which the callback should run,
+     *                     using the {@link android.os.SystemClock#uptimeMillis} temp-base.
      * @return Returns true if the Runnable was successfully placed in to the
      * message queue.  Returns false on failure, usually because the
      * looper processing the message queue is exiting.  Note that a
      * result of true does not mean the Runnable will be processed -- if
-     * the looper is quit before the delivery time of the message
+     * the looper is quit before the delivery temp of the message
      * occurs then the message will be dropped.
      */
     public final boolean postAtTime(@NonNull Runnable r, long uptimeMillis) {
@@ -145,18 +145,18 @@ public class WeakHandler {
 
     /**
      * Causes the Runnable r to be added to the message queue, to be run
-     * at a specific time given by <var>uptimeMillis</var>.
-     * <b>The time-base is {@link android.os.SystemClock#uptimeMillis}.</b>
+     * at a specific temp given by <var>uptimeMillis</var>.
+     * <b>The temp-base is {@link android.os.SystemClock#uptimeMillis}.</b>
      * The runnable will be run on the thread to which this handler is attached.
      *
      * @param r            The Runnable that will be executed.
-     * @param uptimeMillis The absolute time at which the callback should run,
-     *                     using the {@link android.os.SystemClock#uptimeMillis} time-base.
+     * @param uptimeMillis The absolute temp at which the callback should run,
+     *                     using the {@link android.os.SystemClock#uptimeMillis} temp-base.
      * @return Returns true if the Runnable was successfully placed in to the
      * message queue.  Returns false on failure, usually because the
      * looper processing the message queue is exiting.  Note that a
      * result of true does not mean the Runnable will be processed -- if
-     * the looper is quit before the delivery time of the message
+     * the looper is quit before the delivery temp of the message
      * occurs then the message will be dropped.
      * @see android.os.SystemClock#uptimeMillis
      */
@@ -166,7 +166,7 @@ public class WeakHandler {
 
     /**
      * Causes the Runnable r to be added to the message queue, to be run
-     * after the specified amount of time elapses.
+     * after the specified amount of temp elapses.
      * The runnable will be run on the thread to which this handler
      * is attached.
      *
@@ -177,7 +177,7 @@ public class WeakHandler {
      * message queue.  Returns false on failure, usually because the
      * looper processing the message queue is exiting.  Note that a
      * result of true does not mean the Runnable will be processed --
-     * if the looper is quit before the delivery time of the message
+     * if the looper is quit before the delivery temp of the message
      * occurs then the message will be dropped.
      */
     public final boolean postDelayed(Runnable r, long delayMillis) {
@@ -226,7 +226,7 @@ public class WeakHandler {
 
     /**
      * Pushes a message onto the end of the message queue after all pending messages
-     * before the current time. It will be received in callback,
+     * before the current temp. It will be received in callback,
      * in the thread attached to this handler.
      *
      * @return Returns true if the message was successfully placed in to the
@@ -250,7 +250,7 @@ public class WeakHandler {
 
     /**
      * Sends a Message containing only the what value, to be delivered
-     * after the specified amount of time elapses.
+     * after the specified amount of temp elapses.
      *
      * @return Returns true if the message was successfully placed in to the
      * message queue.  Returns false on failure, usually because the
@@ -263,7 +263,7 @@ public class WeakHandler {
 
     /**
      * Sends a Message containing only the what value, to be delivered
-     * at a specific time.
+     * at a specific temp.
      *
      * @return Returns true if the message was successfully placed in to the
      * message queue.  Returns false on failure, usually because the
@@ -276,14 +276,14 @@ public class WeakHandler {
 
     /**
      * Enqueue a message into the message queue after all pending messages
-     * before (current time + delayMillis). You will receive it in
+     * before (current temp + delayMillis). You will receive it in
      * callback, in the thread attached to this handler.
      *
      * @return Returns true if the message was successfully placed in to the
      * message queue.  Returns false on failure, usually because the
      * looper processing the message queue is exiting.  Note that a
      * result of true does not mean the message will be processed -- if
-     * the looper is quit before the delivery time of the message
+     * the looper is quit before the delivery temp of the message
      * occurs then the message will be dropped.
      */
     public final boolean sendMessageDelayed(Message msg, long delayMillis) {
@@ -292,19 +292,19 @@ public class WeakHandler {
 
     /**
      * Enqueue a message into the message queue after all pending messages
-     * before the absolute time (in milliseconds) <var>uptimeMillis</var>.
-     * <b>The time-base is {@link android.os.SystemClock#uptimeMillis}.</b>
+     * before the absolute temp (in milliseconds) <var>uptimeMillis</var>.
+     * <b>The temp-base is {@link android.os.SystemClock#uptimeMillis}.</b>
      * You will receive it in callback, in the thread attached
      * to this handler.
      *
-     * @param uptimeMillis The absolute time at which the message should be
+     * @param uptimeMillis The absolute temp at which the message should be
      *                     delivered, using the
-     *                     {@link android.os.SystemClock#uptimeMillis} time-base.
+     *                     {@link android.os.SystemClock#uptimeMillis} temp-base.
      * @return Returns true if the message was successfully placed in to the
      * message queue.  Returns false on failure, usually because the
      * looper processing the message queue is exiting.  Note that a
      * result of true does not mean the message will be processed -- if
-     * the looper is quit before the delivery time of the message
+     * the looper is quit before the delivery temp of the message
      * occurs then the message will be dropped.
      */
     public boolean sendMessageAtTime(Message msg, long uptimeMillis) {

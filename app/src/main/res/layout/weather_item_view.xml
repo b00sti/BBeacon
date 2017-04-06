@@ -136,7 +136,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/daysTV"
+                android:id="@+id/messageTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/timeLL"
@@ -154,7 +154,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_below="@+id/daysTV">
+                android:layout_below="@+id/messageTV">
 
                 <include
                     android:id="@+id/chart_toolbar"

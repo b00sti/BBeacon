@@ -2,9 +2,12 @@ package com.example.b00sti.bbeacon.ui_weather.main;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
@@ -24,9 +27,10 @@ import java.util.List;
 
 @EFragment(R.layout.weather_fragment)
 public class WeatherFragment extends BaseFragment<WeatherPresenter> implements WeatherContract.View {
+    private static final String TAG = "WeatherFragment";
 
     @ViewById(R.id.fragment_container) FrameLayout fragmentContainer;
-
+    @ViewById(R.id.noAvailableTV) TextView noAvailableTV;
     @ViewById(R.id.mainRV) RecyclerView recyclerView;
 
     @Bean
@@ -72,7 +76,7 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
     @Override
     public void refresh() {
         if (recyclerView != null) {
-            recyclerView.smoothScrollToPosition(0);
+            presenter.fetchData();
         }
     }
 
@@ -110,8 +114,18 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
 
     @Override
     public void refreshData(List<WeatherItem> items) {
-        weatherAdapter.setDataSet(items);
-        weatherAdapter.notifyDataSetChanged();
+        Log.d(TAG, "refreshData: " + items.size());
+        Log.d(TAG, "refreshData: " + weatherAdapter.getItemCount());
+        if (items.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            noAvailableTV.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            noAvailableTV.setVisibility(View.GONE);
+            weatherAdapter.setDataSet(items);
+            Log.d(TAG, "refreshData: " + items.size());
+            Log.d(TAG, "refreshData: " + weatherAdapter.getItemCount());
+        }
     }
 
 }

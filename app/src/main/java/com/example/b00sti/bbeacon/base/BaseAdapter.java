@@ -38,7 +38,7 @@ public abstract class BaseAdapter<T, V extends View> extends RecyclerView.Adapte
     public void setDataSet(List<T> dataSet) {
         this.dataSet.clear();
         this.dataSet.addAll(dataSet);
-        notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 
     @Override

@@ -20,6 +20,7 @@ import org.androidannotations.annotations.res.IntArrayRes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-14
@@ -71,13 +72,24 @@ public class AddNewBeaconFragment extends Fragment {
     @Click(R.id.saveB)
     void save() {
         List<ScannerItem> items = new ArrayList<ScannerItem>();
-        int val = Integer.parseInt(rangeET.getText().toString());
+        String s = rangeET.getText().toString();
+        int val;
+        if (s.length() > 0) {
+            val = Integer.parseInt(s);
+        } else {
+            val = 66;
+        }
         if (val < 0) {
             val = 0;
         } else if (val > 100) {
             val = 100;
+        } else {
+            val = 50;
         }
-        items.add(new ScannerItem(titleET.getText().toString(), color, enabledCB.isChecked(), "Last visible: 21:41 19/02/17", val));
+        double rand = new Random().nextDouble();
+        items.add(new ScannerItem(
+                titleET.getText().hashCode() + "" + rand,
+                titleET.getText().toString(), color, enabledCB.isChecked(), "Last visible: 21:41 19/02/17", val));
 
         new SetScannerInteractor().execute(items, new RealmUtils.OnSuccessListener() {
             @Override

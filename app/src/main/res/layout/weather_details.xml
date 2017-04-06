@@ -113,7 +113,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/daysTV"
+            android:id="@+id/messageTV"
             style="@style/TextViewLightLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@+id/daysTV">
+            android:layout_below="@+id/messageTV">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/card_view1"
@@ -200,7 +200,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@+id/daysTV">
+            android:layout_below="@+id/messageTV">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/card_view2"
@@ -228,7 +228,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@+id/daysTV">
+            android:layout_below="@+id/messageTV">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/card_view3"

@@ -14,12 +14,12 @@ public class LastRealmMigration implements RealmMigration {
         RealmSchema schema = realm.getSchema();
 
         if (oldVersion == 0) {
-            schema.get("AlarmItem").removeField("time");
+            schema.get("AlarmItem").removeField("temp");
             oldVersion++;
         }
 
         if (oldVersion == 1) {
-            schema.get("AlarmItem").addField("time", Long.TYPE);
+            schema.get("AlarmItem").addField("temp", Long.TYPE);
             oldVersion++;
         }
 

@@ -15,12 +15,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ScannerItem extends RealmObject {
     @PrimaryKey
-    String text;
+    String id;
 
-    int color;
-    boolean enabled;
-    String lastVisible;
-    int range;
+    private String title;
+    private int color;
+    private boolean enabled;
+    private String lastVisible;
+    private int range;
 
     public ScannerItem() {
     }

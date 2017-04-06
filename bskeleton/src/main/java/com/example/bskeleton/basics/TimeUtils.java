@@ -87,7 +87,7 @@ public class TimeUtils {
     /**
      * Get hour string depending on user system preferences
      *
-     * @return - current time in proper format eg. 1, 9,
+     * @return - current temp in proper format eg. 1, 9,
      */
     public static String getUserVisibleHour(Context context, int hour) {
         hour = hour % 24;
@@ -108,9 +108,9 @@ public class TimeUtils {
     }
 
     /**
-     * Get time string depending on user system preferences
+     * Get temp string depending on user system preferences
      *
-     * @return - current time in 24h or AM/PM format
+     * @return - current temp in 24h or AM/PM format
      */
     public static String getUserVisibleTime(Context context, Date date) {
         return android.text.format.DateFormat.getTimeFormat(context).format(date);
@@ -119,7 +119,7 @@ public class TimeUtils {
     /**
      * Get date string depending on user system preferences
      *
-     * @return - current time in proper format eg. dd-mm-yyyy, mm-dd-yyy, yyyy-mm-dd
+     * @return - current temp in proper format eg. dd-mm-yyyy, mm-dd-yyy, yyyy-mm-dd
      */
     public static String getUserVisibleDate(Context context, Date date) {
         return android.text.format.DateFormat.getDateFormat(context).format(date).replace("/", "-");

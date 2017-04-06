@@ -2,6 +2,7 @@ package com.example.b00sti.bbeacon.ui_weather.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,6 +20,7 @@ import org.androidannotations.annotations.RootContext;
  */
 @EBean
 public class WeatherAdapter extends BaseAdapter<WeatherItem, WeatherItemView> {
+    private static final String TAG = "WeatherAdapter";
 
     @RootContext
     Context context;
@@ -29,7 +31,9 @@ public class WeatherAdapter extends BaseAdapter<WeatherItem, WeatherItemView> {
     }
 
     @Override
-    public void onBindViewHolder(ViewWrapper<WeatherItemView> holder, int position) {
+    public void onBindViewHolder(ViewWrapper<WeatherItemView> holder, final int position) {
+        Log.d(TAG, "onBindViewHolder: " + position);
+        Log.d(TAG, "onBindViewHolder: " + dataSet.size());
         WeatherItemView weatherItemView = holder.getView();
         WeatherItem weatherItem = dataSet.get(position);
         weatherItemView.bind(weatherItem);

@@ -50,7 +50,7 @@ public class ScannerItemView extends BaseItemView<ScannerItem> {
 
     @Override
     public void bind(final ScannerItem scannerItem) {
-        textView.setText(scannerItem.getText());
+        textView.setText(scannerItem.getTitle());
         sidebar.setBackgroundColor(scannerItem.getColor());
         progressBar.setProgressColor(scannerItem.getColor());
         progressBar.setProgress(scannerItem.getRange());
