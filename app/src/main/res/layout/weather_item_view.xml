@@ -156,18 +156,14 @@
                 android:layout_height="100dp"
                 android:layout_below="@+id/messageTV">
 
-                <include
-                    android:id="@+id/chart_toolbar"
-                    layout="@layout/card_toolbar"/>
-
-                <com.db.chart.view.LineChartView
+                <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/chart1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/chart_toolbar"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"/>
+                    android:layout_margin="8dp"
+                    android:layout_marginLeft="@dimen/size_4dp"
+                    />
+
             </RelativeLayout>
 
         </RelativeLayout>

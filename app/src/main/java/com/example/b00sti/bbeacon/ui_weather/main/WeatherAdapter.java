@@ -34,7 +34,7 @@ public class WeatherAdapter extends BaseAdapter<WeatherItem, WeatherItemView> {
     public void onBindViewHolder(ViewWrapper<WeatherItemView> holder, final int position) {
         Log.d(TAG, "onBindViewHolder: " + position);
         Log.d(TAG, "onBindViewHolder: " + dataSet.size());
-        WeatherItemView weatherItemView = holder.getView();
+        final WeatherItemView weatherItemView = holder.getView();
         WeatherItem weatherItem = dataSet.get(position);
         weatherItemView.bind(weatherItem);
 
@@ -44,7 +44,18 @@ public class WeatherAdapter extends BaseAdapter<WeatherItem, WeatherItemView> {
                 startWeatherDetailsActivity();
             }
         });
+
+        weatherItemView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                if (visibility == View.VISIBLE) {
+                    weatherItemView.invalidate();
+                    notifyDataSetChanged();
+                }
+            }
+        });
     }
+
 
     private void startWeatherDetailsActivity() {
         Intent intent = new Intent(context, BaseInnerViewActivity_.class);

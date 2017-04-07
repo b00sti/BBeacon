@@ -1,6 +1,7 @@
 package com.example.b00sti.bbeacon.ui_weather.main;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -10,11 +11,29 @@ import android.widget.TextView;
 
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseItemView;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.MarkerImage;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.StackedValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.res.DrawableRes;
 import org.androidannotations.annotations.res.IntArrayRes;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
@@ -32,6 +51,10 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
     @ViewById(R.id.humidityTV) TextView textView2;
     @ViewById(R.id.pressureTV) TextView textView1;
     @ViewById(R.id.card_view) CardView card_view;
+    @ViewById(R.id.chart1) LineChart mChart;
+
+    @ColorRes(R.color.colorAccent)
+    int accentColor;
 
     @IntArrayRes(R.array.beaconColors)
     int colors[];
@@ -43,6 +66,7 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
     Drawable alarm;
 
     Context context;
+
 
     public WeatherItemView(Context context) {
         super(context);
@@ -65,7 +89,127 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
             messageTV.setCompoundDrawablesWithIntrinsicBounds(desc, null, null, null);
         }
 
-        (new LineCardOne(card_view, context, color)).init();
+        // no description text
+        mChart.getDescription().setEnabled(false);
 
+        // enable touch gestures
+        mChart.setTouchEnabled(true);
+
+        mChart.setDragDecelerationFrictionCoef(0.9f);
+
+        // enable scaling and dragging
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(true);
+        mChart.setDrawGridBackground(false);
+        mChart.setHighlightPerDragEnabled(true);
+
+        // set an alternative background color
+        mChart.setBackgroundColor(Color.WHITE);
+        mChart.setViewPortOffsets(0f, 0f, 0f, 0f);
+
+        // add data
+        setData(12, 25, color);
+        mChart.invalidate();
+
+        // get the legend (only possible after setting data)
+        Legend l = mChart.getLegend();
+        l.setEnabled(false);
+
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        //xAxis.setTypeface(mTfLight);
+        xAxis.setTextSize(10f);
+        xAxis.setTextColor(Color.WHITE);
+        xAxis.setDrawAxisLine(false);
+        xAxis.setDrawGridLines(false);
+        xAxis.setTextColor(Color.rgb(255, 192, 56));
+        xAxis.setCenterAxisLabels(true);
+        xAxis.setGranularity(1f); // one hour
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+
+            private SimpleDateFormat mFormat = new SimpleDateFormat("dd MMM HH:mm");
+
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+
+                long millis = TimeUnit.HOURS.toMillis((long) value);
+                return mFormat.format(new Date(millis));
+            }
+        });
+
+        YAxis leftAxis = mChart.getAxisLeft();
+        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+//        leftAxis.setTypeface(mTfLight);
+        leftAxis.setTextColor(ColorTemplate.getHoloBlue());
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setGranularityEnabled(false);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(40f);
+        leftAxis.setYOffset(-9f);
+        leftAxis.setTextColor(Color.rgb(255, 192, 56));
+        leftAxis.setEnabled(false);
+
+        YAxis rightAxis = mChart.getAxisRight();
+        rightAxis.setEnabled(false);
+        mChart.setMarker(new MarkerImage(context, R.drawable.marker));
+        mChart.setDrawMarkers(true);
+        mChart.animateY(500);
+
+
+    }
+
+    private void setData(int count, float range, int color) {
+
+        // now in hours
+        long now = TimeUnit.MILLISECONDS.toHours(System.currentTimeMillis());
+
+        ArrayList<Entry> values = new ArrayList<Entry>();
+
+        float from = now;
+
+        // count = hours
+        float to = now + count;
+
+        // increment by 1 hour
+        for (float x = from; x < to; x++) {
+
+            float y = getRandom(range, 10);
+            values.add(new Entry(x, y)); // add one entry per hour
+        }
+
+        // create a dataset and give it a type
+        LineDataSet set1 = new LineDataSet(values, "DataSet 1");
+        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        set1.setMode(LineDataSet.Mode.LINEAR);
+        set1.setColor(accentColor);
+        set1.setValueTextColor(accentColor);
+        set1.setLineWidth(0f);
+        set1.setDrawCircles(true);
+        set1.setCircleColor(accentColor);
+        set1.setDrawValues(false);
+        set1.setDrawFilled(true);
+        set1.setFillAlpha(255);
+        set1.setFillColor(color);
+        set1.setCircleRadius(3f);
+        set1.setValueFormatter(new StackedValueFormatter(false, "", 1));
+        set1.setDrawCircleHole(false);
+        set1.enableDashedHighlightLine(5f, 5f, 5f);
+        set1.setDrawHorizontalHighlightIndicator(false);
+        set1.setDrawVerticalHighlightIndicator(false);
+        set1.setHighLightColor(accentColor);
+
+        // create a data object with the datasets
+        LineData data = new LineData(set1);
+        data.setValueTextColor(accentColor);
+        data.setValueTextSize(10f);
+
+
+        // set data
+        mChart.setData(data);
+        mChart.highlightValue(200f, 200f, 0);
+    }
+
+    protected float getRandom(float range, float startsfrom) {
+        return (float) (Math.random() * range) + startsfrom;
     }
 }

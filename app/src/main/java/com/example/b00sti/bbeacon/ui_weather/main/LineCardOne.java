@@ -6,26 +6,29 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
-import android.view.animation.BounceInterpolator;
 import android.widget.TextView;
 
-import com.db.chart.Tools;
-import com.db.chart.animation.Animation;
-import com.db.chart.model.LineSet;
-import com.db.chart.renderer.AxisRenderer;
-import com.db.chart.tooltip.Tooltip;
-import com.db.chart.view.LineChartView;
 import com.example.b00sti.bbeacon.R;
+import com.example.b00sti.bbeacon.utils.chart.Tools;
+import com.example.b00sti.bbeacon.utils.chart.animation.Animation;
+import com.example.b00sti.bbeacon.utils.chart.model.LineSet;
+import com.example.b00sti.bbeacon.utils.chart.renderer.AxisRenderer;
+import com.example.b00sti.bbeacon.utils.chart.tooltip.Tooltip;
+import com.example.b00sti.bbeacon.utils.chart.view.LineChartView;
 
 import java.util.Random;
 
+import lombok.Getter;
 
-public class LineCardOne extends CardController {
+
+public class LineCardOne {
+    private static final String TAG = "LineCardOne";
 
 
+    @Getter
     private final LineChartView mChart;
-
 
     private final Context mContext;
 
@@ -37,14 +40,10 @@ public class LineCardOne extends CardController {
 
     private Tooltip mTip;
 
-    private Runnable mBaseAction;
-
     private int color;
 
 
     public LineCardOne(CardView card, Context context, int color) {
-
-        super(card);
 
         mContext = context;
         this.color = color;
@@ -57,8 +56,6 @@ public class LineCardOne extends CardController {
 
     public LineCardOne(CardView card, Context context, int color, int idChart) {
 
-        super(card);
-
         mContext = context;
         this.color = color;
         for (int x = 0; x < mValues[0].length; x++) {
@@ -68,10 +65,11 @@ public class LineCardOne extends CardController {
         mChart = (LineChartView) card.findViewById(idChart);
     }
 
-    @Override
-    public void show(Runnable action) {
+    public void init() {
+        show();
+    }
 
-        super.show(action);
+    public void show() {
 
         // Tooltip
         mTip = new Tooltip(mContext, R.layout.linechart_three_tooltip, R.id.value);
@@ -124,12 +122,12 @@ public class LineCardOne extends CardController {
                 .setXAxis(false)
                 .setYAxis(false);
 
-        mBaseAction = action;
-        Runnable chartAction = new Runnable() {
+        Log.d(TAG, "show: " + dataset.size());
+
+/*        Runnable chartAction = new Runnable() {
             @Override
             public void run() {
 
-                mBaseAction.run();
                 int i = 0;
                 float max = 0.f;
                 for (int j = 0; j < mValues[0].length; j++) {
@@ -143,18 +141,30 @@ public class LineCardOne extends CardController {
 
                 mChart.showTooltip(mTip, true);
             }
-        };
+        };*/
 
-        Animation anim = new Animation().setEasing(new BounceInterpolator()).setEndAction(chartAction);
+        int i = 0;
+        float max = 0.f;
+        for (int j = 0; j < mValues[0].length; j++) {
+            if (mValues[0][j] > max) {
+                max = mValues[0][j];
+                i = j;
+            }
+        }
 
-        mChart.show(anim);
+
+        //Animation anim = new Animation().setEasing(new BounceInterpolator()).setEndAction(chartAction);
+
+        mChart.show();
+
+        //mTip.prepare(mChart.getEntriesArea(0).get(i), mValues[0][i]);
+
+        //mChart.showTooltip(mTip, true);
+
     }
 
 
-    @Override
-    public void update() {
-
-        super.update();
+    public void update(boolean firstStage) {
 
         mChart.dismissAllTooltips();
         if (firstStage) {
@@ -164,18 +174,17 @@ public class LineCardOne extends CardController {
             mChart.updateValues(0, mValues[0]);
             mChart.updateValues(1, mValues[0]);
         }
-        mChart.getChartAnimation().setEndAction(mBaseAction);
+        //mChart.getChartAnimation().setEndAction(mBaseAction);
         mChart.notifyDataUpdate();
     }
 
 
-    @Override
-    public void dismiss(Runnable action) {
-
-        super.dismiss(action);
+    public void dismiss(Animation animation) {
 
         mChart.dismissAllTooltips();
-        mChart.dismiss(new Animation().setEasing(new BounceInterpolator()).setEndAction(action));
+        mChart.dismiss(animation);
+
+        //mChart.dismiss(new Animation().setEasing(new BounceInterpolator()).setEndAction(action));
     }
 
 }

@@ -184,7 +184,7 @@
                     android:id="@+id/chart_toolbar"
                     layout="@layout/card_toolbar"/>
 
-                <com.db.chart.view.LineChartView
+                <com.example.b00sti.bbeacon.utils.chart.view.LineChartView
                     android:id="@+id/chart1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -212,7 +212,7 @@
                     android:id="@+id/chart_toolbar"
                     layout="@layout/card_toolbar"/>
 
-                <com.db.chart.view.LineChartView
+                <com.example.b00sti.bbeacon.utils.chart.view.LineChartView
                     android:id="@+id/chart2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -240,7 +240,7 @@
                     android:id="@+id/chart_toolbar"
                     layout="@layout/card_toolbar"/>
 
-                <com.db.chart.view.LineChartView
+                <com.example.b00sti.bbeacon.utils.chart.view.LineChartView
                     android:id="@+id/chart3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

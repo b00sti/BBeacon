@@ -57,6 +57,7 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
     private void initList() {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setItemPrefetchEnabled(false);
         recyclerView.setLayoutManager(layoutManager);
         weatherAdapter.setDataSet(new ArrayList<WeatherItem>());
         recyclerView.setAdapter(weatherAdapter);
