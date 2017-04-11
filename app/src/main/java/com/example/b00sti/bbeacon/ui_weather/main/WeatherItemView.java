@@ -14,7 +14,6 @@ import com.example.b00sti.bbeacon.base.BaseItemView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.MarkerImage;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -83,12 +82,16 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
         messageTV.setText(weatherItem.getMessage());
         textView1.setText(weatherItem.getPressure());
         textView2.setText(weatherItem.getHumidity());
-        if (weatherItem.isAlarm) {
+        if (weatherItem.isAlarm()) {
             messageTV.setCompoundDrawablesWithIntrinsicBounds(desc, null, alarm, null);
         } else {
             messageTV.setCompoundDrawablesWithIntrinsicBounds(desc, null, null, null);
         }
 
+        handleExampleChart(color);
+    }
+
+    void handleExampleChart(int color) {
         // no description text
         mChart.getDescription().setEnabled(false);
 
@@ -99,7 +102,7 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
 
         // enable scaling and dragging
         mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(true);
+        mChart.setScaleEnabled(false);
         mChart.setDrawGridBackground(false);
         mChart.setHighlightPerDragEnabled(true);
 
@@ -145,13 +148,15 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
         leftAxis.setGranularityEnabled(false);
         leftAxis.setAxisMinimum(0f);
         leftAxis.setAxisMaximum(40f);
-        leftAxis.setYOffset(-9f);
+        CustomMarkerView markerView = new CustomMarkerView(context, R.layout.marker);
+        //markerView.setOffset(-markerView.getMeasuredWidth() / 2, - markerView.getMeasuredHeight());
+        leftAxis.setYOffset(-10f);
         leftAxis.setTextColor(Color.rgb(255, 192, 56));
         leftAxis.setEnabled(false);
 
         YAxis rightAxis = mChart.getAxisRight();
         rightAxis.setEnabled(false);
-        mChart.setMarker(new MarkerImage(context, R.drawable.marker));
+        mChart.setMarker(markerView);
         mChart.setDrawMarkers(true);
         mChart.animateY(500);
 
@@ -171,16 +176,26 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
         float to = now + count;
 
         // increment by 1 hour
+        int i = 0;
+        float maxY = 0;
+        int indexMaxY = 0;
+
         for (float x = from; x < to; x++) {
 
             float y = getRandom(range, 10);
+            if (y > maxY) {
+                indexMaxY = i;
+                maxY = y;
+            }
             values.add(new Entry(x, y)); // add one entry per hour
+
+            i++;
         }
 
         // create a dataset and give it a type
         LineDataSet set1 = new LineDataSet(values, "DataSet 1");
         set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-        set1.setMode(LineDataSet.Mode.LINEAR);
+        set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set1.setColor(accentColor);
         set1.setValueTextColor(accentColor);
         set1.setLineWidth(0f);
@@ -190,7 +205,7 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
         set1.setDrawFilled(true);
         set1.setFillAlpha(255);
         set1.setFillColor(color);
-        set1.setCircleRadius(3f);
+        set1.setCircleRadius(5f);
         set1.setValueFormatter(new StackedValueFormatter(false, "", 1));
         set1.setDrawCircleHole(false);
         set1.enableDashedHighlightLine(5f, 5f, 5f);
@@ -206,7 +221,7 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
 
         // set data
         mChart.setData(data);
-        mChart.highlightValue(200f, 200f, 0);
+        mChart.highlightValue(values.get(indexMaxY).getX(), 0);
     }
 
     protected float getRandom(float range, float startsfrom) {

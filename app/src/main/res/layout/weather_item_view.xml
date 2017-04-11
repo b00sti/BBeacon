@@ -160,8 +160,9 @@
                     android:id="@+id/chart1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    android:layout_marginLeft="@dimen/size_4dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="0dp"
                     />
 
             </RelativeLayout>

@@ -1,5 +1,5 @@
 
-package com.example.b00sti.bbeacon.ui_weather.top;
+package com.example.b00sti.bbeacon.ui_weather.top.model;
 
 import java.util.HashMap;
 import java.util.Map;

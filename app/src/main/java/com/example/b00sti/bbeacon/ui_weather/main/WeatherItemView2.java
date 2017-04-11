@@ -81,7 +81,7 @@ public class WeatherItemView2 extends BaseItemView<WeatherItem> {
         messageTV.setText(weatherItem.getMessage());
         textView1.setText(weatherItem.getPressure());
         textView2.setText(weatherItem.getHumidity());
-        if (weatherItem.isAlarm) {
+        if (weatherItem.isAlarm()) {
             messageTV.setCompoundDrawablesWithIntrinsicBounds(desc, null, alarm, null);
         } else {
             messageTV.setCompoundDrawablesWithIntrinsicBounds(desc, null, null, null);

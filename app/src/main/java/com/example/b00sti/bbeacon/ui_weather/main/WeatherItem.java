@@ -16,16 +16,17 @@ import lombok.Setter;
 public class WeatherItem extends RealmObject {
 
     @PrimaryKey
-    String beaconId;
-    String conditionValue;
-    String conditionParameter;
-    boolean isAlarm;
-    int color;
+    private String beaconId;
+    private String conditionValue;
+    private String conditionParameter;
+
     private String title;
     private String temp;
     private String message;
     private String humidity;
     private String pressure;
+    private boolean isAlarm;
+    private int color;
 
     public WeatherItem() {
     }

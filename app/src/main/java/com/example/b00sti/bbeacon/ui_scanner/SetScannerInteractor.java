@@ -41,18 +41,17 @@ public class SetScannerInteractor {
     private void setWeatherItem(List<ScannerItem> data) {
         List<WeatherItem> weatherItems = new ArrayList<>();
         for (ScannerItem scannerItem : data) {
-            WeatherItem weatherItem = new WeatherItem(
-                    scannerItem.getId(),
-                    scannerItem.getTitle(),
-                    new Random().nextInt(33) + " ℃",
-                    "Do something !",
-                    (new Random().nextInt(100)) + " %",
-                    (new Random().nextInt(30) + 1000) + " hPa",
-                    "",
-                    "",
-                    scannerItem.isEnabled(),
-                    scannerItem.getColor()
-            );
+            WeatherItem weatherItem = new WeatherItem();
+            weatherItem.setBeaconId(scannerItem.getId());
+            weatherItem.setColor(scannerItem.getColor());
+            weatherItem.setConditionParameter("");
+            weatherItem.setConditionValue("");
+            weatherItem.setHumidity((new Random().nextInt(100)) + " %");
+            weatherItem.setMessage("Do something !");
+            weatherItem.setAlarm(scannerItem.isEnabled());
+            weatherItem.setPressure((new Random().nextInt(30) + 1000) + " hPa");
+            weatherItem.setTemp(new Random().nextInt(33) + " ℃");
+            weatherItem.setTitle(scannerItem.getTitle());
             weatherItems.add(weatherItem);
         }
         new SetWeatherInteractor().execute(weatherItems, null);

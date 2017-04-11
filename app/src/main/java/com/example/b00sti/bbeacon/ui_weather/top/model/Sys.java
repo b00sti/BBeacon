@@ -1,12 +1,15 @@
 
-package com.example.b00sti.bbeacon.ui_weather.top;
+package com.example.b00sti.bbeacon.ui_weather.top.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Clouds {
+public class Sys {
 
-    public int all;
+    public double message;
+    public String country;
+    public int sunrise;
+    public int sunset;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public Map<String, Object> getAdditionalProperties() {

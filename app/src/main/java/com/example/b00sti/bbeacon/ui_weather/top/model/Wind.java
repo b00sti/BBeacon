@@ -1,15 +1,13 @@
 
-package com.example.b00sti.bbeacon.ui_weather.top;
+package com.example.b00sti.bbeacon.ui_weather.top.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Weather {
+public class Wind {
 
-    public int id;
-    public String main;
-    public String description;
-    public String icon;
+    public double speed;
+    public int deg;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public Map<String, Object> getAdditionalProperties() {
