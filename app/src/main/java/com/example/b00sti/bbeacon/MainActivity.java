@@ -24,7 +24,9 @@ import com.example.b00sti.bbeacon.ui_alarm.interactors.GetAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.ui_scanner.GetScannerInteractor;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerItem;
+import com.example.b00sti.bbeacon.ui_weather.interactors.GetWeatherInteractor;
 import com.example.b00sti.bbeacon.ui_weather.main.OnAnimationToolbar;
+import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
 import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
 import org.androidannotations.annotations.AfterViews;
@@ -41,7 +43,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function3;
 import io.reactivex.observers.DefaultObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -169,9 +171,10 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         Observable.zip(
                 new GetAlarmInteractor().execute(),
                 new GetScannerInteractor().execute(),
-                new BiFunction<List<AlarmItem>, List<ScannerItem>, ArrayList<Pair<AHNotification, Integer>>>() {
+                new GetWeatherInteractor().execute(),
+                new Function3<List<AlarmItem>, List<ScannerItem>, List<WeatherItem>, ArrayList<Pair<AHNotification, Integer>>>() {
                     @Override
-                    public ArrayList<Pair<AHNotification, Integer>> apply(List<AlarmItem> alarmItems, List<ScannerItem> scannerItems) throws Exception {
+                    public ArrayList<Pair<AHNotification, Integer>> apply(List<AlarmItem> alarmItems, List<ScannerItem> scannerItems, List<WeatherItem> weatherItems) throws Exception {
 
                         ArrayList<Pair<AHNotification, Integer>> notifications = new ArrayList<>();
                         int sizeAlarms = 0;
@@ -200,7 +203,18 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                             notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeScanner))), 2));
                         }
 
-                        notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(2))), 1));
+                        int sizeWeather = 0;
+                        for (WeatherItem weatherItem : weatherItems) {
+                            if (weatherItem.isAlarm()) {
+                                sizeWeather++;
+                            }
+                        }
+
+                        if (sizeWeather == 0) {
+                            notifications.add(new Pair<>(new AHNotification(), 2));
+                        } else {
+                            notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeWeather))), 1));
+                        }
 
                         return notifications;
                     }
