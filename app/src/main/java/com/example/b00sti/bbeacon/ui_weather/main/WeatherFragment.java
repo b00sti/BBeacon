@@ -92,6 +92,7 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
     @Override
     public void willBeDisplayed() {
         refreshToolbar();
+        refresh();
         if (fragmentContainer != null) {
             Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
             fragmentContainer.startAnimation(fadeIn);

@@ -126,7 +126,9 @@ public class WeatherTopFragment extends Fragment implements OnAnimationToolbar,
                         if (throwable instanceof HttpException) {
                             HttpException response = (HttpException) throwable;
                             int code = response.code();
-                            Log.d("RetrofitTest", "Error code: " + code);
+                            Log.d(TAG, "Retrofit Error  - code: " + code);
+                        } else {
+                            Log.d(TAG, "Other Error - code: " + throwable.getMessage());
                         }
 
                         return new WeatherFromOWM();
@@ -136,32 +138,50 @@ public class WeatherTopFragment extends Fragment implements OnAnimationToolbar,
                     @Override
                     public void accept(WeatherFromOWM weatherFromOWM) throws Exception {
                         if (weatherFromOWM.main != null) {
-                            tempValueTV.setText(getFormattedTemp(weatherFromOWM.main.temp));
-                            pressureTV.setText(getFormattedPressure(weatherFromOWM.main.pressure));
-                            humidityTV.setText(getFormattedHumidity(weatherFromOWM.main.humidity));
-                            windTV.setText(getFormattedWind(weatherFromOWM.wind.speed));
-                            refreshToolbar(weatherFromOWM.name);
-                            expandedTitle = weatherFromOWM.name;
-                            collapsedTitle = weatherFromOWM.name + "    " + getFormattedTemp(weatherFromOWM.main.temp) + " \u2103";
-                            if (weatherFromOWM.weather != null) {
-                                if (!weatherFromOWM.weather.isEmpty()) {
-                                    String iconName = weatherFromOWM.weather.get(0).icon;
-                                    String iconUrl = "http://openweathermap.org/img/w/" + iconName + ".png";
-                                    Log.d(TAG, "accept: " + iconName);
-                                    Log.i(TAG, "accept: icon url:" + iconUrl);
-                                    Picasso.with(getContext()).load(iconUrl).into(circleImageView);
-                                } else {
-                                    Log.d(TAG, "accept: image not available");
-                                }
-                            }
-
+                            Log.d(TAG, "accept: " + weatherFromOWM.name);
+                            refreshUI(weatherFromOWM);
                             saveWeatherToRealm(weatherFromOWM);
-
+                        } else {
+                            Log.d(TAG, "accept: " + "weather from OWM is null");
                         }
-                        Log.d(TAG, "accept: " + weatherFromOWM.name);
                     }
                 });
 
+    }
+
+    private void refreshUI(@NonNull WeatherFromOWM weatherFromOWM) {
+
+        if (tempValueTV != null) {
+            tempValueTV.setText(getFormattedTemp(weatherFromOWM.main.temp));
+        }
+
+        if (pressureTV != null) {
+            pressureTV.setText(getFormattedPressure(weatherFromOWM.main.pressure));
+        }
+
+        if (humidityTV != null) {
+            humidityTV.setText(getFormattedHumidity(weatherFromOWM.main.humidity));
+        }
+
+        if (windTV != null) {
+            windTV.setText(getFormattedWind(weatherFromOWM.wind.speed));
+        }
+
+        refreshToolbar(weatherFromOWM.name);
+
+        expandedTitle = weatherFromOWM.name;
+        collapsedTitle = weatherFromOWM.name + "    " + getFormattedTemp(weatherFromOWM.main.temp) + " \u2103";
+
+        if (weatherFromOWM.weather != null) {
+            if (!weatherFromOWM.weather.isEmpty()) {
+                String iconName = weatherFromOWM.weather.get(0).icon;
+                String iconUrl = "http://openweathermap.org/img/w/" + iconName + ".png";
+                Log.i(TAG, "accept: icon url:" + iconUrl);
+                Picasso.with(getContext()).load(iconUrl).into(circleImageView);
+            } else {
+                Log.d(TAG, "accept: image not available");
+            }
+        }
     }
 
     private void saveWeatherToRealm(WeatherFromOWM weatherFromOWM) {
