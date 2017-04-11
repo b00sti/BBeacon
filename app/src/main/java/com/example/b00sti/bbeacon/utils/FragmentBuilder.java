@@ -7,7 +7,7 @@ import com.example.b00sti.bbeacon.base.EmptyFragment;
 import com.example.b00sti.bbeacon.ui_alarm.add.AddNewAlarmFragment;
 import com.example.b00sti.bbeacon.ui_alarm.main.AlarmFragment;
 import com.example.b00sti.bbeacon.ui_alarm.top.AlarmTopFragment;
-import com.example.b00sti.bbeacon.ui_others.AddNewBeaconFragment;
+import com.example.b00sti.bbeacon.ui_scanner.AddNewBeaconFragment;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerFragment;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerTopFragment;
 import com.example.b00sti.bbeacon.ui_weather.details.WeatherDetailsFragment;

@@ -50,7 +50,7 @@ public class SetScannerInteractor {
             weatherItem.setMessage("Do something !");
             weatherItem.setAlarm(scannerItem.isEnabled());
             weatherItem.setPressure((new Random().nextInt(30) + 1000) + " hPa");
-            weatherItem.setTemp(new Random().nextInt(33) + " ℃");
+            weatherItem.setTemp(new Random().nextInt(33) + "");
             weatherItem.setTitle(scannerItem.getTitle());
             weatherItems.add(weatherItem);
         }

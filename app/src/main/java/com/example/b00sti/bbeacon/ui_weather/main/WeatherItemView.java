@@ -78,7 +78,7 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
         int color = weatherItem.getColor();
         topLL.setBackgroundColor(color);
         sidebar.setBackgroundColor(color);
-        tempTV.setText(weatherItem.getTemp());
+        tempTV.setText(weatherItem.getTemp() + " ℃");
         messageTV.setText(weatherItem.getMessage());
         textView1.setText(weatherItem.getPressure());
         textView2.setText(weatherItem.getHumidity());

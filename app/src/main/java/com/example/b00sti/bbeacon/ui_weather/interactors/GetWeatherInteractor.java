@@ -17,6 +17,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class GetWeatherInteractor {
 
+    public Observable<WeatherItem> execute(String id) {
+        return Observable.just(RealmUtils.Find(WeatherItem.class, "beaconId", id))
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Observable<List<WeatherItem>> execute() {
         boolean fakeData = false;
         int color1 = Color.parseColor("#3F52B5");

@@ -73,6 +73,17 @@ public class RealmUtils {
         return result;
     }
 
+    public static <E extends RealmObject> E Find(Class<E> clazz, String fieldTitle, String fieldValue) {
+        final Realm realm = Realm.getDefaultInstance();
+        final E first = realm.where(clazz).equalTo(fieldTitle, fieldValue).findFirst();
+        E result = null;
+        if (first != null) {
+            result = realm.copyFromRealm(first);
+        }
+        realm.close();
+        return result;
+    }
+
     public static <E extends RealmObject> List<E> FindAll(Class<E> clazz, String fieldTitle, String fieldValue) {
         final Realm realm = Realm.getDefaultInstance();
         final RealmResults<E> all = realm.where(clazz).equalTo(fieldTitle, fieldValue).findAll();

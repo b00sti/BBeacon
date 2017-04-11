@@ -35,13 +35,13 @@ public class WeatherAdapter extends BaseAdapter<WeatherItem, WeatherItemView> {
         Log.d(TAG, "onBindViewHolder: " + position);
         Log.d(TAG, "onBindViewHolder: " + dataSet.size());
         final WeatherItemView weatherItemView = holder.getView();
-        WeatherItem weatherItem = dataSet.get(position);
+        final WeatherItem weatherItem = dataSet.get(position);
         weatherItemView.bind(weatherItem);
 
         weatherItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startWeatherDetailsActivity();
+                startWeatherDetailsActivity(weatherItem);
             }
         });
 
@@ -57,9 +57,10 @@ public class WeatherAdapter extends BaseAdapter<WeatherItem, WeatherItemView> {
     }
 
 
-    private void startWeatherDetailsActivity() {
+    private void startWeatherDetailsActivity(WeatherItem weatherItem) {
         Intent intent = new Intent(context, BaseInnerViewActivity_.class);
         intent.putExtra(context.getString(R.string.bundle_fragment), FragmentBuilder.WEATHER_DETAILS);
+        intent.putExtra("id", weatherItem.getBeaconId());
         context.startActivity(intent);
     }
 }
