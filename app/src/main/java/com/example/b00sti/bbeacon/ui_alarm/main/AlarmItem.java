@@ -1,7 +1,7 @@
 package com.example.b00sti.bbeacon.ui_alarm.main;
 
 import com.example.b00sti.bbeacon.base.Bool;
-import com.example.b00sti.bbeacon.base.SettingId;
+import com.example.b00sti.bbeacon.utils.SettingId;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;

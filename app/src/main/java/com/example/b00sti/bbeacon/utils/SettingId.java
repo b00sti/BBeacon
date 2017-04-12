@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.base;
+package com.example.b00sti.bbeacon.utils;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-30

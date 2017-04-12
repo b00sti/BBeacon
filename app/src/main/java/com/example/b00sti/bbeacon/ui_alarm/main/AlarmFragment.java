@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
-import com.example.b00sti.bbeacon.base.BaseRefreshableFragmentWithToolbar;
+import com.example.b00sti.bbeacon.base.RefreshableFragmentWithToolbar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 
 @EFragment(R.layout.alarm_fragment)
-public class AlarmFragment extends BaseFragment<AlarmPresenter> implements AlarmContract.View, BaseRefreshableFragmentWithToolbar {
+public class AlarmFragment extends BaseFragment<AlarmPresenter> implements AlarmContract.View, RefreshableFragmentWithToolbar {
     private static final String TAG = "AlarmFragment";
 
     @ViewById(R.id.fragment_container) FrameLayout fragmentContainer;

@@ -16,7 +16,7 @@ import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
 import com.example.b00sti.bbeacon.base.BaseInnerViewActivity_;
-import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
+import com.example.b00sti.bbeacon.base.RefreshableFragment;
 import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
 import org.androidannotations.annotations.EBean;
@@ -55,8 +55,8 @@ public class NavigationManager {
             ctx.setNotifications();
         }
 
-        if (currentFragment != null && currentFragment instanceof BaseRefreshableFragment) {
-            ((BaseRefreshableFragment) currentFragment).refresh();
+        if (currentFragment != null && currentFragment instanceof RefreshableFragment) {
+            ((RefreshableFragment) currentFragment).refresh();
             Log.d(TAG, "current fragment refreshed " + currentFragment.getClass().getName());
         }
     }
@@ -112,13 +112,13 @@ public class NavigationManager {
                     return true;
                 }
 
-                if (currentFragment != null && currentFragment instanceof BaseRefreshableFragment) {
-                    ((BaseRefreshableFragment) currentFragment).willBeHidden();
+                if (currentFragment != null && currentFragment instanceof RefreshableFragment) {
+                    ((RefreshableFragment) currentFragment).willBeHidden();
                 }
 
                 currentFragment = adapter.getCurrentFragment();
-                if (currentFragment != null && currentFragment instanceof BaseRefreshableFragment) {
-                    ((BaseRefreshableFragment) currentFragment).willBeDisplayed();
+                if (currentFragment != null && currentFragment instanceof RefreshableFragment) {
+                    ((RefreshableFragment) currentFragment).willBeDisplayed();
                 }
                 return true;
 
@@ -131,8 +131,8 @@ public class NavigationManager {
 
         currentFragment = adapter.getCurrentFragment();
 
-        if (currentFragment != null && currentFragment instanceof BaseRefreshableFragment) {
-            ((BaseRefreshableFragment) currentFragment).willBeDisplayed();
+        if (currentFragment != null && currentFragment instanceof RefreshableFragment) {
+            ((RefreshableFragment) currentFragment).willBeDisplayed();
         } else {
             Log.d(TAG, "initUI: currentFragment is null");
         }

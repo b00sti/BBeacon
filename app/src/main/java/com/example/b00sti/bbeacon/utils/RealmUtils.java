@@ -2,8 +2,6 @@ package com.example.b00sti.bbeacon.utils;
 
 import android.support.annotation.Nullable;
 
-import com.example.b00sti.bbeacon.base.SettingId;
-
 import java.util.ArrayList;
 import java.util.List;
 

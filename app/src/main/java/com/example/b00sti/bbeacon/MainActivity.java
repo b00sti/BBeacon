@@ -17,11 +17,11 @@ import android.view.ViewGroup;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
-import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
-import com.example.b00sti.bbeacon.base.BaseRefreshableFragmentWithToolbar;
+import com.example.b00sti.bbeacon.base.RefreshableFragment;
+import com.example.b00sti.bbeacon.base.RefreshableFragmentWithToolbar;
 import com.example.b00sti.bbeacon.navigation.NavigationManager;
+import com.example.b00sti.bbeacon.navigation.NotificationEvent;
 import com.example.b00sti.bbeacon.navigation.NotificationManager;
-import com.example.b00sti.bbeacon.ui_alarm.NotificationEvent;
 import com.example.b00sti.bbeacon.ui_alarm.interactors.GetAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.ui_scanner.GetScannerInteractor;
@@ -138,8 +138,8 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
         Fragment fragment = navigationManager.getCurrentFragment();
 
-        if (fragment != null && fragment instanceof BaseRefreshableFragmentWithToolbar) {
-            ((BaseRefreshableFragmentWithToolbar) fragment).refreshToolbar();
+        if (fragment != null && fragment instanceof RefreshableFragmentWithToolbar) {
+            ((RefreshableFragmentWithToolbar) fragment).refreshToolbar();
         }
 
         if (withMainFragment) {
@@ -164,8 +164,8 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     }
 
     private void refreshTopFragment() {
-        if (topFragment instanceof BaseRefreshableFragment) {
-            ((BaseRefreshableFragment) topFragment).refresh();
+        if (topFragment instanceof RefreshableFragment) {
+            ((RefreshableFragment) topFragment).refresh();
         }
     }
 

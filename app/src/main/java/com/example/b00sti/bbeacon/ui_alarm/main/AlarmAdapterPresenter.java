@@ -7,7 +7,7 @@ import android.widget.Toast;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseInnerViewActivity_;
 import com.example.b00sti.bbeacon.base.BasePresenter;
-import com.example.b00sti.bbeacon.ui_alarm.NotificationEvent;
+import com.example.b00sti.bbeacon.navigation.NotificationEvent;
 import com.example.b00sti.bbeacon.ui_alarm.interactors.RemoveAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.interactors.SetAlarmInteractor;
 import com.example.b00sti.bbeacon.utils.FragmentBuilder;
