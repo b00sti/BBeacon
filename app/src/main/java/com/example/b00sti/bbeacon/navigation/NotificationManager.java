@@ -11,7 +11,6 @@ import com.example.b00sti.bbeacon.R;
  */
 
 public class NotificationManager {
-
     public static AHNotification newDefault(Context ctx, String s) {
         return new AHNotification.Builder()
                 .setText(s)

@@ -2,7 +2,7 @@ package com.example.b00sti.bbeacon.utils;
 
 import android.support.annotation.Nullable;
 
-import com.example.b00sti.bbeacon.base.SetIdInterface;
+import com.example.b00sti.bbeacon.base.SettingId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,8 +162,8 @@ public class RealmUtils {
                         primaryKeyValue = e.longValue();
                         primaryKeyValue = primaryKeyValue + 1;
 
-                        if (item instanceof SetIdInterface) {
-                            ((SetIdInterface) item).setManualId(primaryKeyValue);
+                        if (item instanceof SettingId) {
+                            ((SettingId) item).setManualId(primaryKeyValue);
                         }
 
                     }

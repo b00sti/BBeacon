@@ -1,5 +1,6 @@
 package com.example.b00sti.bbeacon.ui_alarm.top;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.util.Log;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ import static com.example.b00sti.bbeacon.ui_weather.top.WeatherTopFragment.TAG;
  */
 
 @EFragment(R.layout.alarm_top_fragment)
-public class AlarmTopFragment extends BaseRefreshableFragment {
+public class AlarmTopFragment extends Fragment implements BaseRefreshableFragment {
 
     public static final int INTERVAL_TO_REFRESH_TIME = 5;
 

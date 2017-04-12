@@ -267,7 +267,6 @@ public class AddNewAlarmFragment extends Fragment {
 
     @Click(R.id.doneIV)
     void save() {
-
         if (alarmItem != null) {
             alarmItem.setEnabled(switchSB.isChecked());
             alarmItem.setColor(color);

@@ -35,7 +35,7 @@
 
                 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                              xmlns:app="http://schemas.android.com/apk/res-auto"
-                             android:id="@+id/activityTopPlaceholderFL"
+                             android:id="@+id/activityTopPlaceholderVG"
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content"
                              android:background="@android:color/transparent"
@@ -57,7 +57,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager
-        android:id="@+id/mainViewPager"
+        android:id="@+id/mainViewPagerVP"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="true"

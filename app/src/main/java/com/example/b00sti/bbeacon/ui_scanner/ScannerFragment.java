@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
+import com.example.b00sti.bbeacon.base.BaseRefreshableFragmentWithToolbar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -23,7 +24,7 @@ import java.util.List;
  */
 
 @EFragment(R.layout.scanner_fragment)
-public class ScannerFragment extends BaseFragment<ScannerPresenter> implements ScannerContract.View {
+public class ScannerFragment extends BaseFragment<ScannerPresenter> implements ScannerContract.View, BaseRefreshableFragmentWithToolbar {
 
     @ViewById(R.id.fragment_container) FrameLayout fragmentContainer;
 
@@ -46,7 +47,7 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
 
     private void initToolbar() {
         if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).configureToolbar("Tracked beacons");
+            ((MainActivity) getActivity()).setTitleToToolbar("Tracked beacons");
         }
     }
 

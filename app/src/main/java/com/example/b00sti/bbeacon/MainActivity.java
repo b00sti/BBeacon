@@ -11,12 +11,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.FrameLayout;
+import android.util.Log;
+import android.view.ViewGroup;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
+import com.example.b00sti.bbeacon.base.BaseRefreshableFragmentWithToolbar;
 import com.example.b00sti.bbeacon.navigation.NavigationManager;
 import com.example.b00sti.bbeacon.navigation.NotificationManager;
 import com.example.b00sti.bbeacon.ui_alarm.NotificationEvent;
@@ -51,18 +53,20 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
     private static final String TAG = "MainActivity";
 
-    @ViewById(R.id.mainViewPager) public AHBottomNavigationViewPager viewPager;
+    @ViewById(R.id.mainViewPagerVP) public AHBottomNavigationViewPager viewPager;
     @ViewById(R.id.bottomNavigation) public AHBottomNavigation bottomNavigation;
-    @ViewById(R.id.mainFAB) public FloatingActionButton floatingActionButton;
-    @ViewById(R.id.activityTopPlaceholderFL) public FrameLayout frameLayout;
+    @ViewById(R.id.mainFAB) public FloatingActionButton mainFAB;
+    @ViewById(R.id.activityTopPlaceholderVG) public ViewGroup activityTopPlaceholderVG;
     @ViewById(R.id.collapsedTitleL) public CollapsingToolbarLayout collapsedTitleL;
     @ViewById(R.id.appBarL) public AppBarLayout appBarLayout;
     @ViewById(R.id.toolbar) public Toolbar toolbar;
 
     @Bean
     NavigationManager navigationManager;
+
     @Bean
     FragmentBuilder fragmentBuilder;
+
     Fragment topFragment;
 
     @AfterViews
@@ -76,15 +80,19 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             @Override
             public void onTabSelected(int position, boolean wasSelected) {
                 setupTopFragment(position);
+                handleDraggingInAppBar(position);
                 setNotifications();
-                if (position == 2) {
-                    dragInAppBar(false);
-                } else {
-                    dragInAppBar(true);
-                }
             }
         });
 
+    }
+
+    private void handleDraggingInAppBar(int currentTab) {
+        if (currentTab == 2) {
+            dragInAppBar(false);
+        } else {
+            dragInAppBar(true);
+        }
     }
 
     private void dragInAppBar(final boolean drag) {
@@ -103,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(NotificationEvent event) {
-        refreshAllViews();
+        refreshAllViews(false);
     }
 
     @Override
@@ -125,20 +133,18 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     }
 
     public void refreshAllViews(boolean withMainFragment) {
-        refreshTopFragment(bottomNavigation.getCurrentItem());
+        refreshTopFragment();
         setNotifications();
 
-        if (navigationManager.getCurrentFragment() != null) {
-            navigationManager.getCurrentFragment().refreshToolbar();
+        Fragment fragment = navigationManager.getCurrentFragment();
+
+        if (fragment != null && fragment instanceof BaseRefreshableFragmentWithToolbar) {
+            ((BaseRefreshableFragmentWithToolbar) fragment).refreshToolbar();
         }
 
         if (withMainFragment) {
             navigationManager.refreshCurrentFragment();
         }
-    }
-
-    public void refreshAllViews() {
-        refreshAllViews(false);
     }
 
     private void setupTopFragment(int currentTab) {
@@ -153,17 +159,17 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.activityTopPlaceholderFL, topFragment);
+        transaction.replace(R.id.activityTopPlaceholderVG, topFragment);
         transaction.commit();
     }
 
-    private void refreshTopFragment(int currentTab) {
+    private void refreshTopFragment() {
         if (topFragment instanceof BaseRefreshableFragment) {
             ((BaseRefreshableFragment) topFragment).refresh();
         }
     }
 
-    public void configureToolbar(String titleL) {
+    public void setTitleToToolbar(String titleL) {
         collapsedTitleL.setTitle(titleL);
     }
 
@@ -211,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                         }
 
                         if (sizeWeather == 0) {
-                            notifications.add(new Pair<>(new AHNotification(), 2));
+                            notifications.add(new Pair<>(new AHNotification(), 1));
                         } else {
                             notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeWeather))), 1));
                         }
@@ -234,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
             @Override
             public void onError(Throwable e) {
-
+                Log.d(TAG, "onError: " + e.getMessage());
             }
 
             @Override
@@ -244,52 +250,36 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         };
     }
 
-    /**
-     * Add or remove items of the bottom navigation
-     */
     public void updateBottomNavigationItems(@Nullable ArrayList<Pair<AHNotification, Integer>> notifications) {
         navigationManager.updateBottomNavigationItems(notifications);
     }
 
-    /**
-     * Show or hide the bottom navigation with animation
-     */
     public void showOrHideBottomNavigation(boolean show) {
         navigationManager.showOrHideBottomNavigation(show);
     }
 
-    /**
-     * Show or hide selected item background
-     */
     public void updateSelectedBackgroundVisibility(boolean isVisible) {
         navigationManager.updateSelectedBackgroundVisibility(isVisible);
     }
 
-    /**
-     * Show or hide selected item background
-     */
     public void setForceTitleHide(boolean forceTitleHide) {
         navigationManager.setForceTitleHide(forceTitleHide);
     }
 
-    /**
-     * Return the number of items in the bottom navigation
-     */
     public int getBottomNavigationNbItems() {
         return navigationManager.getBottomNavigationNbItems();
     }
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-
-        Fragment fragment = topFragment;
-        if (fragment instanceof OnAnimationToolbar) {
+        //handle animated visibility changes on toolbar during collapsing
+        if (topFragment instanceof OnAnimationToolbar) {
             if (verticalOffset == 0) {
-                collapsedTitleL.setTitle(((OnAnimationToolbar) fragment).setExpandedTitleLayout());
+                collapsedTitleL.setTitle(((OnAnimationToolbar) topFragment).setExpandedTitleLayout());
             } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                ((OnAnimationToolbar) fragment).setCollapsedTitleLayout();
+                ((OnAnimationToolbar) topFragment).setCollapsedTitleLayout();
             } else {
-                ((OnAnimationToolbar) fragment).setExpandedTitleLayout();
+                ((OnAnimationToolbar) topFragment).setExpandedTitleLayout();
             }
         }
 

@@ -14,8 +14,9 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
+import com.example.b00sti.bbeacon.base.BaseFragment;
 import com.example.b00sti.bbeacon.base.BaseInnerViewActivity_;
-import com.example.b00sti.bbeacon.base.BaseRefreshableFragmentWithToolbar;
+import com.example.b00sti.bbeacon.base.BaseRefreshableFragment;
 import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
 import org.androidannotations.annotations.EBean;
@@ -40,31 +41,9 @@ public class NavigationManager {
     private MainViewPagerAdapter adapter;
 
     @Getter
-    private BaseRefreshableFragmentWithToolbar currentFragment;
+    private BaseFragment currentFragment;
 
     NavigationManager() {
-    }
-
-    private void prepareNavigationItems() {
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_alarm_white_24dp, R.color.indigo_900);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.ic_wb_sunny_white_24dp, R.color.indigo_900);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_bluetooth_searching_white_24dp, R.color.indigo_900);
-
-        bottomNavigationItems.add(item1);
-        bottomNavigationItems.add(item2);
-        bottomNavigationItems.add(item3);
-    }
-
-    private void onFabClickedOnFirstPage() {
-        Intent intent = new Intent(ctx, BaseInnerViewActivity_.class);
-        intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.ADD_NEW_ALARM);
-        ctx.startActivity(intent);
-    }
-
-    private void onFabClickedOnThirdPage() {
-        Intent intent = new Intent(ctx, BaseInnerViewActivity_.class);
-        intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.ADD_NEW_BEACON);
-        ctx.startActivity(intent);
     }
 
     public void refreshCurrentFragment() {
@@ -76,11 +55,8 @@ public class NavigationManager {
             ctx.setNotifications();
         }
 
-        if (currentFragment != null) {
-            currentFragment.refresh();
-        }
-
-        if (currentFragment != null) {
+        if (currentFragment != null && currentFragment instanceof BaseRefreshableFragment) {
+            ((BaseRefreshableFragment) currentFragment).refresh();
             Log.d(TAG, "current fragment refreshed " + currentFragment.getClass().getName());
         }
     }
@@ -92,7 +68,7 @@ public class NavigationManager {
         ctx.bottomNavigation.setColored(true);
         ctx.bottomNavigation.addItems(bottomNavigationItems);
 
-        ctx.bottomNavigation.manageFloatingActionButtonBehavior(ctx.floatingActionButton);
+        ctx.bottomNavigation.manageFloatingActionButtonBehavior(ctx.mainFAB);
 
         if (ctx.bottomNavigation.getCurrentItem() != 1) {
             showFAB(true);
@@ -100,7 +76,7 @@ public class NavigationManager {
             showFAB(false);
         }
 
-        ctx.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        ctx.mainFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int i = ctx.bottomNavigation.getCurrentItem();
@@ -136,13 +112,14 @@ public class NavigationManager {
                     return true;
                 }
 
-                if (currentFragment != null) {
-                    currentFragment.willBeHidden();
+                if (currentFragment != null && currentFragment instanceof BaseRefreshableFragment) {
+                    ((BaseRefreshableFragment) currentFragment).willBeHidden();
                 }
 
                 currentFragment = adapter.getCurrentFragment();
-                currentFragment.willBeDisplayed();
-
+                if (currentFragment != null && currentFragment instanceof BaseRefreshableFragment) {
+                    ((BaseRefreshableFragment) currentFragment).willBeDisplayed();
+                }
                 return true;
 
             }
@@ -154,21 +131,43 @@ public class NavigationManager {
 
         currentFragment = adapter.getCurrentFragment();
 
-        if (currentFragment != null) {
-            currentFragment.willBeDisplayed();
+        if (currentFragment != null && currentFragment instanceof BaseRefreshableFragment) {
+            ((BaseRefreshableFragment) currentFragment).willBeDisplayed();
         } else {
             Log.d(TAG, "initUI: currentFragment is null");
         }
         
     }
 
+    private void prepareNavigationItems() {
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_alarm_white_24dp, R.color.indigo_900);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.ic_wb_sunny_white_24dp, R.color.indigo_900);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_bluetooth_searching_white_24dp, R.color.indigo_900);
+
+        bottomNavigationItems.add(item1);
+        bottomNavigationItems.add(item2);
+        bottomNavigationItems.add(item3);
+    }
+
+    private void onFabClickedOnFirstPage() {
+        Intent intent = new Intent(ctx, BaseInnerViewActivity_.class);
+        intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.ADD_NEW_ALARM);
+        ctx.startActivity(intent);
+    }
+
+    private void onFabClickedOnThirdPage() {
+        Intent intent = new Intent(ctx, BaseInnerViewActivity_.class);
+        intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.ADD_NEW_BEACON);
+        ctx.startActivity(intent);
+    }
+
     private void showFAB(boolean show) {
         if (show) {
-            ctx.floatingActionButton.setVisibility(View.VISIBLE);
-            ctx.floatingActionButton.setAlpha(0f);
-            ctx.floatingActionButton.setScaleX(0f);
-            ctx.floatingActionButton.setScaleY(0f);
-            ctx.floatingActionButton.animate()
+            ctx.mainFAB.setVisibility(View.VISIBLE);
+            ctx.mainFAB.setAlpha(0f);
+            ctx.mainFAB.setScaleX(0f);
+            ctx.mainFAB.setScaleY(0f);
+            ctx.mainFAB.animate()
                     .alpha(1)
                     .scaleX(1)
                     .scaleY(1)
@@ -182,7 +181,7 @@ public class NavigationManager {
 
                         @Override
                         public void onAnimationEnd(Animator animation) {
-                            ctx.floatingActionButton.animate()
+                            ctx.mainFAB.animate()
                                     .setInterpolator(new LinearOutSlowInInterpolator())
                                     .start();
                         }
@@ -199,8 +198,8 @@ public class NavigationManager {
                     })
                     .start();
         } else {
-            if (ctx.floatingActionButton.getVisibility() == View.VISIBLE) {
-                ctx.floatingActionButton.animate()
+            if (ctx.mainFAB.getVisibility() == View.VISIBLE) {
+                ctx.mainFAB.animate()
                         .alpha(0)
                         .scaleX(0)
                         .scaleY(0)
@@ -214,12 +213,12 @@ public class NavigationManager {
 
                             @Override
                             public void onAnimationEnd(Animator animation) {
-                                ctx.floatingActionButton.setVisibility(View.GONE);
+                                ctx.mainFAB.setVisibility(View.GONE);
                             }
 
                             @Override
                             public void onAnimationCancel(Animator animation) {
-                                ctx.floatingActionButton.setVisibility(View.GONE);
+                                ctx.mainFAB.setVisibility(View.GONE);
                             }
 
                             @Override
@@ -232,25 +231,15 @@ public class NavigationManager {
         }
     }
 
-    /**
-     * Update the bottom navigation colored param
-     */
     public void updateBottomNavigationColor(boolean isColored) {
         ctx.bottomNavigation.setColored(isColored);
     }
 
-    /**
-     * Return if the bottom navigation is colored
-     */
     public boolean isBottomNavigationColored() {
         return ctx.bottomNavigation.isColored();
     }
 
-    /**
-     * Add or remove items of the bottom navigation
-     */
     public void updateBottomNavigationItems(@Nullable ArrayList<Pair<AHNotification, Integer>> notifications) {
-
         if (notifications == null) {
             ctx.bottomNavigation.removeAllItems();
             ctx.bottomNavigation.addItems(bottomNavigationItems);
@@ -264,9 +253,6 @@ public class NavigationManager {
         }
     }
 
-    /**
-     * Show or hide the bottom navigation with animation
-     */
     public void showOrHideBottomNavigation(boolean show) {
         if (show) {
             ctx.bottomNavigation.restoreBottomNavigation(true);
@@ -275,29 +261,20 @@ public class NavigationManager {
         }
     }
 
-    /**
-     * Show or hide selected item background
-     */
     public void updateSelectedBackgroundVisibility(boolean isVisible) {
         ctx.bottomNavigation.setSelectedBackgroundVisible(isVisible);
     }
 
-    /**
-     * Show or hide selected item background
-     */
     public void setForceTitleHide(boolean forceTitleHide) {
         AHBottomNavigation.TitleState state = forceTitleHide ? AHBottomNavigation.TitleState.ALWAYS_HIDE : AHBottomNavigation.TitleState.ALWAYS_SHOW;
         ctx.bottomNavigation.setTitleState(state);
     }
 
-    /**
-     * Return the number of items in the bottom navigation
-     */
     public int getBottomNavigationNbItems() {
         return ctx.bottomNavigation.getItemsCount();
     }
 
     public interface AHonTabSelectedListener {
-        public void onTabSelected(int position, boolean wasSelected);
+        void onTabSelected(int position, boolean wasSelected);
     }
 }

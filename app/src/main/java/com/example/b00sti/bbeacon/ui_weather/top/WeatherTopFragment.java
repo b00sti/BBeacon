@@ -247,7 +247,7 @@ public class WeatherTopFragment extends Fragment implements OnAnimationToolbar,
 
     public void refreshToolbar(String title) {
         if (getActivity() instanceof MainActivity) {
-            ((MainActivity) getActivity()).configureToolbar(title);
+            ((MainActivity) getActivity()).setTitleToToolbar(title);
         }
     }
 

@@ -6,6 +6,5 @@ package com.example.b00sti.bbeacon.ui_alarm;
 
 public class NotificationEvent {
     public NotificationEvent() {
-
     }
 }

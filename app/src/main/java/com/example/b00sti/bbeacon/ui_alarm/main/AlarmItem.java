@@ -1,7 +1,7 @@
 package com.example.b00sti.bbeacon.ui_alarm.main;
 
 import com.example.b00sti.bbeacon.base.Bool;
-import com.example.b00sti.bbeacon.base.SetIdInterface;
+import com.example.b00sti.bbeacon.base.SettingId;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class AlarmItem extends RealmObject implements SetIdInterface {
+public class AlarmItem extends RealmObject implements SettingId {
 
     @PrimaryKey
     long id;
@@ -40,7 +40,6 @@ public class AlarmItem extends RealmObject implements SetIdInterface {
         this.color = color;
         this.time = time;
         this.isEnabled = isEnabled;
-
         for (int i = 0; i < 7; i++) {
             isEnabledRepeat.add(new Bool(false));
         }

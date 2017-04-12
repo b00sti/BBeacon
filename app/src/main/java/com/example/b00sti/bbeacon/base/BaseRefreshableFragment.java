@@ -1,19 +1,13 @@
 package com.example.b00sti.bbeacon.base;
 
-import android.support.v4.app.Fragment;
-
-import org.androidannotations.annotations.EFragment;
-
 /**
- * Created by Dominik (b00sti) Pawlik on 2017-02-01
+ * Created by Dominik (b00sti) Pawlik on 2017-04-12
  */
 
-@EFragment
-public abstract class BaseRefreshableFragment extends Fragment {
-    public abstract void refresh();
+public interface BaseRefreshableFragment {
+    void refresh();
 
-    public abstract void willBeHidden();
+    void willBeHidden();
 
-    public abstract void willBeDisplayed();
-
+    void willBeDisplayed();
 }

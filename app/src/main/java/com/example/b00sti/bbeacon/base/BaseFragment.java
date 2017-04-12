@@ -3,6 +3,7 @@ package com.example.b00sti.bbeacon.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 
@@ -12,7 +13,7 @@ import org.androidannotations.annotations.EFragment;
  * Created by Dominik (b00sti) Pawlik on 2016-11-03
  */
 @EFragment
-public abstract class BaseFragment<P extends BasePresenter> extends BaseRefreshableFragmentWithToolbar {
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
     private static final String TAG = "BaseFragment";
 
     public P presenter;
