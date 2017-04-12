@@ -35,8 +35,8 @@
     <dimen name="image_final_width">32dp</dimen>
     <dimen name="spacing_normal">16dp</dimen>
 
-    <!-- ChartView -->
 
+    <!-- ChartView -->
     <!-- Axis thickness-->
     <dimen name="axis_thickness">2dp</dimen>
 

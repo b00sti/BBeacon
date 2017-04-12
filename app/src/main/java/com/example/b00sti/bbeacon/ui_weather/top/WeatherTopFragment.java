@@ -16,7 +16,7 @@ import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.ui_weather.main.OnAnimationToolbar;
 import com.example.b00sti.bbeacon.ui_weather.top.model.WeatherFromOWM;
-import com.example.bskeleton.basics.CLog;
+import com.example.b00sti.bbeacon.utils.CLog;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;

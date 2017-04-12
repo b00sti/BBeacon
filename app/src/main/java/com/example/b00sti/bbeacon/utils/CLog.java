@@ -1,4 +1,4 @@
-package com.example.bskeleton.basics;
+package com.example.b00sti.bbeacon.utils;
 
 import android.util.Log;
 

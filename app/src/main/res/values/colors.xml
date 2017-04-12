@@ -4,10 +4,11 @@
     <color name="colorPrimaryDark">@color/indigo_900</color>
     <color name="colorPrimaryLight">@color/indigo_100</color>
 
-    <color name="colorAccent">#4CAF50</color>
+    <color name="colorAccent">@color/green_500</color>
 
-    <color name="primaryText">#212121</color>
-    <color name="secondaryText">#757575</color>
+    <color name="colorDarkText">#212121</color>
+    <color name="colorMediumText">#757575</color>
+    <color name="colorLightText">#FFFFFF</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
@@ -41,7 +42,7 @@
     <color name="green_A400">#00E676</color>
     <color name="green_A700">#00C853</color>
 
-    <array name="beaconColors1">
+    <array name="examplePalette">
         <item>#4CAF52</item>
         <item>#3B8386</item>
         <item>#DE9B61</item>
@@ -54,7 +55,6 @@
         <item>#3F52B5</item>
         <item>#653BB5</item>
         <item>#3087A8</item>
-        <!--<item>#FFC841</item>-->
     </array>
 
 </resources>
