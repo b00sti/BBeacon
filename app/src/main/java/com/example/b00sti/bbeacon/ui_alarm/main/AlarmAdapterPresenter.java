@@ -52,7 +52,7 @@ public class AlarmAdapterPresenter extends BasePresenter<AlarmContract.View> imp
     @Override
     public void onRemoveClick(AlarmItem alarmItem, int position) {
         if (alarmItem.isEnabled()) {
-            Toast.makeText(ctx, "First disable alarm !", Toast.LENGTH_LONG).show();
+            Toast.makeText(ctx, R.string.first_disable_alarm, Toast.LENGTH_LONG).show();
         } else {
             new RemoveAlarmInteractor().execute(alarmItem);
             view.getAdapter().getDataSet().remove(alarmItem);

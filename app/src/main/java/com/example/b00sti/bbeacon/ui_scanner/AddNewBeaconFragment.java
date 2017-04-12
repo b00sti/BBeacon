@@ -51,7 +51,7 @@ public class AddNewBeaconFragment extends Fragment {
         }
 
         new MaterialDialog.Builder(getActivity())
-                .title("Select color")
+                .title(getString(R.string.select_color))
                 .items(strings)
                 .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
@@ -63,7 +63,7 @@ public class AddNewBeaconFragment extends Fragment {
                         return true;
                     }
                 })
-                .positiveText("Ok")
+                .positiveText(android.R.string.ok)
                 .show();
     }
 
@@ -87,7 +87,7 @@ public class AddNewBeaconFragment extends Fragment {
         double rand = new Random().nextDouble();
         items.add(new ScannerItem(
                 titleET.getText().hashCode() + "" + rand,
-                titleET.getText().toString(), color, enabledCB.isChecked(), "Last visible: 21:41 19/02/17", val));
+                titleET.getText().toString(), color, enabledCB.isChecked(), String.format(getString(R.string.last_visible_at)), val));
 
         new SetScannerInteractor().execute(items, new RealmUtils.OnSuccessListener() {
             @Override

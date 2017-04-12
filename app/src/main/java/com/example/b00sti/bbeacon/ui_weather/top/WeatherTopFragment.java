@@ -92,7 +92,7 @@ public class WeatherTopFragment extends Fragment implements OnAnimationToolbar,
         weatherFromOWMRealm = new GetWeatherFromOWMInteractor().execute();
 
         if (weatherFromOWMRealm == null) {
-            Toast.makeText(getContext(), "Enable your Internet and refresh to get weather...", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.enable_internet_to_refresh_weather, Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -107,7 +107,7 @@ public class WeatherTopFragment extends Fragment implements OnAnimationToolbar,
         expandedTitle = weatherFromOWMRealm.getName();
         collapsedTitle = weatherFromOWMRealm.getName() + "    " + getFormattedTemp(weatherFromOWMRealm.getTemp()) + " \u2103";
         if (weatherFromOWMRealm.getIcon() != null) {
-            String iconUrl = "http://openweathermap.org/img/w/" + weatherFromOWMRealm.getIcon() + ".png";
+            String iconUrl = String.format(getString(R.string.openweathermap_icon_url), weatherFromOWMRealm.getIcon());
             Picasso.with(getContext()).load(iconUrl).into(circleImageView);
         } else {
             Log.i(TAG, "accept: image not available");
@@ -175,7 +175,7 @@ public class WeatherTopFragment extends Fragment implements OnAnimationToolbar,
         if (weatherFromOWM.weather != null) {
             if (!weatherFromOWM.weather.isEmpty()) {
                 String iconName = weatherFromOWM.weather.get(0).icon;
-                String iconUrl = "http://openweathermap.org/img/w/" + iconName + ".png";
+                String iconUrl = String.format(getString(R.string.openweathermap_icon_url), weatherFromOWMRealm.getIcon());
                 Log.i(TAG, "accept: icon url:" + iconUrl);
                 Picasso.with(getContext()).load(iconUrl).into(circleImageView);
             } else {

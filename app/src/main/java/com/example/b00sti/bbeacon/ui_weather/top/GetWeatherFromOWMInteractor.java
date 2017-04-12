@@ -8,6 +8,6 @@ import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 public class GetWeatherFromOWMInteractor {
     public WeatherFromOWMRealm execute() {
-        return RealmUtils.Find(WeatherFromOWMRealm.class, "id", 0);
+        return RealmUtils.Find(WeatherFromOWMRealm.class, "id", 0); //NON-NLS
     }
 }

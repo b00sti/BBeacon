@@ -161,12 +161,12 @@ public class AddNewAlarmFragment extends Fragment {
 
         String time = TimeUtils.twoDatesBetweenTime(cal.getTimeInMillis());
 
-        return "Time to next alarm: " + time;
+        return String.format(getString(R.string.to_next_alarm), time);
     }
 
     private String getCurrentTime() {
         Calendar c = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        DateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format_hhmm), Locale.getDefault());
 
         return dateFormat.format(c.getTime());//TimeUtils.getTimeWith0(dateFormat.format(c.getTemp()));
     }
@@ -179,7 +179,7 @@ public class AddNewAlarmFragment extends Fragment {
         }
 
         new MaterialDialog.Builder(getActivity())
-                .title("Select color")
+                .title(R.string.select_color)
                 .items(strings)
                 .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
@@ -191,7 +191,7 @@ public class AddNewAlarmFragment extends Fragment {
                         return true;
                     }
                 })
-                .positiveText("Ok")
+                .positiveText(android.R.string.ok)
                 .show();
     }
 
@@ -278,7 +278,7 @@ public class AddNewAlarmFragment extends Fragment {
                 @Override
                 public void onSuccess() {
                     getActivity().finish();
-                    Toast.makeText(getActivity(), "Alarm updated...", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), R.string.after_alarm_updated, Toast.LENGTH_LONG).show();
                 }
             });
 

@@ -44,7 +44,7 @@ public class BaseInnerViewActivity extends AppCompatActivity {
 
     private void setActivityTitle() {
         Intent intent = getIntent();
-        String title = intent.getStringExtra("name");
+        String title = intent.getStringExtra(getString(R.string.name_intent_key));
         setTitle(title);
     }
 

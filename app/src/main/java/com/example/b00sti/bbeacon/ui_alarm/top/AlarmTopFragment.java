@@ -88,7 +88,7 @@ public class AlarmTopFragment extends Fragment implements RefreshableFragment {
             String time = TimeUtils.twoDatesBetweenTime(pair.second);
             result = String.format(toNextAlarm, time);
         } else {
-            result = String.format(toNextAlarm, "none");
+            result = String.format(toNextAlarm, getString(R.string.none));
         }
 
         return result;
@@ -96,7 +96,7 @@ public class AlarmTopFragment extends Fragment implements RefreshableFragment {
 
     private String prepareActualTime() {
         Calendar c = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        DateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format_hhmm), Locale.getDefault());
 
         return dateFormat.format(c.getTime());
     }

@@ -36,7 +36,7 @@ public class AlarmPresenter extends BasePresenter<AlarmContract.View> implements
         if (alarmItem.getText() != null) {
             alarmTitle = alarmItem.getText();
         } else {
-            alarmTitle = "none";
+            alarmTitle = ctx.getString(R.string.none);
         }
         return String.format(nextAlarm, alarmTitle);
     }
