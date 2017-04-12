@@ -38,12 +38,12 @@
                     <TextView
                         android:id="@+id/layout_item_demo_title"
                         style="@style/TextViewLightNormal"
+                        tools:text="Keys"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@+id/enableDisableIV"
                         android:gravity="center"
-                        android:padding="@dimen/size_8dp"
-                        android:text="Keys"/>
+                        android:padding="@dimen/size_8dp"/>
 
                     <ImageView
                         android:id="@+id/enableDisableIV"
@@ -65,7 +65,7 @@
                 android:layout_below="@+id/topLayoutLL"
                 android:layout_toRightOf="@+id/sidebar"
                 android:padding="@dimen/size_12dp"
-                android:text="Distance: 10 m"
+                android:text="@string/distance"
                 android:textSize="@dimen/font_12sp"/>
 
             <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
@@ -89,7 +89,7 @@
                 android:layout_below="@+id/strengthPB"
                 android:layout_toRightOf="@+id/sidebar"
                 android:padding="@dimen/size_12dp"
-                android:text="Last visible: 10:41 19/01/17"
+                android:text="@string/last_visible_at"
                 android:textSize="@dimen/font_12sp"/>
 
         </RelativeLayout>

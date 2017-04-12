@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -44,7 +45,7 @@
                         android:layout_toLeftOf="@+id/moreIV"
                         android:gravity="center"
                         android:padding="@dimen/size_8dp"
-                        android:text="Work"/>
+                        tools:text="Work"/>
 
                     <LinearLayout
                         android:id="@+id/moreIV"
@@ -83,8 +84,8 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:padding="@dimen/size_8dp"
-                    android:text="16:09"
-                    android:textSize="50sp"/>
+                    android:textSize="50sp"
+                    tools:text="16:09"/>
 
                 <LinearLayout
                     android:layout_width="0dp"

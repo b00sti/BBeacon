@@ -38,12 +38,12 @@
                     <TextView
                         android:id="@+id/layout_item_demo_title"
                         style="@style/TextViewLightNormal"
+                        tools:text="Work"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@+id/moreIV"
                         android:gravity="center"
-                        android:padding="@dimen/size_8dp"
-                        android:text="Work"/>
+                        android:padding="@dimen/size_8dp"/>
 
                     <ImageView
                         android:id="@+id/moreIV"
@@ -69,6 +69,7 @@
 
                 <me.grantland.widget.AutofitTextView
                     android:id="@+id/tempValueTV"
+                    tools:text="17"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -76,7 +77,6 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:padding="@dimen/size_8dp"
-                    android:text="17"
                     android:textSize="50sp"/>
 
                 <LinearLayout
@@ -99,11 +99,11 @@
 
                         <TextView
                             android:id="@+id/pressureTV"
+                            tools:text="1020 hPa"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/imageView"
                             android:padding="@dimen/size_8dp"
-                            android:text="1020 hPa"
                             android:textSize="18sp"/>/>
 
                     </LinearLayout>
@@ -122,11 +122,11 @@
 
                         <TextView
                             android:id="@+id/humidityTV"
+                            tools:text="80 %"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/imageView"
                             android:padding="@dimen/size_8dp"
-                            android:text="80 %"
                             android:textSize="18sp"/>/>
 
                     </LinearLayout>
@@ -137,6 +137,7 @@
 
             <TextView
                 android:id="@+id/messageTV"
+                tools:text="Your flowers are watered?"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/timeLL"
@@ -148,7 +149,6 @@
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:padding="@dimen/size_12dp"
-                android:text="Your flowers are watered?"
                 android:textSize="@dimen/font_16sp"/>
 
             <RelativeLayout

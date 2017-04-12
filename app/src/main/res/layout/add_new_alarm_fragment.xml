@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -22,8 +23,8 @@
             android:gravity="center"
             android:maxLines="1"
             android:padding="@dimen/size_8dp"
-            android:text="16:09"
-            android:textSize="100sp"/>
+            android:textSize="100sp"
+            tools:text="16:09"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,9 +62,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_12dp"
-            android:hint="Title"
             android:imeOptions="actionDone"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            tools:hint="Title"/>
 
         <TextView
             android:id="@+id/selectBeaconTV"
@@ -73,7 +74,7 @@
             android:drawableLeft="@drawable/ic_cast_connected_green_500_36dp"
             android:drawablePadding="@dimen/size_8dp"
             android:gravity="center"
-            android:text="Beacon: Keys"
+            android:text="@string/beacon_name"
             android:textSize="@dimen/font_18sp"/>
 
         <TextView
@@ -84,8 +85,8 @@
             android:drawableLeft="@drawable/ic_timelapse_green_500_36dp"
             android:drawablePadding="@dimen/size_8dp"
             android:gravity="center"
-            android:text="Time to alarm: 10 h 15 min"
-            android:textSize="@dimen/font_18sp"/>
+            android:textSize="@dimen/font_18sp"
+            tools:text="Time to alarm: 10 h 15 min"/>
 
     </LinearLayout>
 

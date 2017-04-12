@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:padding="@dimen/size_8dp"
-                android:text="-"
+                android:text="@string/dash"
                 android:textSize="75sp"/>
 
             <TextView
@@ -43,7 +43,7 @@
                 android:layout_gravity="top"
                 android:maxLines="1"
                 android:padding="@dimen/size_8dp"
-                android:text="\u2103"
+                android:text="@string/celsjus"
                 android:textSize="44sp"/>
         </LinearLayout>
 

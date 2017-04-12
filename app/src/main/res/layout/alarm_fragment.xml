@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:paddingTop="@dimen/size_128dp"
-            android:text="No alarms available"
+            android:text="@string/no_alarms_available"
             android:textSize="@dimen/font_18sp"
             android:visibility="gone"/>
 

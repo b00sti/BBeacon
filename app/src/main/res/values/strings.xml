@@ -22,5 +22,18 @@
     <string name="tracked_beacons">Tracked beacons</string>
     <string name="enable_internet_to_refresh_weather">Enable your Internet and refresh to get weather…</string>
     <string name="openweathermap_icon_url">http://openweathermap.org/img/w/%s.png</string>
+    <string name="beacon_name">Beacon: Keys</string>
+    <string name="no_alarms_available">No alarms available</string>
+    <string name="mon">MON</string>
+    <string name="tue">TUE</string>
+    <string name="wed">WED</string>
+    <string name="thu">THU</string>
+    <string name="fri">FRI</string>
+    <string name="sat">SAT</string>
+    <string name="sun">SUN</string>
+    <string name="distance">Distance: 10 m</string>
+    <string name="celsjus">℃</string>
+    <string name="no_weather_data">No alarms weather data, first configure or enable scanning your beacons...</string>
+    <string name="dash">-</string>
 
 </resources>
