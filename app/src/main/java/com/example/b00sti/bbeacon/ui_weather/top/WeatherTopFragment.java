@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
-import com.example.b00sti.bbeacon.ui_weather.main.OnAnimationToolbar;
+import com.example.b00sti.bbeacon.base.OnAnimationToolbar;
 import com.example.b00sti.bbeacon.ui_weather.top.model.WeatherFromOWM;
 import com.example.b00sti.bbeacon.utils.CLog;
 import com.google.android.gms.common.ConnectionResult;

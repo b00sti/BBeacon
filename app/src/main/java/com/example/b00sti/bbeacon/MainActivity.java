@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
+import com.example.b00sti.bbeacon.base.OnAnimationToolbar;
 import com.example.b00sti.bbeacon.base.RefreshableFragment;
 import com.example.b00sti.bbeacon.base.RefreshableFragmentWithToolbar;
 import com.example.b00sti.bbeacon.navigation.NavigationManager;
@@ -27,7 +28,6 @@ import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.ui_scanner.GetScannerInteractor;
 import com.example.b00sti.bbeacon.ui_scanner.ScannerItem;
 import com.example.b00sti.bbeacon.ui_weather.interactors.GetWeatherInteractor;
-import com.example.b00sti.bbeacon.ui_weather.main.OnAnimationToolbar;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
 import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 

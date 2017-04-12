@@ -2,7 +2,6 @@ package com.example.b00sti.bbeacon.ui_weather.main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -32,8 +31,6 @@ public class WeatherAdapter extends BaseAdapter<WeatherItem, WeatherItemView> {
 
     @Override
     public void onBindViewHolder(ViewWrapper<WeatherItemView> holder, final int position) {
-        Log.d(TAG, "onBindViewHolder: " + position);
-        Log.d(TAG, "onBindViewHolder: " + dataSet.size());
         final WeatherItemView weatherItemView = holder.getView();
         final WeatherItem weatherItem = dataSet.get(position);
         weatherItemView.bind(weatherItem);
@@ -44,9 +41,7 @@ public class WeatherAdapter extends BaseAdapter<WeatherItem, WeatherItemView> {
                 startWeatherDetailsActivity(weatherItem);
             }
         });
-        
     }
-
 
     private void startWeatherDetailsActivity(WeatherItem weatherItem) {
         Intent intent = new Intent(context, BaseInnerViewActivity_.class);
