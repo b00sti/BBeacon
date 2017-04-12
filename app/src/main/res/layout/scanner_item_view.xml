@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -38,12 +39,12 @@
                     <TextView
                         android:id="@+id/layout_item_demo_title"
                         style="@style/TextViewLightNormal"
-                        tools:text="Keys"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@+id/enableDisableIV"
                         android:gravity="center"
-                        android:padding="@dimen/size_8dp"/>
+                        android:padding="@dimen/size_8dp"
+                        tools:text="Keys"/>
 
                     <ImageView
                         android:id="@+id/enableDisableIV"
