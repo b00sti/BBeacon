@@ -44,16 +44,7 @@ public class WeatherAdapter extends BaseAdapter<WeatherItem, WeatherItemView> {
                 startWeatherDetailsActivity(weatherItem);
             }
         });
-
-        weatherItemView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-            @Override
-            public void onSystemUiVisibilityChange(int visibility) {
-                if (visibility == View.VISIBLE) {
-                    weatherItemView.invalidate();
-                    notifyDataSetChanged();
-                }
-            }
-        });
+        
     }
 
 
