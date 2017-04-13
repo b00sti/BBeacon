@@ -71,8 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_12dp"
-            android:drawableLeft="@drawable/ic_cast_connected_green_500_36dp"
             android:drawablePadding="@dimen/size_8dp"
+            android:drawableStart="@drawable/ic_cast_connected_green_500_36dp"
             android:gravity="center"
             android:text="@string/beacon_name"
             android:textSize="@dimen/font_18sp"/>
@@ -82,8 +82,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/size_12dp"
-            android:drawableLeft="@drawable/ic_timelapse_green_500_36dp"
             android:drawablePadding="@dimen/size_8dp"
+            android:drawableStart="@drawable/ic_timelapse_green_500_36dp"
             android:gravity="center"
             android:textSize="@dimen/font_18sp"
             tools:text="Time to alarm: 10 h 15 min"/>

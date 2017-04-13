@@ -11,6 +11,8 @@
     android:weightSum="7"
     tools:showIn="@layout/add_new_alarm_fragment">
 
+    <!-- TODO TO REFACTOR -->
+
     <TextView
         android:id="@+id/day1TV"
         android:layout_width="0dp"

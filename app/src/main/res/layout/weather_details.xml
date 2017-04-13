@@ -4,6 +4,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+    <!-- TODO TO REFACTOR -->
+
     <LinearLayout
         android:id="@+id/headerLL"
         android:layout_width="match_parent"

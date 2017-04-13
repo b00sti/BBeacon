@@ -6,6 +6,8 @@
                 android:layout_height="250dp"
                 android:orientation="vertical">
 
+    <!-- TODO TO REFACTOR -->
+
     <RelativeLayout
         android:id="@+id/topTopHeaderRL"
         android:layout_width="match_parent"
