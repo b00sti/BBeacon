@@ -7,7 +7,7 @@ import java.util.Map;
 public class Wind {
 
     public double speed;
-    public int deg;
+    public double deg;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public Map<String, Object> getAdditionalProperties() {
