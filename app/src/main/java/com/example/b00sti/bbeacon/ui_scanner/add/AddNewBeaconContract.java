@@ -8,9 +8,20 @@ public class AddNewBeaconContract {
 
     public interface View {
 
+        boolean getEnableDisable();
+
+        String getRange();
+
+        String getTitle();
+
     }
 
     public interface Presenter {
 
+        void storageNewItem();
+
+        void selectColor();
+
     }
+
 }
