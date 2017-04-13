@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.ui_scanner;
+package com.example.b00sti.bbeacon.ui_scanner.add;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.b00sti.bbeacon.R;
+import com.example.b00sti.bbeacon.ui_scanner.interactors.SetScannerInteractor;
+import com.example.b00sti.bbeacon.ui_scanner.main.ScannerItem;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import org.androidannotations.annotations.Click;

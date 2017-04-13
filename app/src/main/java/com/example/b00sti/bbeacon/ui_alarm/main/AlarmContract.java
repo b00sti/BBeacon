@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Dominik (b00sti) Pawlik on 2017-03-09
  */
 
-public class AlarmContract {
+class AlarmContract {
 
     public interface View {
 

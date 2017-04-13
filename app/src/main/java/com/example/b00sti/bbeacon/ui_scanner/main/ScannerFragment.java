@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.ui_scanner;
+package com.example.b00sti.bbeacon.ui_scanner.main;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,7 +42,8 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
 
     @AfterViews
     void initUI() {
-        initDemoList();
+        initRecycler();
+        presenter.fetchData();
     }
 
     private void initToolbar() {
@@ -57,13 +58,12 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
         return presenter;
     }
 
-    private void initDemoList() {
+    private void initRecycler() {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         scannerAdapter.setDataSet(new ArrayList<ScannerItem>());
         recyclerView.setAdapter(scannerAdapter);
-        presenter.fetchData();
     }
 
     @Override
@@ -88,21 +88,6 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
             Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
             fragmentContainer.startAnimation(fadeIn);
         }
-    }
-
-    @Override
-    public void showProgressBar() {
-
-    }
-
-    @Override
-    public void hideProgressBar() {
-
-    }
-
-    @Override
-    public void showNoConnection() {
-
     }
 
     @Override

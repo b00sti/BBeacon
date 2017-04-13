@@ -4,7 +4,7 @@ package com.example.b00sti.bbeacon.ui_alarm.top;
  * Created by Dominik (b00sti) Pawlik on 2017-04-12
  */
 
-public class AlarmTopContract {
+class AlarmTopContract {
 
     public interface View {
 
@@ -21,6 +21,5 @@ public class AlarmTopContract {
 
         void setCurrentTime();
     }
-
 
 }

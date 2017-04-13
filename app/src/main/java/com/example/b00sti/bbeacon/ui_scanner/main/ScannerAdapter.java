@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.ui_scanner;
+package com.example.b00sti.bbeacon.ui_scanner.main;
 
 import android.content.Context;
 import android.view.ViewGroup;

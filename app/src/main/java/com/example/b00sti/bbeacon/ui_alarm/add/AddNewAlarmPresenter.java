@@ -187,6 +187,7 @@ public class AddNewAlarmPresenter extends BasePresenter<AddNewAlarmContract.View
         }
 
         time = alarmItem.getTime();
+        mainColor = alarmItem.getColor();
         view.setTime(time);
         view.setEnableDisable(alarmItem.isEnabled());
         view.setTimeToNextAlarm(getPreparedTimeToNextAlarm());

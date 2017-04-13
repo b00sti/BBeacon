@@ -1,5 +1,6 @@
-package com.example.b00sti.bbeacon.ui_scanner;
+package com.example.b00sti.bbeacon.ui_scanner.interactors;
 
+import com.example.b00sti.bbeacon.ui_scanner.main.ScannerItem;
 import com.example.b00sti.bbeacon.ui_weather.interactors.SetWeatherInteractor;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
@@ -39,6 +40,7 @@ public class SetScannerInteractor {
     }
 
     private void setWeatherItem(List<ScannerItem> data) {
+        //generate fake Weathter Item
         List<WeatherItem> weatherItems = new ArrayList<>();
         for (ScannerItem scannerItem : data) {
             WeatherItem weatherItem = new WeatherItem();

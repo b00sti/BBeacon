@@ -1,4 +1,4 @@
-package com.example.b00sti.bbeacon.ui_scanner;
+package com.example.b00sti.bbeacon.ui_scanner.main;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -11,12 +11,12 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseItemView;
 import com.example.b00sti.bbeacon.navigation.NotificationEvent;
+import com.example.b00sti.bbeacon.ui_scanner.interactors.SetScannerInteractor;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.DrawableRes;
-import org.androidannotations.annotations.res.IntArrayRes;
 import org.greenrobot.eventbus.EventBus;
 
 /**
@@ -32,9 +32,6 @@ public class ScannerItemView extends BaseItemView<ScannerItem> {
     @ViewById(R.id.lastVisibleTV) TextView lastVisibleTV;
     @ViewById(R.id.strengthPB) RoundCornerProgressBar progressBar;
     @ViewById(R.id.topLayoutLL) ViewGroup topLL;
-
-    @IntArrayRes(R.array.beaconColors)
-    int colors[];
 
     @DrawableRes(R.drawable.ic_bluetooth_connected_white_24dp)
     Drawable enabled;

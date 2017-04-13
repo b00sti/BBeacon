@@ -6,7 +6,7 @@ import android.widget.TextView;
  * Created by Dominik (b00sti) Pawlik on 2017-04-12
  */
 
-public class AddNewAlarmContract {
+class AddNewAlarmContract {
 
     public interface View {
 

@@ -1,11 +1,9 @@
-package com.example.b00sti.bbeacon.ui_scanner;
-
-import android.app.Activity;
+package com.example.b00sti.bbeacon.ui_scanner.main;
 
 import com.example.b00sti.bbeacon.base.BasePresenter;
+import com.example.b00sti.bbeacon.ui_scanner.interactors.GetScannerInteractor;
 
 import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.RootContext;
 
 import java.util.List;
 
@@ -17,9 +15,6 @@ import io.reactivex.functions.Consumer;
 
 @EBean
 public class ScannerPresenter extends BasePresenter<ScannerContract.View> implements ScannerContract.Presenter {
-
-    @RootContext
-    Activity ctx;
 
     @Override
     public void fetchData() {
