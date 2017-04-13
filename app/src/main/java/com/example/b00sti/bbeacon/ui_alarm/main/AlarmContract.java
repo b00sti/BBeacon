@@ -10,12 +10,6 @@ public class AlarmContract {
 
     public interface View {
 
-        void showProgressBar();
-
-        void hideProgressBar();
-
-        void showNoConnection();
-
         void refreshData(List<AlarmItem> items);
 
         AlarmAdapter getAdapter();

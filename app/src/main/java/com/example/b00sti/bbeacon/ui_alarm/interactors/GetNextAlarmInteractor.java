@@ -24,7 +24,6 @@ public class GetNextAlarmInteractor {
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
         int currentMin = calendar.get(Calendar.MINUTE);
 
-        AlarmItem result = new AlarmItem();
         ArrayList<Pair<AlarmItem, Long>> pairs = new ArrayList<>();
 
         for (AlarmItem alarmItem : items) {

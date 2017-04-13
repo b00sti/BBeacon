@@ -34,7 +34,7 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
     @ViewById(R.id.noAvailableTV) TextView noAvailableTV;
 
     @Bean
-    AlarmPresenter presenter;
+    AlarmPresenter alarmPresenter;
 
     @Bean
     AlarmAdapter alarmAdapter;
@@ -51,8 +51,8 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
 
     @Override
     protected AlarmPresenter registerPresenter() {
-        presenter.attachView(this);
-        return presenter;
+        alarmPresenter.attachView(this);
+        return alarmPresenter;
     }
 
     private void initList() {
@@ -87,21 +87,6 @@ public class AlarmFragment extends BaseFragment<AlarmPresenter> implements Alarm
             Animation fadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
             fragmentContainer.startAnimation(fadeIn);
         }
-    }
-
-    @Override
-    public void showProgressBar() {
-
-    }
-
-    @Override
-    public void hideProgressBar() {
-
-    }
-
-    @Override
-    public void showNoConnection() {
-
     }
 
     @Override
