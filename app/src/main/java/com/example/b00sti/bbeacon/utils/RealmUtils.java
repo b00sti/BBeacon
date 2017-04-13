@@ -18,6 +18,9 @@ import io.realm.RealmResults;
 
 public class RealmUtils {
 
+    private RealmUtils() {
+    }
+
     public static <E extends RealmObject> Observable<List<E>> FindAllAsync(Class<E> clazz) {
         final Realm realm = Realm.getDefaultInstance();
         final RealmResults<E> all = realm.where(clazz).findAll();

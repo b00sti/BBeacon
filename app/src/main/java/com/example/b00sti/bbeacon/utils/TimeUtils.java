@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class TimeUtils {
+
     public static final String DATE_FORMAT_MERGED = "yyyyMMdd";
     public static final String DATE_FORMAT_ISO = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
     public static final String MONTH_DAY_FORMAT = "MMM d";
@@ -23,6 +24,9 @@ public class TimeUtils {
     public static final String REGULAR_DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm";
     private static final String TAG = "TimeUtils";
     public static long MILLIS_IN_DAY = 86400000L;
+
+    private TimeUtils() {
+    }
 
     public static String getTimeWith0(String time) {
         String finalTime = "";

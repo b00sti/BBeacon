@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 public class ViewUtils {
 
+    private ViewUtils() {
+    }
+
     public static void hideKeyboard(Activity activity) {
         View view = activity.getCurrentFocus();
         InputMethodManager imm = (InputMethodManager) activity.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);

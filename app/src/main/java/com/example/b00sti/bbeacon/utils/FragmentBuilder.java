@@ -25,6 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @EBean(scope = EBean.Scope.Singleton)
 public class FragmentBuilder {
+
     public static final int TOP_ALARM = 0;
     public static final int ALARM = 1;
     public static final int TOP_WEATHER = 2;

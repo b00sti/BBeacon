@@ -9,6 +9,8 @@ import java.util.List;
  */
 
 public class CLog {
+    private CLog() {
+    }
 
     public static <T> void logListSize(String TAG, String title, List<T> list) {
         if (list == null) {
