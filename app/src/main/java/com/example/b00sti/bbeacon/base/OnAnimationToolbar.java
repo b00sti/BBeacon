@@ -6,7 +6,5 @@ package com.example.b00sti.bbeacon.base;
 
 public interface OnAnimationToolbar {
     String setCollapsedTitleLayout();
-
     String setExpandedTitleLayout();
-
 }

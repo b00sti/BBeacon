@@ -148,7 +148,7 @@ public class RealmUtils {
         RealmUtils.SaveAllWithId(list, onSuccessListener);
     }
 
-    public static <E extends RealmObject> void SaveAllWithId(final List<E> items, @Nullable final OnSuccessListener onSuccessListener) {
+/*    public static <E extends RealmObject> void SaveAllWithId(final List<E> items, @Nullable final OnSuccessListener onSuccessListener) {
         final Realm realm = Realm.getDefaultInstance();
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
@@ -165,6 +165,56 @@ public class RealmUtils {
                         }
 
                     }
+                    realm.copyToRealmOrUpdate(item);
+                }
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                realm.close();
+                if (onSuccessListener != null) {
+                    onSuccessListener.onSuccess();
+                }
+            }
+        });
+    }*/
+
+    public static <E extends RealmObject> void SaveAllWithId(final List<E> items, @Nullable final OnSuccessListener onSuccessListener) {
+        final Realm realm = Realm.getDefaultInstance();
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                for (E item : items) {
+
+                    //if item has a id copy or update
+                    if (item instanceof SettingId) {
+                        if (((SettingId) item).getManualId() != 0) {
+                            realm.copyToRealmOrUpdate(item);
+                            continue;
+                        }
+                    }
+
+                    //get max id
+                    RealmResults all = realm.where(item.getClass()).findAll();
+                    Number e = null;
+                    if (!all.isEmpty()) {
+                        e = all.max("id");
+                    }
+
+                    //set id to max + 1 or to 1 if max is not available
+                    long primaryKeyValue;
+                    if (e != null) {
+                        primaryKeyValue = e.longValue();
+                        primaryKeyValue = primaryKeyValue + 1;
+                    } else {
+                        primaryKeyValue = 1;
+                    }
+
+                    if (item instanceof SettingId) {
+                        ((SettingId) item).setManualId(primaryKeyValue);
+                    }
+
+                    //copy or update
                     realm.copyToRealmOrUpdate(item);
                 }
             }

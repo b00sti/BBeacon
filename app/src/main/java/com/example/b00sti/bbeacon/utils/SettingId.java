@@ -5,5 +5,8 @@ package com.example.b00sti.bbeacon.utils;
  */
 
 public interface SettingId {
+    long getManualId();
+
     void setManualId(long id);
+
 }

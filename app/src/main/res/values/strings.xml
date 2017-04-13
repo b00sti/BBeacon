@@ -35,5 +35,6 @@
     <string name="celsjus">℃</string>
     <string name="no_weather_data">No alarms weather data, first configure or enable scanning your beacons...</string>
     <string name="dash">-</string>
+    <string name="new_alarm">New Alarm</string>
 
 </resources>

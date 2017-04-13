@@ -46,6 +46,11 @@ public class AlarmItem extends RealmObject implements SettingId {
     }
 
     @Override
+    public long getManualId() {
+        return id;
+    }
+
+    @Override
     public void setManualId(long id) {
         setId(id);
     }
