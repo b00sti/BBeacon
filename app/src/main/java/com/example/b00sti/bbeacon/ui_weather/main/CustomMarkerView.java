@@ -71,8 +71,8 @@ public class CustomMarkerView extends MarkerView {
 
     @Override
     public void draw(Canvas canvas, float posX, float posY) {
-        float posx = posX;
-        float posy = posY;
+        float posx;
+        float posy;
 
         // take offsets into consideration
         float px = (int) (20 * Resources.getSystem().getDisplayMetrics().density);

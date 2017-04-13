@@ -23,6 +23,8 @@ import java.util.Random;
 import lombok.Getter;
 
 
+//test chart
+//example data
 public class LineCardOne {
     private static final String TAG = "LineCardOne";
 

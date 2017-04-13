@@ -10,12 +10,6 @@ public class WeatherContract {
 
     public interface View {
 
-        void showProgressBar();
-
-        void hideProgressBar();
-
-        void showNoConnection();
-
         void refreshData(List<WeatherItem> items);
 
     }

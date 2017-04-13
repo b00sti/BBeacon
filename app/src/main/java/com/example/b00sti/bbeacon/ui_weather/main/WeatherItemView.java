@@ -91,6 +91,7 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
         handleExampleChart(color);
     }
 
+    //test chart, example data
     void handleExampleChart(int color) {
         // no description text
         mChart.getDescription().setEnabled(false);

@@ -2,7 +2,6 @@ package com.example.b00sti.bbeacon.ui_weather.main;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -35,7 +34,7 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
     @ViewById(R.id.mainRV) RecyclerView recyclerView;
 
     @Bean
-    WeatherPresenter presenter;
+    WeatherPresenter weatherPresenter;
 
     @Bean
     WeatherAdapter weatherAdapter;
@@ -46,8 +45,8 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
 
     @Override
     protected WeatherPresenter registerPresenter() {
-        presenter.attachView(this);
-        return presenter;
+        weatherPresenter.attachView(this);
+        return weatherPresenter;
     }
 
     @AfterViews
@@ -100,25 +99,9 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
         }
     }
 
-    @Override
-    public void showProgressBar() {
-
-    }
-
-    @Override
-    public void hideProgressBar() {
-
-    }
-
-    @Override
-    public void showNoConnection() {
-
-    }
 
     @Override
     public void refreshData(List<WeatherItem> items) {
-        Log.d(TAG, "refreshData: " + items.size());
-        Log.d(TAG, "refreshData: " + weatherAdapter.getItemCount());
         if (items.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             noAvailableTV.setVisibility(View.VISIBLE);
@@ -126,8 +109,6 @@ public class WeatherFragment extends BaseFragment<WeatherPresenter> implements W
             recyclerView.setVisibility(View.VISIBLE);
             noAvailableTV.setVisibility(View.GONE);
             weatherAdapter.setDataSet(items);
-            Log.d(TAG, "refreshData: " + items.size());
-            Log.d(TAG, "refreshData: " + weatherAdapter.getItemCount());
         }
     }
 

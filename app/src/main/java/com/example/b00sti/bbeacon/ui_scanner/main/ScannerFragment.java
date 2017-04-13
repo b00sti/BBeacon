@@ -31,7 +31,7 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
     @ViewById(R.id.mainRV) RecyclerView recyclerView;
 
     @Bean
-    ScannerPresenter presenter;
+    ScannerPresenter scannerPresenter;
 
     @Bean
     ScannerAdapter scannerAdapter;
@@ -54,8 +54,8 @@ public class ScannerFragment extends BaseFragment<ScannerPresenter> implements S
 
     @Override
     protected ScannerPresenter registerPresenter() {
-        presenter.attachView(this);
-        return presenter;
+        scannerPresenter.attachView(this);
+        return scannerPresenter;
     }
 
     private void initRecycler() {
