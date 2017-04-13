@@ -105,7 +105,9 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
                     @Override
                     public void accept(WeatherFromOWM weatherFromOWM) throws Exception {
                         if (weatherFromOWM.main != null) {
-                            view.refreshViews(weatherFromOWM);
+                            if (view != null) {
+                                view.refreshViews(weatherFromOWM);
+                            }
                             saveWeatherToRealm(weatherFromOWM);
                         } else {
                             Log.d(TAG, "accept: " + "weather from OWM is null");
