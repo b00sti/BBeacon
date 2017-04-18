@@ -36,9 +36,8 @@ import retrofit2.HttpException;
 public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> implements WeatherTopContract.Presenter, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "WeatherTopPresenter";
 
-    //defualt coordinates
-    private static final Double lat = 50.057667;
-    private static final Double lon = 19.937222;
+    private static final Double defaultLat = 50.057667;
+    private static final Double defaultLon = 19.937222;
 
     @RootContext
     Activity ctx;
@@ -75,15 +74,7 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
     }
 
     private void getWeatherDataFromWeb() {
-        double latToRequest = lat;
-        double lonToRequest = lon;
-
-        if (weatherFromOWMRealm != null) {
-            latToRequest = weatherFromOWMRealm.getLat();
-            lonToRequest = weatherFromOWMRealm.getLon();
-        }
-
-        addDisposable(GetWeatherFromOWMInteractor.getFromApi(latToRequest, lonToRequest)
+        addDisposable(GetWeatherFromOWMInteractor.getFromApi(getLat(), getLon())
                 .onErrorReturn(new Function<Throwable, WeatherFromOWM>() {
                     @Override
                     public WeatherFromOWM apply(Throwable throwable) throws Exception {
@@ -105,6 +96,22 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
                         onRetrievedWeatherFromApi(weatherFromOWM);
                     }
                 }));
+    }
+
+    private double getLat() {
+        if (weatherFromOWMRealm != null) {
+            return weatherFromOWMRealm.getLat();
+        } else {
+            return defaultLat;
+        }
+    }
+
+    private double getLon() {
+        if (weatherFromOWMRealm != null) {
+            return weatherFromOWMRealm.getLon();
+        } else {
+            return defaultLon;
+        }
     }
 
     @UiThread
@@ -147,7 +154,7 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             updateWeatherAfterLocationChanges(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            CLog.d(TAG, "onConnected: new location lat", weatherFromOWMRealm.getLat(), "lon", weatherFromOWMRealm.getLon());
+            CLog.d(TAG, "onConnected: new location defaultLat", weatherFromOWMRealm.getLat(), "defaultLon", weatherFromOWMRealm.getLon());
         } else {
             Log.d(TAG, "onConnected: Location is null");
         }
@@ -195,8 +202,8 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
         }
 
         result.setName(weatherFromOWM.getName());
-        result.setLat(this.weatherFromOWMRealm.getLat());
-        result.setLon(this.weatherFromOWMRealm.getLon());
+        result.setLat(getLat());
+        result.setLon(getLon());
 
         return result;
     }

@@ -17,7 +17,7 @@
     <string name="to_next_alarm">Time to next alarm: %s</string>
     <string name="last_visible_at">Last visible: 21:41 19/02/17</string>
     <string name="first_disable_alarm">First disable alarm !</string>
-    <string name="none">none</string>
+    <string name="none">-</string>
     <string name="name_intent_key">name</string>
     <string name="tracked_beacons">Tracked beacons</string>
     <string name="enable_internet_to_refresh_weather">Enable your Internet and refresh to get weather…</string>
