@@ -7,7 +7,6 @@ import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
 import com.example.b00sti.bbeacon.base.OnAnimationToolbar;
-import com.example.b00sti.bbeacon.ui_weather.top.model.WeatherFromOWM;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
@@ -61,7 +60,6 @@ public class WeatherTopFragment extends BaseFragment<WeatherTopPresenter> implem
     @AfterViews
     void initUI() {
         presenter.initViews();
-        presenter.getWeatherDataFromWeb();
     }
 
     @Override
@@ -83,48 +81,28 @@ public class WeatherTopFragment extends BaseFragment<WeatherTopPresenter> implem
     }
 
     @Override
-    public void refreshViews(WeatherFromOWM weatherFromOWM) {
+    public void refreshViews(WeatherFromOWMRealm weatherFromOWMRealm) {
         if (tempValueTV != null) {
-            tempValueTV.setText(WeatherUtils.getFormattedTemp(weatherFromOWM.main.temp));
+            tempValueTV.setText(getFormattedTemp(weatherFromOWMRealm.getTemp()));
         }
 
         if (pressureTV != null) {
-            pressureTV.setText(WeatherUtils.getFormattedPressure(getContext(), weatherFromOWM.main.pressure));
+            pressureTV.setText(WeatherUtils.getFormattedPressure(getContext(), weatherFromOWMRealm.getPressure()));
         }
 
         if (humidityTV != null) {
-            humidityTV.setText(WeatherUtils.getFormattedHumidity(getContext(), weatherFromOWM.main.humidity));
+            humidityTV.setText(WeatherUtils.getFormattedHumidity(getContext(), weatherFromOWMRealm.getHumidity()));
         }
 
         if (windTV != null) {
-            windTV.setText(WeatherUtils.getFormattedWind(getContext(), weatherFromOWM.wind.speed));
+            windTV.setText(WeatherUtils.getFormattedWind(getContext(), weatherFromOWMRealm.getWind()));
         }
 
-        refreshToolbar(weatherFromOWM.name);
-
-        expandedTitle = weatherFromOWM.name;
-        collapsedTitle = weatherFromOWM.name + "    " + getFormattedTemp(weatherFromOWM.main.temp) + " \u2103";
-
-        if (weatherFromOWM.weather != null) {
-            if (!weatherFromOWM.weather.isEmpty()) {
-                String iconUrl = String.format(getString(R.string.openweathermap_icon_url), weatherFromOWM.weather.get(0).icon);
-                Log.i(TAG, "accept: icon url:" + iconUrl);
-                Picasso.with(getContext()).load(iconUrl).into(circleImageView);
-            } else {
-                Log.d(TAG, "accept: image not available");
-            }
-        }
-    }
-
-    @Override
-    public void refreshViews(WeatherFromOWMRealm weatherFromOWMRealm) {
-        tempValueTV.setText(getFormattedTemp(weatherFromOWMRealm.getTemp()));
-        pressureTV.setText(WeatherUtils.getFormattedPressure(getContext(), weatherFromOWMRealm.getPressure()));
-        humidityTV.setText(WeatherUtils.getFormattedHumidity(getContext(), weatherFromOWMRealm.getHumidity()));
-        windTV.setText(WeatherUtils.getFormattedWind(getContext(), weatherFromOWMRealm.getWind()));
         refreshToolbar(weatherFromOWMRealm.getName());
+
         expandedTitle = weatherFromOWMRealm.getName();
         collapsedTitle = weatherFromOWMRealm.getName() + "    " + getFormattedTemp(weatherFromOWMRealm.getTemp()) + " \u2103";
+
         if (weatherFromOWMRealm.getIcon() != null) {
             String iconUrl = String.format(getString(R.string.openweathermap_icon_url), weatherFromOWMRealm.getIcon());
             Picasso.with(getContext()).load(iconUrl).into(circleImageView);

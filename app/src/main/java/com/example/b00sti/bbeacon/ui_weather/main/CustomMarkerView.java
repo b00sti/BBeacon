@@ -3,6 +3,7 @@ package com.example.b00sti.bbeacon.ui_weather.main;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.b00sti.bbeacon.R;
@@ -19,6 +20,7 @@ import java.text.DecimalFormat;
  */
 
 public class CustomMarkerView extends MarkerView {
+    private static final String TAG = "CustomMarkerView";
 
     private TextView textTV;
     private Context context;
@@ -34,8 +36,14 @@ public class CustomMarkerView extends MarkerView {
     // content (user-interface)
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
-        double value = Double.parseDouble(new DecimalFormat("##.#").format(e.getY()));
-        textTV.setText(String.valueOf(value)); // set the entry-value as the display text
+
+        try {
+            float value = Float.parseFloat(new DecimalFormat("##.#").format(e.getY()));
+            textTV.setText(String.valueOf(value)); // set the entry-value as the display text
+        } catch (NumberFormatException e1) {
+            Log.d(TAG, "refreshContent: Invalid parsing !");
+        }
+
         super.refreshContent(e, highlight);
     }
 

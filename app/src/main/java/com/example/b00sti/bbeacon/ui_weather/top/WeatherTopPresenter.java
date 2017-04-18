@@ -9,10 +9,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v13.app.ActivityCompat;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BasePresenter;
+import com.example.b00sti.bbeacon.ui_weather.top.interactors.GetWeatherFromOWMInteractor;
+import com.example.b00sti.bbeacon.ui_weather.top.interactors.SetWeatherFromOWMInteractor;
+import com.example.b00sti.bbeacon.ui_weather.top.model.Main;
 import com.example.b00sti.bbeacon.ui_weather.top.model.WeatherFromOWM;
 import com.example.b00sti.bbeacon.utils.CLog;
 import com.google.android.gms.common.ConnectionResult;
@@ -21,16 +22,11 @@ import com.google.android.gms.location.LocationServices;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
+import org.androidannotations.annotations.UiThread;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.HttpException;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-04-13
@@ -40,17 +36,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> implements WeatherTopContract.Presenter, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "WeatherTopPresenter";
 
-    private static final String ENDPOINT = "http://api.openweathermap.org/data/2.5/";
-    private static final String APPID = "871ef8a06bbdc5fdc0a0a1ce6b3b5e23";
-    private static final String UNITS = "metric";
-
     //defualt coordinates
-    public Double lat = 50.057667;
-    public Double lon = 19.937222;
+    private static final Double lat = 50.057667;
+    private static final Double lon = 19.937222;
+
     @RootContext
     Activity ctx;
     private GoogleApiClient mGoogleApiClient = null;
-    private WeatherFromOWMRealm weatherFromOWMRealm;
+    private com.example.b00sti.bbeacon.ui_weather.top.WeatherFromOWMRealm weatherFromOWMRealm;
 
     @Override
     public void onSubscribe() {
@@ -83,9 +76,15 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
 
     @Override
     public void getWeatherDataFromWeb() {
-        getWeatherData()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
+        double latToRequest = lat;
+        double lonToRequest = lon;
+
+        if (weatherFromOWMRealm != null) {
+            latToRequest = weatherFromOWMRealm.getLat();
+            lonToRequest = weatherFromOWMRealm.getLon();
+        }
+
+        addDisposable(GetWeatherFromOWMInteractor.getFromApi(latToRequest, lonToRequest)
                 .onErrorReturn(new Function<Throwable, WeatherFromOWM>() {
                     @Override
                     public WeatherFromOWM apply(Throwable throwable) throws Exception {
@@ -104,30 +103,35 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
                 .subscribe(new Consumer<WeatherFromOWM>() {
                     @Override
                     public void accept(WeatherFromOWM weatherFromOWM) throws Exception {
-                        if (weatherFromOWM.main != null) {
-                            if (view != null) {
-                                view.refreshViews(weatherFromOWM);
-                            }
-                            saveWeatherToRealm(weatherFromOWM);
-                        } else {
-                            Log.d(TAG, "accept: " + "weather from OWM is null");
-                        }
+                        onRetrievedWeatherFromApi(weatherFromOWM);
                     }
-                });
+                }));
+    }
+
+    @UiThread
+    void onRetrievedWeatherFromApi(WeatherFromOWM weatherFromOWM) {
+        //if error occurs weatherFromOWM.getMain() should be null
+        if (weatherFromOWM.getMain() != null) {
+            weatherFromOWMRealm = prepareWeatherToRealmObject(weatherFromOWM);
+            SetWeatherFromOWMInteractor.saveToRealm(weatherFromOWMRealm);
+
+            if (view != null) {
+                view.refreshViews(weatherFromOWMRealm);
+            }
+        } else {
+            Log.d(TAG, "accept: " + "weather from OWM is null");
+        }
     }
 
     @Override
     public void initViews() {
-        weatherFromOWMRealm = new GetWeatherFromOWMInteractor().execute();
+        weatherFromOWMRealm = GetWeatherFromOWMInteractor.getFromRealm();
 
-        if (weatherFromOWMRealm == null) {
-            Toast.makeText(ctx, R.string.enable_internet_to_refresh_weather, Toast.LENGTH_LONG).show();
-            return;
+        if (weatherFromOWMRealm != null) {
+            view.refreshViews(weatherFromOWMRealm);
         }
 
-        lat = weatherFromOWMRealm.lat;
-        lon = weatherFromOWMRealm.lon;
-        view.refreshViews(weatherFromOWMRealm);
+        getWeatherDataFromWeb();
     }
 
     @Override
@@ -144,10 +148,8 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
         }
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
-            lat = mLastLocation.getLatitude();
-            lon = mLastLocation.getLongitude();
-            saveWeatherAfterLocationUpdate(lat, lon);
-            CLog.d(TAG, "onConnected: new location lat", lat, "lon", lon);
+            updateWeatherAfterLocationChanges(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            CLog.d(TAG, "onConnected: new location lat", weatherFromOWMRealm.getLat(), "lon", weatherFromOWMRealm.getLon());
         } else {
             Log.d(TAG, "onConnected: Location is null");
         }
@@ -163,36 +165,41 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
 
     }
 
-    private void saveWeatherAfterLocationUpdate(double lat, double lon) {
+    private void updateWeatherAfterLocationChanges(double lat, double lon) {
         if (this.weatherFromOWMRealm != null) {
             this.weatherFromOWMRealm.setLat(lat);
             this.weatherFromOWMRealm.setLon(lon);
-            new SetWeatherFromOWMInteractor().execute(weatherFromOWMRealm);
+            SetWeatherFromOWMInteractor.saveToRealm(weatherFromOWMRealm);
         }
+        getWeatherDataFromWeb();
     }
 
-    private Observable<WeatherFromOWM> getWeatherData() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(ENDPOINT)
-                .build();
+    private WeatherFromOWMRealm prepareWeatherToRealmObject(WeatherFromOWM weatherFromOWM) {
+        WeatherFromOWMRealm result = new WeatherFromOWMRealm();
 
-        WeatherService weatherService = retrofit.create(WeatherService.class);
-        return weatherService.getWeatherFromOWM(lat, lon, APPID, UNITS);
-    }
+        //always id = 0 as primary key to ensure one weather object exist in database
+        result.setId(0);
 
-    private void saveWeatherToRealm(WeatherFromOWM weatherFromOWM) {
-        WeatherFromOWMRealm weatherFromOWMRealm = new WeatherFromOWMRealm(0
-                , weatherFromOWM.main.temp
-                , weatherFromOWM.main.pressure
-                , weatherFromOWM.main.humidity
-                , weatherFromOWM.wind.speed
-                , weatherFromOWM.weather.get(0).icon
-                , weatherFromOWM.name
-                , lat
-                , lon);
-        this.weatherFromOWMRealm = weatherFromOWMRealm;
-        new SetWeatherFromOWMInteractor().execute(weatherFromOWMRealm);
+        Main main = weatherFromOWM.getMain();
+        if (main != null) {
+            result.setTemp(main.getTemp());
+            result.setPressure(main.getPressure());
+            result.setHumidity(main.getHumidity());
+        }
+
+        if (weatherFromOWM.getWind() != null) {
+            result.setWind(weatherFromOWM.getWind().getSpeed());
+        }
+
+        //get first available icon
+        if (weatherFromOWM.getWeather() != null && !weatherFromOWM.getWeather().isEmpty()) {
+            result.setIcon(weatherFromOWM.getWeather().get(0).getIcon());
+        }
+
+        result.setName(weatherFromOWM.getName());
+        result.setLat(this.weatherFromOWMRealm.getLat());
+        result.setLon(this.weatherFromOWMRealm.getLon());
+
+        return result;
     }
 }

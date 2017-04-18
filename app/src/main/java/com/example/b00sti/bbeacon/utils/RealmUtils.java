@@ -155,7 +155,7 @@ public class RealmUtils {
         final Realm realm = Realm.getDefaultInstance();
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
-            public void execute(Realm realm) {
+            public void getFromRealm(Realm realm) {
                 for (E item : items) {
                     long primaryKeyValue;
                     Number e = realm.where(item.getClass()).max("id");

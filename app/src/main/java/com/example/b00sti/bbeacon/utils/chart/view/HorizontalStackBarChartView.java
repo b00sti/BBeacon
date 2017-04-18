@@ -197,7 +197,7 @@ public class HorizontalStackBarChartView extends BaseStackBarChartView {
 
 
     /**
-     * (Optional) To be overridden in case the view needs to execute some code before
+     * (Optional) To be overridden in case the view needs to getFromApi some code before
      * starting the drawing.
      *
      * @param data Array of {@link com.db.chart.model.ChartSet} to do the necessary preparation just

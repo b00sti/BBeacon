@@ -1,21 +1,32 @@
 
 package com.example.b00sti.bbeacon.ui_weather.top.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Wind {
 
-    public double speed;
-    public double deg;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("speed")
+    @Expose
+    private Float speed;
+    @SerializedName("deg")
+    @Expose
+    private Float deg;
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
+    public Float getSpeed() {
+        return speed;
     }
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    public void setSpeed(Float speed) {
+        this.speed = speed;
+    }
+
+    public Float getDeg() {
+        return deg;
+    }
+
+    public void setDeg(Float deg) {
+        this.deg = deg;
     }
 
 }

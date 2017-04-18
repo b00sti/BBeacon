@@ -2,7 +2,6 @@ package com.example.b00sti.bbeacon.ui_weather.top;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,20 +11,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class WeatherFromOWMRealm extends RealmObject {
 
     @PrimaryKey
-    int id = 0;
+    private int id = 0;
 
-    double temp;
-    double pressure;
-    int humidity;
-    double wind;
-    String icon;
-    String name;
-    double lat;
-    double lon;
+    private double temp;
+    private double pressure;
+    private int humidity;
+    private double wind;
+    private String icon;
+    private String name;
+    private double lat;
+    private double lon;
 
     public WeatherFromOWMRealm() {
     }

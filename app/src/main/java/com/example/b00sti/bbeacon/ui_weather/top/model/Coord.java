@@ -1,21 +1,32 @@
 
 package com.example.b00sti.bbeacon.ui_weather.top.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Coord {
 
-    public double lon;
-    public double lat;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("lon")
+    @Expose
+    private Float lon;
+    @SerializedName("lat")
+    @Expose
+    private Float lat;
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
+    public Float getLon() {
+        return lon;
     }
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    public void setLon(Float lon) {
+        this.lon = lon;
+    }
+
+    public Float getLat() {
+        return lat;
+    }
+
+    public void setLat(Float lat) {
+        this.lat = lat;
     }
 
 }

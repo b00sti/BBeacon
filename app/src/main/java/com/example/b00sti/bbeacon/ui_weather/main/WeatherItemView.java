@@ -20,7 +20,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.StackedValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -207,7 +206,6 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
         set1.setFillAlpha(255);
         set1.setFillColor(color);
         set1.setCircleRadius(5f);
-        set1.setValueFormatter(new StackedValueFormatter(false, "", 1));
         set1.setDrawCircleHole(false);
         set1.enableDashedHighlightLine(5f, 5f, 5f);
         set1.setDrawHorizontalHighlightIndicator(false);

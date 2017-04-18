@@ -1,23 +1,54 @@
 
 package com.example.b00sti.bbeacon.ui_weather.top.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Sys {
 
-    public double message;
-    public String country;
-    public int sunrise;
-    public int sunset;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("message")
+    @Expose
+    private Float message;
+    @SerializedName("country")
+    @Expose
+    private String country;
+    @SerializedName("sunrise")
+    @Expose
+    private Integer sunrise;
+    @SerializedName("sunset")
+    @Expose
+    private Integer sunset;
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
+    public Float getMessage() {
+        return message;
     }
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+    public void setMessage(Float message) {
+        this.message = message;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Integer getSunrise() {
+        return sunrise;
+    }
+
+    public void setSunrise(Integer sunrise) {
+        this.sunrise = sunrise;
+    }
+
+    public Integer getSunset() {
+        return sunset;
+    }
+
+    public void setSunset(Integer sunset) {
+        this.sunset = sunset;
     }
 
 }
