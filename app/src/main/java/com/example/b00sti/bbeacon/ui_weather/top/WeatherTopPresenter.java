@@ -42,7 +42,7 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
     @RootContext
     Activity ctx;
     private GoogleApiClient mGoogleApiClient = null;
-    private com.example.b00sti.bbeacon.ui_weather.top.WeatherFromOWMRealm weatherFromOWMRealm;
+    private WeatherFromOWMRealm weatherFromOWMRealm;
 
     @Override
     public void onSubscribe() {
@@ -130,12 +130,15 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
 
     @Override
     public void initViews() {
+        //get last from database
         weatherFromOWMRealm = GetWeatherFromOWMInteractor.getFromRealm();
 
+        //refresh views
         if (weatherFromOWMRealm != null) {
             view.refreshViews(weatherFromOWMRealm);
         }
 
+        //get actual data
         getWeatherDataFromWeb();
     }
 
