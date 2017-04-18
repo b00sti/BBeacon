@@ -68,14 +68,13 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
     }
 
     @Override
-    public void stopLocationListener() {
+    public void stopLocation() {
         if (mGoogleApiClient != null) {
             mGoogleApiClient.disconnect();
         }
     }
 
-    @Override
-    public void getWeatherDataFromWeb() {
+    private void getWeatherDataFromWeb() {
         double latToRequest = lat;
         double lonToRequest = lon;
 
@@ -112,14 +111,13 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
     void onRetrievedWeatherFromApi(WeatherFromOWM weatherFromOWM) {
         //if error occurs weatherFromOWM.getMain() should be null
         if (weatherFromOWM.getMain() != null) {
-            weatherFromOWMRealm = prepareWeatherToRealmObject(weatherFromOWM);
+            weatherFromOWMRealm = prepareWeatherToRealm(weatherFromOWM);
             SetWeatherFromOWMInteractor.saveToRealm(weatherFromOWMRealm);
-
             if (view != null) {
                 view.refreshViews(weatherFromOWMRealm);
             }
         } else {
-            Log.d(TAG, "accept: " + "weather from OWM is null");
+            Log.d(TAG, "onRetrievedWeatherFromApi: " + "weather from OWM is null");
         }
     }
 
@@ -174,7 +172,7 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
         getWeatherDataFromWeb();
     }
 
-    private WeatherFromOWMRealm prepareWeatherToRealmObject(WeatherFromOWM weatherFromOWM) {
+    private WeatherFromOWMRealm prepareWeatherToRealm(WeatherFromOWM weatherFromOWM) {
         WeatherFromOWMRealm result = new WeatherFromOWMRealm();
 
         //always id = 0 as primary key to ensure one weather object exist in database

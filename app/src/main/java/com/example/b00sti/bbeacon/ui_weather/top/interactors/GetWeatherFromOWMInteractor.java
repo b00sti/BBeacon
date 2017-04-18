@@ -1,5 +1,6 @@
 package com.example.b00sti.bbeacon.ui_weather.top.interactors;
 
+import com.example.b00sti.bbeacon.ui_weather.top.WeatherFromOWMRealm;
 import com.example.b00sti.bbeacon.ui_weather.top.WeatherService;
 import com.example.b00sti.bbeacon.ui_weather.top.model.WeatherFromOWM;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
@@ -23,7 +24,7 @@ public class GetWeatherFromOWMInteractor {
     private GetWeatherFromOWMInteractor() {
     }
 
-    public static com.example.b00sti.bbeacon.ui_weather.top.WeatherFromOWMRealm getFromRealm() {
+    public static WeatherFromOWMRealm getFromRealm() {
         return RealmUtils.Find(com.example.b00sti.bbeacon.ui_weather.top.WeatherFromOWMRealm.class, "id", 0); //NON-NLS
     }
 

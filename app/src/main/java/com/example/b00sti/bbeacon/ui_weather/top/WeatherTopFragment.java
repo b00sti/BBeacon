@@ -53,7 +53,7 @@ public class WeatherTopFragment extends BaseFragment<WeatherTopPresenter> implem
     }
 
     public void onStop() {
-        presenter.stopLocationListener();
+        presenter.stopLocation();
         super.onStop();
     }
 

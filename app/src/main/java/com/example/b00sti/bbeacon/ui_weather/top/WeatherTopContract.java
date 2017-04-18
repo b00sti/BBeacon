@@ -16,9 +16,7 @@ class WeatherTopContract {
 
         void initLocation();
 
-        void stopLocationListener();
-
-        void getWeatherDataFromWeb();
+        void stopLocation();
 
         void initViews();
     }
