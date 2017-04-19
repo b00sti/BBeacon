@@ -6,14 +6,13 @@
 
     <!-- TODO TO REFACTOR -->
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/headerLL"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/size_2dp"
+        android:paddingBottom="@dimen/size_16dp"
         android:paddingLeft="@dimen/size_16dp"
         android:paddingRight="@dimen/size_16dp"
         android:paddingTop="@dimen/size_8dp">
@@ -22,13 +21,13 @@
             android:id="@+id/timeLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/messageRL"
+            android:layout_alignParentTop="true"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
                 android:layout_weight="0.5"
                 android:gravity="center_horizontal">
 
@@ -116,12 +115,11 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/messageRL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/timeLL"
-            android:layout_centerInParent="true"
-            android:layout_toRightOf="@+id/sidebar"
-            android:paddingBottom="@dimen/size_8dp"
+            android:layout_above="@+id/whenTV"
+            android:layout_alignParentStart="true"
             android:paddingLeft="@dimen/size_12dp"
             android:paddingRight="@dimen/size_12dp">
 
@@ -130,16 +128,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:src="@drawable/ic_description_green_500_24dp"/>
 
             <EditText
                 android:id="@+id/messageTV"
                 style="@style/TextViewLightLarge"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/iconMessageIV"
-                android:layout_toStartOf="@+id/iconAlertIV"
                 android:drawablePadding="@dimen/size_8dp"
                 android:gravity="center_vertical"
                 android:maxLines="1"
@@ -151,8 +148,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
                 android:src="@drawable/ic_priority_high_red_900_24dp"/>
-
 
         </RelativeLayout>
 
@@ -161,30 +158,31 @@
             style="@style/TextViewLightLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/timeLL"
+            android:layout_above="@+id/titleTV"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:layout_toRightOf="@+id/sidebar"
-            android:drawableLeft="@drawable/ic_notifications_active_green_500_24dp"
             android:drawablePadding="@dimen/size_8dp"
+            android:drawableStart="@drawable/ic_notifications_active_green_500_24dp"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:paddingBottom="@dimen/size_12dp"
+            android:paddingBottom="@dimen/size_8dp"
             android:paddingLeft="@dimen/size_12dp"
             android:paddingRight="@dimen/size_12dp"
-            android:paddingTop="@dimen/size_8dp"
+            android:paddingTop="@dimen/size_4dp"
             android:textSize="@dimen/font_16sp"
             tools:text="Notify if pressure less than 1000 hPa"/>
 
         <TextView
             android:id="@+id/titleTV"
             style="@style/TextViewLightLarge"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="center"
+            android:gravity="center"
             tools:text="Flowers"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
