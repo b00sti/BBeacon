@@ -14,7 +14,7 @@
         android:gravity="center"
         android:maxLines="1"
         android:padding="@dimen/size_24dp"
-        android:textSize="88sp"
+        android:textSize="88dp"
         tools:text="04:09"/>
 
     <TextView
@@ -26,6 +26,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="?attr/actionBarSize"
         android:gravity="center"
+        android:textSize="14dp"
         tools:text="Time to next alarm: 8h 35 min"/>
 
 </RelativeLayout>

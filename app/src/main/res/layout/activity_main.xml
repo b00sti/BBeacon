@@ -23,7 +23,7 @@
             app:contentScrim="@color/colorPrimary"
             app:expandedTitleGravity="center_horizontal|bottom"
             app:expandedTitleMarginBottom="22dp"
-            app:expandedTitleTextAppearance="@style/TextViewLightLarge"
+            app:expandedTitleTextAppearance="@style/CollapsingTitle"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:titleEnabled="true"
             >
