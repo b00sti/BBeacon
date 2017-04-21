@@ -22,7 +22,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:padding="@dimen/size_24dp"
-            android:textSize="@dimen/size_72dp"
+            android:textSize="82dp"
             tools:ignore="SpUsage"
             tools:text="16:09"/>
 

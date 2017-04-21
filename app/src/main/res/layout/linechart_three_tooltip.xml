@@ -8,12 +8,11 @@
 
     <TextView
         android:id="@+id/value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Wrap"
         android:layout_centerVertical="true"
         android:gravity="center"
         android:textColor="#ffffff"
-        android:textSize="16sp">
+        android:textSize="@dimen/font_16sp">
     </TextView>
 
 </RelativeLayout>

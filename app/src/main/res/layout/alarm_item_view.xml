@@ -1,122 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/size_8dp">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_8dp">
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/sidebar"
+            android:layout_width="@dimen/size_4dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorAccent">
+
+        </View>
 
         <RelativeLayout
+            android:id="@+id/topLayoutLL"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/sidebar"
+            android:background="@color/colorPrimary">
 
-            <View
-                android:id="@+id/sidebar"
-                android:layout_width="@dimen/size_4dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:background="@color/colorAccent">
-
-            </View>
+            <TextView
+                android:id="@+id/layout_item_demo_title"
+                style="@style/TextViewLightNormal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/moreIV"
+                android:gravity="center"
+                android:padding="@dimen/size_8dp"
+                tools:text="Work"/>
 
             <LinearLayout
-                android:id="@+id/topLayoutLL"
-                android:layout_width="match_parent"
+                android:id="@+id/moreIV"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/sidebar"
-                android:background="@color/colorPrimary">
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/layout_item_demo_title"
-                        style="@style/TextViewLightNormal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/moreIV"
-                        android:gravity="center"
-                        android:padding="@dimen/size_8dp"
-                        tools:text="Work"/>
-
-                    <LinearLayout
-                        android:id="@+id/moreIV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerInParent="true">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginRight="@dimen/size_4dp"
-                            android:padding="@dimen/size_4dp"
-                            android:src="@drawable/ic_delete_white_24dp"/>
-
-                    </LinearLayout>
-
-                </RelativeLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="@dimen/size_4dp"
+                    android:padding="@dimen/size_4dp"
+                    android:src="@drawable/ic_delete_white_24dp"/>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/timeLL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/topLayoutLL"
-                android:layout_toRightOf="@+id/sidebar"
-                android:orientation="horizontal">
-
-                <me.grantland.widget.AutofitTextView
-                    android:id="@+id/tempValueTV"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:padding="@dimen/size_8dp"
-                    android:textSize="50sp"
-                    tools:text="16:09"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:paddingEnd="@dimen/size_32dp"
-                    android:paddingStart="@dimen/size_32dp">
-
-                    <com.example.b00sti.bbeacon.utils.SwitchButton
-                        android:id="@+id/switchSB"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/size_42dp"
-                        android:layout_gravity="center"
-                        app:sb_checked_color="#A36F95"
-                        app:sb_effect_duration="100"
-                        app:sb_enable_effect="true"
-                        app:sb_shadow_effect="true"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <include
-                layout="@layout/reapeting_days"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/timeLL"
-                android:layout_toRightOf="@+id/sidebar"/>
 
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+        <LinearLayout
+            android:id="@+id/timeLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topLayoutLL"
+            android:layout_toEndOf="@+id/sidebar"
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/tempValueTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:maxLines="1"
+                android:padding="@dimen/size_8dp"
+                android:textSize="@dimen/size_48dp"
+                tools:ignore="SpUsage"
+                tools:text="16:09"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:paddingEnd="@dimen/size_32dp"
+                android:paddingStart="@dimen/size_32dp">
+
+                <com.example.b00sti.bbeacon.utils.SwitchButton
+                    android:id="@+id/switchSB"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_42dp"
+                    android:layout_gravity="center"
+                    app:sb_checked_color="#A36F95"
+                    app:sb_effect_duration="100"
+                    app:sb_enable_effect="true"
+                    app:sb_shadow_effect="true"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <include
+            layout="@layout/reapeting_days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeLL"
+            android:layout_toEndOf="@+id/sidebar"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

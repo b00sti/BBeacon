@@ -2,19 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="@dimen/main_header_size"
                 android:background="@color/colorPrimaryDark">
 
-    <me.grantland.widget.AutofitTextView
+    <TextView
         android:id="@+id/tempValueTV"
         style="@style/TextViewLightLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:gravity="center"
-        android:maxLines="1"
         android:padding="@dimen/size_24dp"
         android:textSize="88dp"
+        tools:ignore="SpUsage"
         tools:text="04:09"/>
 
     <TextView
@@ -26,7 +26,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="?attr/actionBarSize"
         android:gravity="center"
-        android:textSize="14dp"
         tools:text="Time to next alarm: 8h 35 min"/>
 
 </RelativeLayout>

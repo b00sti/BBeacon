@@ -3,31 +3,25 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:orientation="vertical">
+                android:layout_height="@dimen/main_header_size">
 
-    <!-- TODO TO REFACTOR -->
-
-    <RelativeLayout
-        android:id="@+id/topTopHeaderRL"
+    <LinearLayout
+        android:id="@+id/topTopHeaderLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/transparent"
-        app:layout_collapseMode="parallax"
-        app:layout_collapseParallaxMultiplier="0.1">
+        android:weightSum="1">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true">
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_weight="0.5"
+            android:gravity="center|bottom">
 
-            <me.grantland.widget.AutofitTextView
+            <TextView
                 android:id="@+id/tempValueTV"
                 style="@style/TextViewLightNormal"
                 android:layout_width="wrap_content"
@@ -35,39 +29,48 @@
                 android:maxLines="1"
                 android:padding="@dimen/size_8dp"
                 android:text="@string/dash"
-                android:textSize="70dp"/>
+                android:textSize="@dimen/size_72dp"
+                tools:ignore="SpUsage"/>
 
             <TextView
                 android:id="@+id/tempUnitTV"
-                style="@style/TextViewLightNormal"
+                style="@style/TextViewLightLargeFixed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
+                android:layout_gravity="bottom"
                 android:maxLines="1"
                 android:padding="@dimen/size_8dp"
-                android:text="@string/celsjus"
-                android:textSize="25dp"/>
+                android:text="@string/celsjus"/>
+
         </LinearLayout>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleToolbarIconIV"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/weather1"
-            app:border_color="@android:color/white"
-            app:border_width="2dp"
-            app:layout_collapseMode="parallax"
-            app:layout_collapseParallaxMultiplier="0.5"
-            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="32dp"
+            android:layout_weight="0.5"
+            android:gravity="center">
 
-    </RelativeLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleToolbarIconIV"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/weather1"
+                app:border_color="@android:color/white"
+                app:border_width="2dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@+id/topTopHeaderRL"
+        android:layout_below="@+id/topTopHeaderLL"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
@@ -78,21 +81,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:orientation="horizontal">
+            android:layout_toStartOf="@+id/humidityLL"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/pressureIV"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/weather2_drawable"/>
+                android:src="@drawable/weather3"/>
 
             <TextView
                 android:id="@+id/pressureTV"
-                style="@style/TextViewLightNormal"
+                style="@style/TextViewLightSmallFixed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/size_8dp"
-                android:textSize="12dp"
                 tools:text="1020 hPa"/>
 
         </LinearLayout>
@@ -102,22 +106,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/humidityIV"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/weather1_drawable"/>
+                android:src="@drawable/weather2"/>
 
             <TextView
                 android:id="@+id/humidityTV"
-                style="@style/TextViewLightNormal"
+                style="@style/TextViewLightSmallFixed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imageView"
                 android:padding="@dimen/size_8dp"
-                android:textSize="12dp"
                 tools:text="80 %"/>
 
         </LinearLayout>
@@ -127,22 +130,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/windIV"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/weather3_drawable"/>
+                android:src="@drawable/weather4"/>
 
             <TextView
                 android:id="@+id/windTV"
-                style="@style/TextViewLightNormal"
+                style="@style/TextViewLightSmallFixed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/size_8dp"
-                android:textSize="12dp"
-                tools:text="1.5 m/s"/>/>
+                tools:text="1.5 m/s"/>
 
         </LinearLayout>
 

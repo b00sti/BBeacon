@@ -9,9 +9,7 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_play_toolbar"/>
 
@@ -19,7 +17,6 @@
         android:id="@+id/update"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_toLeftOf="@+id/play"
         android:layout_toStartOf="@+id/play"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_refresh"/>
