@@ -13,5 +13,5 @@
     <solid android:color="@color/colorAccent"/>
     <size
         android:width="40dp"
-        android:height="20dp"></size>
+        android:height="20dp"/>
 </shape>
