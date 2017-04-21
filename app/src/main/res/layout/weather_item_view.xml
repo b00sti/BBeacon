@@ -1,177 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/size_8dp">
 
-    <!-- TODO TO REFACTOR -->
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_8dp">
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/sidebar"
+            android:layout_width="@dimen/size_4dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorAccent"/>
 
         <RelativeLayout
+            android:id="@+id/topLayoutLL"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/sidebar"
+            android:background="@color/colorAccent">
 
-            <View
-                android:id="@+id/sidebar"
-                android:layout_width="@dimen/size_4dp"
+            <TextView
+                android:id="@+id/layout_item_demo_title"
+                style="@style/TextViewLightNormal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/moreIV"
+                android:gravity="center"
+                android:padding="@dimen/size_8dp"
+                tools:text="Work"/>
+
+            <ImageView
+                android:id="@+id/moreIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/size_8dp"
+                android:src="@drawable/ic_more_vert_white_24dp"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/timeLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topLayoutLL"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:layout_toEndOf="@+id/sidebar"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            tools:background="@color/colorAccent">
+
+            <TextView
+                android:id="@+id/tempValueTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:maxLines="1"
+                android:padding="@dimen/size_8dp"
+                android:textSize="@dimen/size_48dp"
+                tools:ignore="SpUsage"
+                tools:text="17"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:background="@color/colorAccent">
-
-            </View>
-
-            <LinearLayout
-                android:id="@+id/topLayoutLL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/sidebar"
-                android:background="@color/colorAccent">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/layout_item_demo_title"
-                        style="@style/TextViewLightNormal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/moreIV"
-                        android:gravity="center"
-                        android:padding="@dimen/size_8dp"
-                        tools:text="Work"/>
-
-                    <ImageView
-                        android:id="@+id/moreIV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerInParent="true"
-                        android:padding="@dimen/size_8dp"
-                        android:src="@drawable/ic_more_vert_white_24dp"/>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/timeLL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/topLayoutLL"
-                android:layout_marginTop="@dimen/size_8dp"
-                android:layout_toRightOf="@+id/sidebar"
-                android:orientation="horizontal">
-
-                <me.grantland.widget.AutofitTextView
-                    android:id="@+id/tempValueTV"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:padding="@dimen/size_8dp"
-                    android:textSize="50sp"
-                    tools:text="17"/>
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:orientation="vertical">
+                    android:id="@+id/pressureLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
-                    <LinearLayout
-                        android:id="@+id/pressureLL"
-                        android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/pressureIV"
+                        android:layout_width="@dimen/size_32dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/weather3"/>
+
+                    <TextView
+                        android:id="@+id/pressureTV"
+                        style="@style/TextViewMediumNormalFixed"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:padding="@dimen/size_8dp"
+                        tools:text="1020 hPa"/>
 
-                        <ImageView
-                            android:id="@+id/pressureIV"
-                            android:layout_width="30dp"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/weather2_drawable"/>
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/pressureTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/imageView"
-                            android:padding="@dimen/size_8dp"
-                            android:textSize="18sp"
-                            tools:text="1020 hPa"/>/>
+                <LinearLayout
+                    android:id="@+id/humidityLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
-                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/humidityIV"
+                        android:layout_width="@dimen/size_32dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/weather2"/>
 
-                    <LinearLayout
-                        android:id="@+id/humidityLL"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/humidityTV"
+                        style="@style/TextViewMediumNormalFixed"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/humidityIV"
-                            android:layout_width="30dp"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/weather1_drawable"/>
-
-                        <TextView
-                            android:id="@+id/humidityTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toRightOf="@+id/imageView"
-                            android:padding="@dimen/size_8dp"
-                            android:textSize="18sp"
-                            tools:text="80 %"/>/>
-
-                    </LinearLayout>
+                        android:padding="@dimen/size_8dp"
+                        tools:text="80 %"/>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/messageTV"
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/messageTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeLL"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/sidebar"
+            android:drawableEnd="@drawable/ic_more_vert_black_24dp"
+            android:drawablePadding="@dimen/size_8dp"
+            android:drawableStart="@drawable/ic_description_grey_900_24dp"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:padding="@dimen/size_12dp"
+            android:textSize="@dimen/font_16sp"
+            tools:text="Your flowers are watered?"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/messageTV">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/timeLL"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@+id/sidebar"
-                android:drawableLeft="@drawable/ic_description_grey_900_24dp"
-                android:drawablePadding="@dimen/size_8dp"
-                android:drawableRight="@drawable/ic_more_vert_black_24dp"
-                android:gravity="center_vertical"
-                android:maxLines="1"
-                android:padding="@dimen/size_12dp"
-                android:textSize="@dimen/font_16sp"
-                tools:text="Your flowers are watered?"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_below="@+id/messageTV">
-
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/chart1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="0dp"
-                    />
-
-            </RelativeLayout>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="4dp"
+                />
 
         </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+    </RelativeLayout>
 
-</LinearLayout>
+</android.support.v7.widget.CardView>

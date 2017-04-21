@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/toNextAlarmTV"
-        style="@style/TextViewLightNormal"
+        style="@style/TextViewLightNormalFixed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tempValueTV"

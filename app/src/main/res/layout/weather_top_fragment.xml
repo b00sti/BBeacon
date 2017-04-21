@@ -9,6 +9,7 @@
         android:id="@+id/topTopHeaderLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:weightSum="1">
 
         <LinearLayout
@@ -131,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
+            tools:ignore="RelativeOverlap,UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/windIV"
