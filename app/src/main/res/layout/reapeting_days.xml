@@ -5,75 +5,44 @@
     android:id="@+id/messageTV"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:maxLines="1"
     android:orientation="horizontal"
     android:padding="@dimen/size_12dp"
     android:weightSum="7"
     tools:showIn="@layout/add_new_alarm_fragment">
 
-    <!-- TODO TO REFACTOR -->
-
     <TextView
         android:id="@+id/day1TV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/mon"
-        android:textSize="@dimen/font_20sp"/>
+        style="@style/DayOfWeek"
+        android:text="@string/mon"/>
 
     <TextView
         android:id="@+id/day2TV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/tue"
-        android:textSize="@dimen/font_20sp"/>
+        style="@style/DayOfWeek"
+        android:text="@string/tue"/>
 
     <TextView
         android:id="@+id/day3TV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/wed"
-        android:textSize="@dimen/font_20sp"/>
+        style="@style/DayOfWeek"
+        android:text="@string/wed"/>
 
     <TextView
         android:id="@+id/day4TV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/thu"
-        android:textSize="@dimen/font_20sp"/>
+        style="@style/DayOfWeek"
+        android:text="@string/thu"/>
 
     <TextView
         android:id="@+id/day5TV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/fri"
-        android:textSize="@dimen/font_20sp"/>
+        style="@style/DayOfWeek"
+        android:text="@string/fri"/>
 
     <TextView
         android:id="@+id/day6TV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/sat"
-        android:textSize="@dimen/font_20sp"/>
+        style="@style/DayOfWeek"
+        android:text="@string/sat"/>
 
     <TextView
         android:id="@+id/day7TV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="@string/sun"
-        android:textSize="@dimen/font_20sp"/>
+        style="@style/DayOfWeek"
+        android:text="@string/sun"/>
 
 </LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/size_8dp"
+    android:paddingLeft="@dimen/size_16dp"
+    android:paddingRight="@dimen/size_16dp"
+    android:paddingTop="@dimen/size_2dp"
+    android:weightSum="1.0"
+    tools:showIn="@layout/weather_details">
+
+    <ImageView
+        android:id="@+id/cancelIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:src="@drawable/ic_clear_red_500_36dp"/>
+
+    <ImageView
+        android:id="@+id/doneIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:src="@drawable/ic_done_green_500_36dp"/>
+
+</LinearLayout>

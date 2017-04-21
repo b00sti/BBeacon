@@ -22,7 +22,7 @@
     <string name="tracked_beacons">Tracked beacons</string>
     <string name="enable_internet_to_refresh_weather">Enable your Internet and refresh to get weather…</string>
     <string name="openweathermap_icon_url">http://openweathermap.org/img/w/%s.png</string>
-    <string name="beacon_name">Beacon: Keys</string>
+    <string name="beacon_name">Beacon: Keys is an attribute for accessibility options. You assign this to a label so that if, on a form , user clicks a</string>
     <string name="no_alarms_available">No alarms available</string>
     <string name="mon">MON</string>
     <string name="tue">TUE</string>

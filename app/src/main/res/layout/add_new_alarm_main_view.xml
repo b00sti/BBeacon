@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       tools:showIn="@layout/add_new_alarm_fragment">
+
+    <LinearLayout
+        android:id="@+id/headerLL"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_header_size"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:padding="@dimen/size_16dp">
+
+        <TextView
+            android:id="@+id/selectedTimeTV"
+            style="@style/TextViewLightLarge"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="@dimen/size_24dp"
+            android:textSize="@dimen/size_72dp"
+            tools:ignore="SpUsage"
+            tools:text="16:09"/>
+
+        <com.example.b00sti.bbeacon.utils.SwitchButton
+            android:id="@+id/switchSB"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_48dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/size_8dp"
+            android:layout_marginEnd="@dimen/size_96dp"
+            android:layout_marginStart="@dimen/size_96dp"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:layout_weight="0"
+            app:sb_checked_color="@color/colorAccent"
+            app:sb_enable_effect="true"
+            app:sb_shadow_effect="true"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <include layout="@layout/reapeting_days"/>
+
+        <EditText
+            android:id="@+id/titleET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_12dp"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1"
+            tools:hint="Title"/>
+
+        <TextView
+            android:id="@+id/selectBeaconTV"
+            style="@style/TextViewMediumNormalMatchWidth"
+            android:layout_margin="@dimen/size_12dp"
+            android:drawablePadding="@dimen/size_8dp"
+            android:drawableStart="@drawable/ic_cast_connected_green_500_36dp"
+            android:text="@string/beacon_name"/>
+
+        <TextView
+            android:id="@+id/timeToNextTV"
+            style="@style/TextViewMediumNormalMatchWidth"
+            android:layout_margin="@dimen/size_12dp"
+            android:drawablePadding="@dimen/size_8dp"
+            android:drawableStart="@drawable/ic_timelapse_green_500_36dp"
+            tools:text="Time to alarm: 10 h 15 min"/>
+
+    </LinearLayout>
+
+</merge>

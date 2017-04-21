@@ -58,5 +58,6 @@
     <dimen name="bar_spacing">6dp</dimen>
     <dimen name="set_spacing">3dp</dimen>
     <dimen name="corner_radius">0dp</dimen>
+    <dimen name="main_header_size">250dp</dimen>
 
 </resources>

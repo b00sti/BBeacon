@@ -14,8 +14,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-import me.grantland.widget.AutofitTextView;
-
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-03-14
  */
@@ -25,7 +23,7 @@ public class AddNewAlarmFragment extends BaseFragment<AddNewAlarmPresenter> impl
 
     @ViewById(R.id.titleET) EditText titleET;
     @ViewById(R.id.switchSB) SwitchButton switchSB;
-    @ViewById(R.id.selectedTimeTV) AutofitTextView selectedTimeTV;
+    @ViewById(R.id.selectedTimeTV) TextView selectedTimeTV;
     @ViewById(R.id.timeToNextTV) TextView timeToNextTV;
     @ViewById(R.id.day1TV) TextView day1TV;
     @ViewById(R.id.day2TV) TextView day2TV;
