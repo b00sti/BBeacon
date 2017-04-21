@@ -16,6 +16,7 @@
     <!-- typical size of views and spaces -->
     <dimen name="size_128dp">128dp</dimen>
     <dimen name="size_96dp">96dp</dimen>
+    <dimen name="size_80dp">80dp</dimen>
     <dimen name="size_72dp">72dp</dimen>
     <dimen name="size_64dp">64dp</dimen>
     <dimen name="size_48dp">48dp</dimen>

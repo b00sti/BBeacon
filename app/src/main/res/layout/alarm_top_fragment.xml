@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:gravity="center"
         android:padding="@dimen/size_24dp"
-        android:textSize="88dp"
+        android:textSize="@dimen/size_80dp"
         tools:ignore="SpUsage"
         tools:text="04:09"/>
 
