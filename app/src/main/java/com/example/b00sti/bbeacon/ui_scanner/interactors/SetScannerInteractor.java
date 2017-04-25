@@ -47,13 +47,16 @@ public class SetScannerInteractor {
             weatherItem.setBeaconId(scannerItem.getId());
             weatherItem.setColor(scannerItem.getColor());
             weatherItem.setConditionParameter("");
-            weatherItem.setConditionValue("");
+            weatherItem.setConditionParameterValue("");
             weatherItem.setHumidity((new Random().nextInt(100)) + " %");
             weatherItem.setMessage("Do something !");
             weatherItem.setAlarm(scannerItem.isEnabled());
             weatherItem.setPressure((new Random().nextInt(30) + 1000) + " hPa");
             weatherItem.setTemp(new Random().nextInt(33) + "");
             weatherItem.setTitle(scannerItem.getTitle());
+            weatherItem.setConditionParameter("pressure");
+            weatherItem.setConditionParameterKind("less");
+            weatherItem.setConditionParameterValue("1000 hPa");
             weatherItems.add(weatherItem);
         }
         new SetWeatherInteractor().execute(weatherItems, null);

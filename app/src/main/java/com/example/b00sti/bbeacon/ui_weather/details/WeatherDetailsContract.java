@@ -25,6 +25,8 @@ class WeatherDetailsContract {
 
         void initUI(String id);
 
+        String getNotifyConditions(WeatherItem weatherItem);
+
         void onAccept();
 
         void onCancel();

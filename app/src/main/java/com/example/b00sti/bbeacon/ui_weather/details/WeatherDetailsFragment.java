@@ -60,7 +60,8 @@ public class WeatherDetailsFragment extends BaseFragment<WeatherDetailsPresenter
         pressureTV.setText(weatherItem.getPressure());
         humidityTV.setText(weatherItem.getHumidity());
         messageTV.setText(weatherItem.getMessage());
-        whenTV.setText("Notify if pressure is less than 1000 hPa");
+        String notifyConditions = presenter.getNotifyConditions(weatherItem);
+        whenTV.setText(notifyConditions);
         titleTV.setText(weatherItem.getTitle());
     }
 

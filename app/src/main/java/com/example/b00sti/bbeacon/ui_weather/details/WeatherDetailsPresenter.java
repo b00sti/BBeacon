@@ -53,6 +53,20 @@ public class WeatherDetailsPresenter extends BasePresenter<WeatherDetailsContrac
     }
 
     @Override
+    public String getNotifyConditions(WeatherItem weatherItem) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Notify if ");
+        if (weatherItem.getConditionParameter() != null && weatherItem.getConditionParameterValue() != null) {
+            builder.append(weatherItem.getConditionParameter());
+            builder.append("less");
+            builder.append(weatherItem.getConditionParameterValue());
+            return builder.toString();
+        }
+
+        return "Notify if pressure is less than 1000 hPa";
+    }
+
+    @Override
     public void onAccept() {
         ctx.finish();
     }

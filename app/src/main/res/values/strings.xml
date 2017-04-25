@@ -36,5 +36,8 @@
     <string name="no_weather_data">No alarms weather data, first configure or enable scanning your beacons…</string>
     <string name="dash">-</string>
     <string name="new_alarm">New Alarm</string>
+    <string name="temperature_key">temperature</string>
+    <string name="humidity_key">humidity</string>
+    <string name="pressure_key">pressure</string>
 
 </resources>
