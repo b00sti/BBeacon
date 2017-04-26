@@ -24,8 +24,6 @@ import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.UiThread;
 
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import retrofit2.HttpException;
 
 /**
@@ -75,27 +73,19 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
 
     private void getWeatherDataFromWeb() {
         addDisposable(GetWeatherFromOWMInteractor.getFromApi(getLat(), getLon())
-                .onErrorReturn(new Function<Throwable, WeatherFromOWM>() {
-                    @Override
-                    public WeatherFromOWM apply(Throwable throwable) throws Exception {
+                .onErrorReturn(throwable -> {
 
-                        if (throwable instanceof HttpException) {
-                            HttpException response = (HttpException) throwable;
-                            int code = response.code();
-                            Log.d(TAG, "Retrofit Error  - code: " + code);
-                        } else {
-                            Log.d(TAG, "Other Error - code: " + throwable.getMessage());
-                        }
-
-                        return new WeatherFromOWM();
+                    if (throwable instanceof HttpException) {
+                        HttpException response = (HttpException) throwable;
+                        int code = response.code();
+                        Log.d(TAG, "Retrofit Error  - code: " + code);
+                    } else {
+                        Log.d(TAG, "Other Error - code: " + throwable.getMessage());
                     }
+
+                    return new WeatherFromOWM();
                 })
-                .subscribe(new Consumer<WeatherFromOWM>() {
-                    @Override
-                    public void accept(WeatherFromOWM weatherFromOWM) throws Exception {
-                        onRetrievedWeatherFromApi(weatherFromOWM);
-                    }
-                }));
+                .subscribe(this::onRetrievedWeatherFromApi));
     }
 
     private double getLat() {

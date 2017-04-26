@@ -60,9 +60,14 @@ public class WeatherDetailsFragment extends BaseFragment<WeatherDetailsPresenter
         pressureTV.setText(weatherItem.getPressure());
         humidityTV.setText(weatherItem.getHumidity());
         messageTV.setText(weatherItem.getMessage());
-        String notifyConditions = presenter.getNotifyConditions(weatherItem);
+        String notifyConditions = presenter.getNotifyConditionsToUI(weatherItem);
         whenTV.setText(notifyConditions);
         titleTV.setText(weatherItem.getTitle());
+    }
+
+    @Override
+    public void updateNotificationView(String text) {
+        whenTV.setText(text);
     }
 
     @Override
@@ -78,6 +83,11 @@ public class WeatherDetailsFragment extends BaseFragment<WeatherDetailsPresenter
     @Override
     public CardView getChartCardView3() {
         return card_view3;
+    }
+
+    @Click(R.id.whenTV)
+    void onNotifyConditionsClicked() {
+        presenter.getNotifyConditionsFromUser();
     }
 
     @Click(R.id.cancelIV)

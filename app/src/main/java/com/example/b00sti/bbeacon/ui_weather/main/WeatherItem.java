@@ -1,5 +1,6 @@
 package com.example.b00sti.bbeacon.ui_weather.main;
 
+import com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherConditionKind;
 import com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherParameterKind;
 
 import io.realm.RealmObject;
@@ -19,10 +20,11 @@ public class WeatherItem extends RealmObject {
 
     @PrimaryKey
     private String beaconId;
-    private String conditionParameterValue;
+    private Double conditionParameterValue;
     @WeatherParameterKind
     private String conditionParameterKind;
-    private String conditionParameter;
+    @WeatherConditionKind
+    private String conditionKind;
     private String title;
     private String temp;
     private String message;
@@ -30,6 +32,7 @@ public class WeatherItem extends RealmObject {
     private String pressure;
     private boolean isAlarm;
     private int color;
+
     public WeatherItem() {
     }
 
@@ -40,5 +43,14 @@ public class WeatherItem extends RealmObject {
 
     public void setConditionParameterKind(@WeatherParameterKind String conditionParameterKind) {
         this.conditionParameterKind = conditionParameterKind;
+    }
+
+    @WeatherConditionKind
+    public String getConditionKind() {
+        return conditionKind;
+    }
+
+    public void setConditionKind(@WeatherConditionKind String conditionKind) {
+        this.conditionKind = conditionKind;
     }
 }

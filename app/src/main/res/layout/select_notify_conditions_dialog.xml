@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/MatchVertical">
+
+    <Spinner
+        android:id="@+id/notifyParametersSpinner"
+        style="@style/MatchWidth"
+        android:layout_margin="@dimen/size_16dp"
+        android:prompt="@string/get_parameter_spinner_title"/>
+
+    <Spinner
+        android:id="@+id/notifyConditionsSpinner"
+        style="@style/MatchWidth"
+        android:layout_margin="@dimen/size_16dp"
+        android:prompt="@string/get_condition_spinner_title"/>
+
+    <EditText
+        android:id="@+id/notifyValueET"
+        style="@style/MatchWidth"
+        android:layout_margin="@dimen/size_16dp"
+        android:hint="@string/get_value_get_notification"
+        android:inputType="number"
+        />
+
+</LinearLayout>
