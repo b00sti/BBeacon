@@ -10,7 +10,7 @@ import com.example.b00sti.bbeacon.R;
  * Created by Dominik (b00sti) Pawlik on 2017-03-08
  */
 
-public class NotificationManager {
+public class NavigationNotificationManager {
     public static AHNotification newDefault(Context ctx, String s) {
         return new AHNotification.Builder()
                 .setText(s)

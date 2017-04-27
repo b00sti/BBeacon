@@ -3,8 +3,8 @@ package com.example.b00sti.bbeacon.ui_scanner.interactors;
 import com.example.b00sti.bbeacon.ui_scanner.main.ScannerItem;
 import com.example.b00sti.bbeacon.ui_weather.interactors.SetWeatherInteractor;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
-import com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherConditionKind;
-import com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherParameterKind;
+import com.example.b00sti.bbeacon.ui_weather.utils.WeatherConditionKind;
+import com.example.b00sti.bbeacon.ui_weather.utils.WeatherParameterKind;
 import com.example.b00sti.bbeacon.utils.NumUtils;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 

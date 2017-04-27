@@ -6,29 +6,32 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BasePresenter;
+import com.example.b00sti.bbeacon.navigation.NavigationNotificationEvent;
 import com.example.b00sti.bbeacon.ui_weather.interactors.GetWeatherInteractor;
 import com.example.b00sti.bbeacon.ui_weather.interactors.SetWeatherInteractor;
 import com.example.b00sti.bbeacon.ui_weather.main.LineCardOne;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
-import com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherConditionKind;
-import com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherConditionUtils;
-import com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherParameterKind;
-import com.example.b00sti.bbeacon.utils.NumUtils;
+import com.example.b00sti.bbeacon.ui_weather.utils.NotificationHelper;
+import com.example.b00sti.bbeacon.ui_weather.utils.WeatherConditionKind;
+import com.example.b00sti.bbeacon.ui_weather.utils.WeatherConditionUtils;
+import com.example.b00sti.bbeacon.ui_weather.utils.WeatherParameterKind;
 
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.res.ColorRes;
 import org.androidannotations.annotations.res.StringArrayRes;
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import io.reactivex.functions.Consumer;
 import lombok.Getter;
 
 /**
@@ -50,12 +53,15 @@ public class WeatherDetailsPresenter extends BasePresenter<WeatherDetailsContrac
 
     @StringArrayRes(R.array.notify_conditions)
     String[] notifyConditions;
-
+    @Bean
+    NotificationHelper notificationHelper;
     @Getter
     private WeatherItem weather;
-
     @WeatherParameterKind private String selectedParameter = "";
     @WeatherConditionKind private String selectedCondition = "";
+    private double selectedValue;
+    private EditText selectedValueET;
+
 
     @Override
     public void onSubscribe() {
@@ -74,35 +80,21 @@ public class WeatherDetailsPresenter extends BasePresenter<WeatherDetailsContrac
         (new LineCardOne(view.getChartCardView2(), ctx, color, R.id.chart2)).init();
         (new LineCardOne(view.getChartCardView3(), ctx, color, R.id.chart3)).init();
 
-        addDisposable(new GetWeatherInteractor().execute(id).subscribe(new Consumer<WeatherItem>() {
-            @Override
-            public void accept(WeatherItem weatherItem) throws Exception {
-                weather = weatherItem;
-                view.updateUI(weatherItem);
-            }
+        addDisposable(new GetWeatherInteractor().execute(id).subscribe(weatherItem -> {
+            weather = weatherItem;
+            view.updateUI(weatherItem);
+            notificationHelper.sendNotification(weatherItem);
         }));
     }
 
     @Override
-    public String getNotifyConditionsToUI() {
-        return getNotifyConditionsToUI(weather);
+    public String getNotificationConditionsText(WeatherItem weatherItem) {
+        return WeatherConditionUtils.prepareNotificationConditionsText(weatherItem, ctx);
     }
 
     @Override
-    public String getNotifyConditionsToUI(WeatherItem weatherItem) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Notify if ");
-        if (weatherItem.getConditionKind() != null && weatherItem.getConditionParameterValue() != null && weatherItem.getConditionParameterKind() != null) {
-            builder.append(WeatherConditionUtils.getParameterName(weatherItem.getConditionParameterKind(), ctx));
-            builder.append(" is ");
-            builder.append(WeatherConditionUtils.getConditionName(weatherItem.getConditionKind(), ctx));
-            builder.append(" than ");
-            builder.append(NumUtils.toS(weatherItem.getConditionParameterValue()));
-            builder.append(WeatherConditionUtils.getUnitsName(weatherItem.getConditionParameterKind(), ctx));
-            return builder.toString();
-        }
-
-        return "-";
+    public String getNotificationConditionsText() {
+        return getNotificationConditionsText(weather);
     }
 
     // todo get from WeatherConditionUtils
@@ -118,7 +110,7 @@ public class WeatherDetailsPresenter extends BasePresenter<WeatherDetailsContrac
         return result;
     }
 
-    public void getNotifyConditionsFromUser() {
+    public void getNotificationConditionsFromUser() {
         if (weather == null) {
             return;
         }
@@ -151,7 +143,6 @@ public class WeatherDetailsPresenter extends BasePresenter<WeatherDetailsContrac
                 } else if (position == 2) {
                     selectedParameter = WeatherParameterKind.WEATHER_HUMIDITY;
                 }
-
             }
 
             @Override
@@ -162,7 +153,7 @@ public class WeatherDetailsPresenter extends BasePresenter<WeatherDetailsContrac
         ArrayAdapter<String> parametersAdapter = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, parameters);
         parametersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         notifyParametersSpinner.setAdapter(parametersAdapter);
-
+        selectSpinnerInitialValue(notifyParametersSpinner, WeatherConditionUtils.getParameterName(weather.getConditionParameterKind(), ctx));
 
         Spinner notifyConditionsSpinner = (Spinner) dialogCustomView.findViewById(R.id.notifyConditionsSpinner);
         notifyConditionsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -186,12 +177,25 @@ public class WeatherDetailsPresenter extends BasePresenter<WeatherDetailsContrac
         ArrayAdapter<String> conditionsAdapter = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, conditions);
         conditionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         notifyConditionsSpinner.setAdapter(conditionsAdapter);
+        selectSpinnerInitialValue(notifyConditionsSpinner, WeatherConditionUtils.getConditionName(weather.getConditionKind(), ctx));
 
-        EditText valueET = (EditText) dialogCustomView.findViewById(R.id.notifyValueET);
+        selectedValueET = (EditText) dialogCustomView.findViewById(R.id.notifyValueET);
 
     }
 
-    void onPositiveButtonOnNotificationConfig() {
+    @Override
+    public void onNotificationIconClick() {
+        weather.setAlarm(false);
+        view.showNotificationIcon(false);
+    }
+
+    private void onPositiveButtonOnNotificationConfig() {
+        if (!isValidatedValues()) {
+            return;
+        }
+
+        weather.setConditionParameterValue(selectedValue);
+
         if (!"".equals(selectedCondition)) {
             weather.setConditionKind(selectedCondition);
         }
@@ -200,23 +204,47 @@ public class WeatherDetailsPresenter extends BasePresenter<WeatherDetailsContrac
             weather.setConditionParameterKind(selectedParameter);
         }
 
-/*        try {
-            double value = Double.parseDouble(b);
-        } catch (NumberFormatException e) {
-            //the parseDouble failed and you need to handle it here
-        }*/
+        view.updateNotificationView(getNotificationConditionsText());
 
-        view.updateNotificationView(getNotifyConditionsToUI());
+    }
+
+    private boolean isValidatedValues() {
+        if (selectedValueET != null) {
+            try {
+                selectedValue = Double.parseDouble(selectedValueET.getText().toString());
+                return true;
+            } catch (NumberFormatException e) {
+                Toast.makeText(ctx, "Type a value and try again !", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    private void selectSpinnerInitialValue(Spinner spinner, String text) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equals(text)) {
+                spinner.setSelection(i);
+                break;
+            }
+        }
     }
 
     @Override
     public void onAccept() {
+        prepareWeatherToSaveInDatabase();
         SetWeatherInteractor.execute(weather);
+        EventBus.getDefault().post(new NavigationNotificationEvent());
         ctx.finish();
     }
 
     @Override
     public void onCancel() {
         ctx.finish();
+    }
+
+    private void prepareWeatherToSaveInDatabase() {
+        weather.setMessage(view.getNotificationMessage());
     }
 }

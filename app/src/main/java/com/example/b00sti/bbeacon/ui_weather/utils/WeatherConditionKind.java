@@ -1,13 +1,13 @@
-package com.example.b00sti.bbeacon.ui_weather.model.utils;
+package com.example.b00sti.bbeacon.ui_weather.utils;
 
 import android.support.annotation.StringDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import static com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherConditionKind.EQUAL;
-import static com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherConditionKind.LESS;
-import static com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherConditionKind.MORE;
+import static com.example.b00sti.bbeacon.ui_weather.utils.WeatherConditionKind.EQUAL;
+import static com.example.b00sti.bbeacon.ui_weather.utils.WeatherConditionKind.LESS;
+import static com.example.b00sti.bbeacon.ui_weather.utils.WeatherConditionKind.MORE;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-04-26

@@ -15,7 +15,7 @@ public class NumUtils {
     }
 
     public static String toS(double i) {
-        return String.format(Locale.getDefault(), "%.1f", i);
+        return String.format(Locale.getDefault(), "%.0f", i);
     }
 
 }

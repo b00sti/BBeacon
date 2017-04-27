@@ -1,7 +1,7 @@
 package com.example.b00sti.bbeacon.ui_weather.main;
 
-import com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherConditionKind;
-import com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherParameterKind;
+import com.example.b00sti.bbeacon.ui_weather.utils.WeatherConditionKind;
+import com.example.b00sti.bbeacon.ui_weather.utils.WeatherParameterKind;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

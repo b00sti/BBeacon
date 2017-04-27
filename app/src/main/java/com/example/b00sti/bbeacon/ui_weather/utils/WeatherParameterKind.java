@@ -1,13 +1,13 @@
-package com.example.b00sti.bbeacon.ui_weather.model.utils;
+package com.example.b00sti.bbeacon.ui_weather.utils;
 
 import android.support.annotation.StringDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import static com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherParameterKind.WEATHER_HUMIDITY;
-import static com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherParameterKind.WEATHER_PRESSURE;
-import static com.example.b00sti.bbeacon.ui_weather.model.utils.WeatherParameterKind.WEATHER_TEMPERATURE;
+import static com.example.b00sti.bbeacon.ui_weather.utils.WeatherParameterKind.WEATHER_HUMIDITY;
+import static com.example.b00sti.bbeacon.ui_weather.utils.WeatherParameterKind.WEATHER_PRESSURE;
+import static com.example.b00sti.bbeacon.ui_weather.utils.WeatherParameterKind.WEATHER_TEMPERATURE;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-04-25

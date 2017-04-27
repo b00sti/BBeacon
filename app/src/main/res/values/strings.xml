@@ -53,9 +53,9 @@
 
     <string-array
         name="notify_parameters">
-        <item>Temperature</item>
-        <item>Pressure</item>
-        <item>Humidity</item>
+        <item>temperature</item>
+        <item>pressure</item>
+        <item>humidity</item>
     </string-array>
 
     <string-array
