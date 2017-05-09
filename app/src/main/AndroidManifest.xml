@@ -42,6 +42,10 @@
 
         </activity>
 
+        <service
+            android:name=".ui_scanner.top.LocationService"
+            android:enabled="true"/>
+
     </application>
 
 </manifest>
