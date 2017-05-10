@@ -20,6 +20,7 @@ import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.example.b00sti.bbeacon.base.OnAnimationToolbar;
 import com.example.b00sti.bbeacon.base.RefreshableFragment;
 import com.example.b00sti.bbeacon.base.RefreshableFragmentWithToolbar;
+import com.example.b00sti.bbeacon.navigation.FragmentBuilder;
 import com.example.b00sti.bbeacon.navigation.NavigationManager;
 import com.example.b00sti.bbeacon.navigation.NavigationNotificationEvent;
 import com.example.b00sti.bbeacon.navigation.NavigationNotificationManager;
@@ -29,7 +30,6 @@ import com.example.b00sti.bbeacon.ui_scanner.interactors.GetScannerInteractor;
 import com.example.b00sti.bbeacon.ui_scanner.main.ScannerItem;
 import com.example.b00sti.bbeacon.ui_weather.interactors.GetWeatherInteractor;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
-import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;

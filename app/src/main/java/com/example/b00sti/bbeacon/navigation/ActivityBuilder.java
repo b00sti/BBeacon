@@ -7,7 +7,6 @@ import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseInnerViewActivity_;
 import com.example.b00sti.bbeacon.ui_scanner.main.ScannerItem;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
-import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-04-27
@@ -17,6 +16,11 @@ public class ActivityBuilder {
 
     public static void startWeatherDetailsActivity(WeatherItem weatherItem, Context ctx) {
         Intent intent = buildStartWeatherDetailsActivityIntent(weatherItem, ctx);
+        ctx.startActivity(intent);
+    }
+
+    public static void startBeaconDetailsActivity(ScannerItem scannerItem, Context ctx) {
+        Intent intent = buildStartBeaconDetailsActivityIntent(scannerItem, ctx);
         ctx.startActivity(intent);
     }
 
