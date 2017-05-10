@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseInnerViewActivity_;
+import com.example.b00sti.bbeacon.ui_scanner.main.ScannerItem;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
 import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
@@ -23,6 +24,13 @@ public class ActivityBuilder {
         Intent intent = new Intent(ctx, BaseInnerViewActivity_.class);
         intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.WEATHER_DETAILS);
         intent.putExtra("id", weatherItem.getBeaconId());
+        return intent;
+    }
+
+    public static Intent buildStartBeaconDetailsActivityIntent(ScannerItem scannerItem, Context ctx) {
+        Intent intent = new Intent(ctx, BaseInnerViewActivity_.class);
+        intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.WEATHER_DETAILS);
+        intent.putExtra("id", scannerItem.getId());
         return intent;
     }
 }

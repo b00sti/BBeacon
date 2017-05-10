@@ -83,7 +83,7 @@ public class WeatherDetailsPresenter extends BasePresenter<WeatherDetailsContrac
         addDisposable(new GetWeatherInteractor().execute(id).subscribe(weatherItem -> {
             weather = weatherItem;
             view.updateUI(weatherItem);
-            notificationHelper.sendNotification(weatherItem);
+            notificationHelper.sendWeatherNotification(weatherItem);
         }));
     }
 

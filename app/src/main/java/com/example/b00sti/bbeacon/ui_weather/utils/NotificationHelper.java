@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.navigation.ActivityBuilder;
+import com.example.b00sti.bbeacon.ui_scanner.main.ScannerItem;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
 
 import org.androidannotations.annotations.AfterInject;
@@ -35,7 +36,53 @@ public class NotificationHelper {
         notificationManager = (NotificationManager) ctx.getSystemService(NOTIFICATION_SERVICE);
     }
 
-    public void sendNotification(WeatherItem weatherItem) {
+    public void sendTrackingAlarmNotifrication(ScannerItem scannerItem) {
+        Intent intent = ActivityBuilder.buildStartBeaconDetailsActivityIntent(scannerItem, ctx);
+        PendingIntent pIntent = PendingIntent.getActivity(ctx, (int) System.currentTimeMillis(), intent, 0);
+
+        String contentText = scannerItem.getTitle() + " is lost";
+        String contentTitle = "Check connection";
+
+        Bitmap icon = BitmapFactory.decodeResource(ctx.getResources(),
+                R.drawable.icon);
+
+        Notification notification = new Notification.Builder(ctx)
+                .setContentTitle(contentTitle)
+                .setContentText(contentText)
+                .setLargeIcon(icon)
+                .setContentIntent(pIntent)
+                .setAutoCancel(false)
+                .build();
+
+        if (notification != null) {
+            notificationManager.notify(0, notification);
+        }
+    }
+
+    public void sendLowBatteryNotification(ScannerItem scannerItem) {
+        Intent intent = ActivityBuilder.buildStartBeaconDetailsActivityIntent(scannerItem, ctx);
+        PendingIntent pIntent = PendingIntent.getActivity(ctx, (int) System.currentTimeMillis(), intent, 0);
+
+        String contentText = "Low battery";
+        String contentTitle = "Replace the battery in " + scannerItem.getTitle() + " beacon";
+
+        Bitmap icon = BitmapFactory.decodeResource(ctx.getResources(),
+                R.drawable.icon);
+
+        Notification notification = new Notification.Builder(ctx)
+                .setContentTitle(contentTitle)
+                .setContentText(contentText)
+                .setLargeIcon(icon)
+                .setContentIntent(pIntent)
+                .setAutoCancel(false)
+                .build();
+
+        if (notification != null) {
+            notificationManager.notify(0, notification);
+        }
+    }
+
+    public void sendWeatherNotification(WeatherItem weatherItem) {
         Intent intent = ActivityBuilder.buildStartWeatherDetailsActivityIntent(weatherItem, ctx);
         PendingIntent pIntent = PendingIntent.getActivity(ctx, (int) System.currentTimeMillis(), intent, 0);
 
