@@ -23,28 +23,13 @@ import com.example.b00sti.bbeacon.ui_scanner.interactors.SetLocationInteractor;
 public class LocationService extends Service {
 
     public static final String BROADCAST_ACTION = "Hello World";
-    private static final int PERIOD = 1000 * 10 * 3;
+    private static final int PERIOD = 1000 * 60 * 3; // interval 3 minutes
 
     public LocationManager locationManager;
     public MyLocationListener listener;
     public Location previousBestLocation = null;
 
     Intent intent;
-
-    public static Thread performOnBackgroundThread(final Runnable runnable) {
-        final Thread t = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    runnable.run();
-                } finally {
-
-                }
-            }
-        };
-        t.start();
-        return t;
-    }
 
     @Override
     public void onCreate() {
@@ -129,7 +114,6 @@ public class LocationService extends Service {
 
     @Override
     public void onDestroy() {
-        // handler.removeCallbacks(sendUpdatesToUI);
         super.onDestroy();
         Log.v("STOP_SERVICE", "DONE");
         locationManager.removeUpdates(listener);
@@ -138,8 +122,6 @@ public class LocationService extends Service {
     public class MyLocationListener implements LocationListener {
 
         public void onLocationChanged(final Location loc) {
-            Log.i("**********", "Location changed");
-
             if (isBetterLocation(loc, previousBestLocation)) {
                 loc.getLatitude();
                 loc.getLongitude();

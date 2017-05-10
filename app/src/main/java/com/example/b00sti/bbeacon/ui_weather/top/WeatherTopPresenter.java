@@ -15,7 +15,6 @@ import com.example.b00sti.bbeacon.ui_weather.top.interactors.GetWeatherFromOWMIn
 import com.example.b00sti.bbeacon.ui_weather.top.interactors.SetWeatherFromOWMInteractor;
 import com.example.b00sti.bbeacon.ui_weather.top.model.Main;
 import com.example.b00sti.bbeacon.ui_weather.top.model.WeatherFromOWM;
-import com.example.b00sti.bbeacon.utils.CLog;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -147,7 +146,6 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             updateWeatherAfterLocationChanges(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            CLog.d(TAG, "onConnected: new location defaultLat", weatherFromOWMRealm.getLat(), "defaultLon", weatherFromOWMRealm.getLon());
         } else {
             Log.d(TAG, "onConnected: Location is null");
         }

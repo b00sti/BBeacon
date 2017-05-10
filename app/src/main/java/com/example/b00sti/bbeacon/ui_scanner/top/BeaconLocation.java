@@ -1,6 +1,7 @@
 package com.example.b00sti.bbeacon.ui_scanner.top;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Setter
 public class BeaconLocation extends RealmObject {
 
+    @PrimaryKey
     private long time;
     private String beaconId;
     private Double lat;

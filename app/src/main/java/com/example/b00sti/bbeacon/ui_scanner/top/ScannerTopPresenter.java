@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BasePresenter;
+import com.example.b00sti.bbeacon.ui_scanner.interactors.GetLocationInteractor;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -19,6 +20,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.res.DrawableRes;
 import org.androidannotations.annotations.res.IntArrayRes;
+
+import java.util.List;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-04-13
@@ -55,6 +58,18 @@ public class ScannerTopPresenter extends BasePresenter<ScannerTopContract.View> 
 
     @Override
     public void showDataOnTheMap(GoogleMap googleMap) {
+
+        List<BeaconLocation> beaconLocations = GetLocationInteractor.fromDatabase();
+        for (BeaconLocation beaconLocation : beaconLocations) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                markerIcon.setTint(colors[0]);
+            }
+            googleMap.addMarker(
+                    new MarkerOptions()
+                            .position(new LatLng(beaconLocation.getLat(), beaconLocation.getLng()))
+                            .icon(getMarkerIconFromDrawable(markerIcon)));
+        }
+        /*
         double lat = 50.051667;
         double lng = 19.93;
 
@@ -139,7 +154,7 @@ public class ScannerTopPresenter extends BasePresenter<ScannerTopContract.View> 
                     new MarkerOptions()
                             .position(new LatLng(lat, lng))
                             .icon(getMarkerIconFromDrawable(markerIcon)));
-        }
+        }*/
     }
 
     private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
