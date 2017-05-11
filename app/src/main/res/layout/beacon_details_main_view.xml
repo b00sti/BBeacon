@@ -195,6 +195,16 @@
             app:dsb_value="30"
             />
 
+        <android.support.v7.widget.AppCompatButton
+            style="@style/TextViewLightNormal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_12dp"
+            android:layout_marginEnd="@dimen/size_8dp"
+            android:layout_marginStart="@dimen/size_8dp"
+            android:layout_marginTop="@dimen/size_24dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="Remove beacon"/>
     </LinearLayout>
 
 </merge>

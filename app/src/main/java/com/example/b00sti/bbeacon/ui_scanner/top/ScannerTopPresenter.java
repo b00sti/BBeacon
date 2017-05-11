@@ -9,6 +9,7 @@ import android.util.Log;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BasePresenter;
 import com.example.b00sti.bbeacon.ui_scanner.interactors.GetLocationInteractor;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -16,12 +17,18 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.res.DrawableRes;
 import org.androidannotations.annotations.res.IntArrayRes;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static com.example.b00sti.bbeacon.R.id.map;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-04-13
@@ -49,25 +56,45 @@ public class ScannerTopPresenter extends BasePresenter<ScannerTopContract.View> 
 
     @Override
     public void getMapAsync(OnMapReadyCallback onMapReadyCallback) {
-        SupportMapFragment supportMapFragment = (SupportMapFragment) view.getViewChildFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment supportMapFragment = (SupportMapFragment) view.getViewChildFragmentManager().findFragmentById(map);
         Log.d(TAG, "init: " + supportMapFragment);
         if (supportMapFragment != null) {
             supportMapFragment.getMapAsync(onMapReadyCallback);
         }
     }
 
+    public String convertTime(long time) {
+        Date date = new Date(time);
+        Format format = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        return format.format(date);
+    }
+
     @Override
     public void showDataOnTheMap(GoogleMap googleMap) {
 
-        List<BeaconLocation> beaconLocations = GetLocationInteractor.fromDatabase();
-        for (BeaconLocation beaconLocation : beaconLocations) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                markerIcon.setTint(colors[0]);
+        List<BeaconLocation> beaconLocations = GetLocationInteractor.fromDatabase(25);
+
+        LatLng latLng = null;
+        if (beaconLocations != null && !beaconLocations.isEmpty()) {
+            googleMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(beaconLocations.get(0).getLat(), beaconLocations.get(0).getLng())));
+            latLng = new LatLng(beaconLocations.get(0).getLat(), beaconLocations.get(0).getLng());
+            for (BeaconLocation beaconLocation : beaconLocations) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    markerIcon.setTint(colors[0]);
+                }
+
+                googleMap.addPolyline(new PolylineOptions()
+                        .add(latLng, new LatLng(beaconLocation.getLat(), beaconLocation.getLng()))
+                        .width(5)
+                        .color(colors[0]));
+
+                latLng = new LatLng(beaconLocation.getLat(), beaconLocation.getLng());
+                googleMap.addMarker(
+                        new MarkerOptions()
+                                .position(new LatLng(beaconLocation.getLat(), beaconLocation.getLng()))
+                                .title(convertTime(beaconLocation.getTime()))
+                                .icon(getMarkerIconFromDrawable(markerIcon)));
             }
-            googleMap.addMarker(
-                    new MarkerOptions()
-                            .position(new LatLng(beaconLocation.getLat(), beaconLocation.getLng()))
-                            .icon(getMarkerIconFromDrawable(markerIcon)));
         }
         /*
         double lat = 50.051667;
