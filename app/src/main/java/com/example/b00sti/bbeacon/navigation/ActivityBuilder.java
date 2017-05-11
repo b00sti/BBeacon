@@ -33,7 +33,7 @@ public class ActivityBuilder {
 
     public static Intent buildStartBeaconDetailsActivityIntent(ScannerItem scannerItem, Context ctx) {
         Intent intent = new Intent(ctx, BaseInnerViewActivity_.class);
-        intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.WEATHER_DETAILS);
+        intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.BEACON_DETAILS);
         intent.putExtra("id", scannerItem.getId());
         return intent;
     }
