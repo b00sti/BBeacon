@@ -25,6 +25,7 @@ public class BLEManager {
     BluetoothAdapter btAdapter;
     Activity activity;
     BluetoothGatt bluetoothGatt;
+
     private final BluetoothGattCallback btleGattCallback = new BluetoothGattCallback() {
 
         @Override

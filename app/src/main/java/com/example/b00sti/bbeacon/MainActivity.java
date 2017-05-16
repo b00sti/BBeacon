@@ -1,5 +1,6 @@
 package com.example.b00sti.bbeacon;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -20,6 +21,7 @@ import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.example.b00sti.bbeacon.base.OnAnimationToolbar;
 import com.example.b00sti.bbeacon.base.RefreshableFragment;
 import com.example.b00sti.bbeacon.base.RefreshableFragmentWithToolbar;
+import com.example.b00sti.bbeacon.bluetooth.BluetoothLEManager;
 import com.example.b00sti.bbeacon.navigation.FragmentBuilder;
 import com.example.b00sti.bbeacon.navigation.NavigationManager;
 import com.example.b00sti.bbeacon.navigation.NavigationNotificationEvent;
@@ -67,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     Fragment topFragment;
 
+    @Bean
+    BluetoothLEManager bluetoothLEManager;
+
     @AfterViews
     void init() {
         appBarLayout.addOnOffsetChangedListener(this);
@@ -84,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         });
 
     }
+
 
     private void handleDraggingInAppBar(int currentTab) {
         if (currentTab == 2) {
@@ -128,6 +134,9 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     protected void onResume() {
         super.onResume();
         refreshAllViews(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            bluetoothLEManager.onResumeInit();
+        }
     }
 
     public void refreshAllViews(boolean withMainFragment) {
