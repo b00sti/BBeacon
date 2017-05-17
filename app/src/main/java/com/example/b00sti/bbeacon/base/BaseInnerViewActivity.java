@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.b00sti.bbeacon.R;
-import com.example.b00sti.bbeacon.utils.FragmentBuilder;
+import com.example.b00sti.bbeacon.navigation.FragmentBuilder;
 import com.example.b00sti.bbeacon.utils.FragmentSwitcher;
 import com.example.b00sti.bbeacon.utils.FragmentSwitcherParams;
 import com.example.b00sti.bbeacon.utils.ViewUtils;

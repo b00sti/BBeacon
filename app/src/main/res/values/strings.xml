@@ -11,6 +11,9 @@
     <string name="pressure">%s hPa</string>
     <string name="humidity">%s %%</string>
     <string name="wind_speed">%s m/s</string>
+    <string name="pressure_unit">" hPa"</string>
+    <string name="humidity_unit">" %"</string>
+    <string name="temperature_unit">" \u2103"</string>
     <string name="after_alarm_updated">Alarm updated…</string>
     <string name="select_color">Select color</string>
     <string name="date_format_hhmm">HH:mm</string>
@@ -36,5 +39,31 @@
     <string name="no_weather_data">No alarms weather data, first configure or enable scanning your beacons…</string>
     <string name="dash">-</string>
     <string name="new_alarm">New Alarm</string>
+    <string name="temperature_key">temperature</string>
+    <string name="humidity_key">humidity</string>
+    <string name="pressure_key">pressure</string>
+    <string name="less">less</string>
+    <string name="more">more</string>
+    <string name="equal">equal</string>
+    <string name="get_notify_conditions_from_user_title">Select notify conditions</string>
+    <string name="get_parameter_spinner_title">Select parameter</string>
+    <string name="get_condition_spinner_title">Select condition</string>
+    <string name="get_value_get_notification">Select value</string>
+    <string name="select_value">Select value</string>
+
+    <string-array
+        name="notify_parameters">
+        <item>temperature</item>
+        <item>pressure</item>
+        <item>humidity</item>
+    </string-array>
+
+    <string-array
+        name="notify_conditions">
+        <item>less</item>
+        <item>more</item>
+        <item>equal</item>
+    </string-array>
+
 
 </resources>

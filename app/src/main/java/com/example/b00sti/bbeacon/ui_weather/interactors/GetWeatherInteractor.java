@@ -33,7 +33,7 @@ public class GetWeatherInteractor {
             //fake data
             List<WeatherItem> itemsData = new ArrayList<>();
 
-            WeatherItem weatherItem1 = new WeatherItem(
+/*            WeatherItem weatherItem1 = new WeatherItem(
                     "Outdoor",
                     "Outdoor",
                     "17 " + " \u2103",
@@ -100,8 +100,8 @@ public class GetWeatherInteractor {
                     "",
                     false,
                     color2
-            );
-            itemsData.add(weatherItem5);
+            );*/
+            //itemsData.add(weatherItem5);
 
             /*for (int i = 0; i < 50; i++) {
                 itemsData.add(new WeatherItem("Fragment Weather as mvp - " + " Item : " + i));

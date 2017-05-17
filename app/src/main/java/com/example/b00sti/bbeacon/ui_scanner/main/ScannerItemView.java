@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseItemView;
-import com.example.b00sti.bbeacon.navigation.NotificationEvent;
+import com.example.b00sti.bbeacon.navigation.NavigationNotificationEvent;
 import com.example.b00sti.bbeacon.ui_scanner.interactors.SetScannerInteractor;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
@@ -75,7 +75,7 @@ public class ScannerItemView extends BaseItemView<ScannerItem> {
                 new SetScannerInteractor().execute(scannerItem, new RealmUtils.OnSuccessListener() {
                     @Override
                     public void onSuccess() {
-                        EventBus.getDefault().post(new NotificationEvent());
+                        EventBus.getDefault().post(new NavigationNotificationEvent());
                     }
                 });
             }

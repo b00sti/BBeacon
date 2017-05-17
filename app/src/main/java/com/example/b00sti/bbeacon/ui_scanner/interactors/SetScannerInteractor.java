@@ -3,6 +3,9 @@ package com.example.b00sti.bbeacon.ui_scanner.interactors;
 import com.example.b00sti.bbeacon.ui_scanner.main.ScannerItem;
 import com.example.b00sti.bbeacon.ui_weather.interactors.SetWeatherInteractor;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
+import com.example.b00sti.bbeacon.ui_weather.utils.WeatherConditionKind;
+import com.example.b00sti.bbeacon.ui_weather.utils.WeatherParameterKind;
+import com.example.b00sti.bbeacon.utils.NumUtils;
 import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import java.util.ArrayList;
@@ -46,17 +49,18 @@ public class SetScannerInteractor {
             WeatherItem weatherItem = new WeatherItem();
             weatherItem.setBeaconId(scannerItem.getId());
             weatherItem.setColor(scannerItem.getColor());
-            weatherItem.setConditionParameter("");
-            weatherItem.setConditionValue("");
             weatherItem.setHumidity((new Random().nextInt(100)) + " %");
             weatherItem.setMessage("Do something !");
             weatherItem.setAlarm(scannerItem.isEnabled());
             weatherItem.setPressure((new Random().nextInt(30) + 1000) + " hPa");
             weatherItem.setTemp(new Random().nextInt(33) + "");
             weatherItem.setTitle(scannerItem.getTitle());
+            weatherItem.setConditionKind(WeatherConditionKind.LESS);
+            weatherItem.setConditionParameterKind(WeatherParameterKind.WEATHER_TEMPERATURE);
+            weatherItem.setConditionParameterValue(NumUtils.toD(77));
             weatherItems.add(weatherItem);
         }
-        new SetWeatherInteractor().execute(weatherItems, null);
+        SetWeatherInteractor.execute(weatherItems, null);
     }
 
 }

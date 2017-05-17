@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                style="@style/Match">
+
+    <ScrollView
+        style="@style/MatchWidth"
+        android:layout_above="@+id/bottomLL"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout style="@style/MatchWidthVertical">
+
+            <include layout="@layout/beacon_details_main_view"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/bottomLL"
+        layout="@layout/bottom_accept_cancel_layout"/>
+
+</RelativeLayout>

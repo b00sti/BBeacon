@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import com.example.b00sti.bbeacon.base.BaseAdapter;
 import com.example.b00sti.bbeacon.base.ViewWrapper;
+import com.example.b00sti.bbeacon.navigation.ActivityBuilder;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
@@ -29,5 +30,6 @@ public class ScannerAdapter extends BaseAdapter<ScannerItem, ScannerItemView> {
         ScannerItemView scannerItemView = holder.getView();
         ScannerItem scannerItem = dataSet.get(position);
         scannerItemView.bind(scannerItem);
+        scannerItemView.setOnClickListener(v -> ActivityBuilder.startBeaconDetailsActivity(scannerItem, context));
     }
 }

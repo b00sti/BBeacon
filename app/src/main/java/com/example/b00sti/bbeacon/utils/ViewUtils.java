@@ -41,6 +41,14 @@ public class ViewUtils {
         return result;
     }
 
+    public static void visible(View view, boolean show) {
+        if (show) {
+            view.setVisibility(View.VISIBLE);
+        } else {
+            view.setVisibility(View.GONE);
+        }
+    }
+
     public static void tintMenuIcon(Context context, MenuItem item, @ColorRes int color) {
         Drawable normalDrawable = item.getIcon();
         Drawable wrapDrawable = DrawableCompat.wrap(normalDrawable);

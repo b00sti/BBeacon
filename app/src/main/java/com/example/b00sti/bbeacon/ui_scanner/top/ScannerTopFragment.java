@@ -1,5 +1,6 @@
 package com.example.b00sti.bbeacon.ui_scanner.top;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 
 import com.example.b00sti.bbeacon.R;
@@ -39,6 +40,7 @@ public class ScannerTopFragment extends BaseFragment<ScannerTopPresenter> implem
     @Override
     public void onMapReady(GoogleMap googleMap) {
         presenter.showDataOnTheMap(googleMap);
+        getActivity().startService(new Intent(getActivity(), LocationService.class));
     }
 
     @Override

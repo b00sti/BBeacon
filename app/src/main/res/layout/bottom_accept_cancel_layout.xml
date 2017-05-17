@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
+    android:background="@color/colorPrimary"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/size_8dp"
     android:paddingLeft="@dimen/size_16dp"
     android:paddingRight="@dimen/size_16dp"
-    android:paddingTop="@dimen/size_2dp"
+    android:paddingTop="@dimen/size_8dp"
     android:weightSum="1.0"
     tools:showIn="@layout/weather_details">
 

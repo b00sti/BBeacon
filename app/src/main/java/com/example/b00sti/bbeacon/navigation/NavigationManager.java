@@ -17,7 +17,6 @@ import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
 import com.example.b00sti.bbeacon.base.BaseInnerViewActivity_;
 import com.example.b00sti.bbeacon.base.RefreshableFragment;
-import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;

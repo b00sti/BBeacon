@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       tools:showIn="@layout/beacon_details_fragment">
+
+    <LinearLayout
+        android:id="@+id/headerLL"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_header_size"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:padding="@dimen/size_16dp">
+
+        <EditText
+            android:id="@+id/titleET"
+            style="@style/TextViewLightLargeFixed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_12dp"
+            android:text="Keys"/>
+
+        <TextView
+            android:id="@+id/colorPickerTV"
+            style="@style/TextViewLightNormalFixed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_12dp"
+            android:drawableEnd="@drawable/circle"
+            android:drawablePadding="@dimen/size_12dp"
+            android:text="Beacon color"/>
+
+        <TextView
+            android:id="@+id/batteryStatusTV"
+            style="@style/TextViewLightNormalFixed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_12dp"
+            android:drawableEnd="@drawable/ic_battery_90_green_500_24dp"
+            android:drawablePadding="@dimen/size_12dp"
+            android:text="Battery Status"/>
+
+        <TextView
+            android:id="@+id/movingDetectionAlarmTV"
+            style="@style/TextViewLightNormalFixed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_12dp"
+            android:drawableEnd="@drawable/ic_priority_high_red_900_24dp"
+            android:drawablePadding="@dimen/size_12dp"
+            android:text="Move detected"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/MatchVertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <LinearLayout
+            style="@style/WrapHorizontal">
+
+            <com.example.b00sti.bbeacon.utils.SwitchButton
+                android:id="@+id/switchEnableScannignSB"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_32dp"
+                android:layout_gravity="center"
+                app:sb_checked="true"
+                app:sb_checked_color="@color/colorAccent"
+                app:sb_enable_effect="true"
+                app:sb_shadow_effect="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/size_24dp"
+                android:gravity="center_horizontal"
+                android:text="Enable Scanning"
+                android:textSize="@dimen/font_18sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/distanceTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_8dp"
+            android:text="@string/distance"
+            android:textSize="@dimen/font_12sp"/>
+
+        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+            android:id="@+id/strengthPB"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_48dp"
+            android:padding="@dimen/size_8dp"
+            app:rcBackgroundColor="@color/indigo_50"
+            app:rcBackgroundPadding="@dimen/size_8dp"
+            app:rcProgress="47"
+            app:rcProgressColor="#653BB5"
+            app:rcRadius="@dimen/size_16dp"
+            app:rcReverse="false"/>
+
+        <TextView
+            android:id="@+id/lastVisibleTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_8dp"
+            android:text="@string/last_visible_at"
+            android:textSize="@dimen/font_12sp"/>
+
+        <LinearLayout
+            style="@style/WrapHorizontal"
+            android:layout_marginTop="@dimen/size_8dp">
+
+            <com.example.b00sti.bbeacon.utils.SwitchButton
+                android:id="@+id/switchEnableTrackingSB"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_32dp"
+                android:layout_gravity="center"
+                app:sb_checked="true"
+                app:sb_checked_color="@color/colorAccent"
+                app:sb_enable_effect="true"
+                app:sb_shadow_effect="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/size_24dp"
+                android:gravity="center_horizontal"
+                android:text="Enable Tracking"
+                android:textSize="@dimen/font_18sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size_12dp"
+            android:gravity="center"
+            android:text="GPS location period [s]"/>
+
+        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+            android:id="@+id/GPSLocationPeriodPB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dsb_indicatorColor="@color/colorAccent"
+            app:dsb_max="1800"
+            app:dsb_min="1"
+            app:dsb_progressColor="@color/colorAccent"
+            app:dsb_trackColor="@color/colorAccent"
+            app:dsb_value="180"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Last GPS points"/>
+
+        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+            android:id="@+id/GPSLastPointsPB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_12dp"
+            app:dsb_indicatorColor="@color/colorAccent"
+            app:dsb_max="250"
+            app:dsb_min="1"
+            app:dsb_progressColor="@color/colorAccent"
+            app:dsb_trackColor="@color/colorAccent"
+            app:dsb_value="50"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Time to notification [s]"/>
+
+        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+            android:id="@+id/timeToNotificationPB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_12dp"
+            app:dsb_indicatorColor="@color/colorAccent"
+            app:dsb_max="120"
+            app:dsb_min="1"
+            app:dsb_progressColor="@color/colorAccent"
+            app:dsb_trackColor="@color/colorAccent"
+            app:dsb_value="30"
+            />
+
+        <android.support.v7.widget.AppCompatButton
+            style="@style/TextViewLightNormal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_12dp"
+            android:layout_marginEnd="@dimen/size_8dp"
+            android:layout_marginStart="@dimen/size_8dp"
+            android:layout_marginTop="@dimen/size_24dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="Remove beacon"/>
+    </LinearLayout>
+
+</merge>

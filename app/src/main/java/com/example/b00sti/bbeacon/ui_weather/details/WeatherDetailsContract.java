@@ -14,6 +14,12 @@ class WeatherDetailsContract {
 
         void updateUI(WeatherItem weatherItem);
 
+        void updateNotificationView(String text);
+
+        void showNotificationIcon(boolean show);
+
+        String getNotificationMessage();
+
         CardView getChartCardView1();
 
         CardView getChartCardView2();
@@ -24,6 +30,14 @@ class WeatherDetailsContract {
     public interface Presenter {
 
         void initUI(String id);
+
+        String getNotificationConditionsText(WeatherItem weatherItem);
+
+        String getNotificationConditionsText();
+
+        void getNotificationConditionsFromUser();
+
+        void onNotificationIconClick();
 
         void onAccept();
 

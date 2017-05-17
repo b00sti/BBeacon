@@ -1,15 +1,11 @@
 package com.example.b00sti.bbeacon.ui_weather.main;
 
 import android.content.Context;
-import android.content.Intent;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseAdapter;
-import com.example.b00sti.bbeacon.base.BaseInnerViewActivity_;
 import com.example.b00sti.bbeacon.base.ViewWrapper;
-import com.example.b00sti.bbeacon.utils.FragmentBuilder;
+import com.example.b00sti.bbeacon.navigation.ActivityBuilder;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
@@ -35,18 +31,7 @@ public class WeatherAdapter extends BaseAdapter<WeatherItem, WeatherItemView> {
         final WeatherItem weatherItem = dataSet.get(position);
         weatherItemView.bind(weatherItem);
 
-        weatherItemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startWeatherDetailsActivity(weatherItem);
-            }
-        });
+        weatherItemView.setOnClickListener(v -> ActivityBuilder.startWeatherDetailsActivity(weatherItem, context));
     }
 
-    private void startWeatherDetailsActivity(WeatherItem weatherItem) {
-        Intent intent = new Intent(context, BaseInnerViewActivity_.class);
-        intent.putExtra(context.getString(R.string.bundle_fragment), FragmentBuilder.WEATHER_DETAILS);
-        intent.putExtra("id", weatherItem.getBeaconId());
-        context.startActivity(intent);
-    }
 }

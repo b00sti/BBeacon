@@ -11,19 +11,22 @@ import java.util.List;
 
 public class SetWeatherInteractor {
 
-    public void execute(List<WeatherItem> data) {
+    private SetWeatherInteractor() {
+    }
+
+    public static void execute(List<WeatherItem> data) {
         RealmUtils.SaveAll(data, null);
     }
 
-    public void execute(WeatherItem weatherItem) {
+    public static void execute(WeatherItem weatherItem) {
         RealmUtils.SaveAll(weatherItem, null);
     }
 
-    public void execute(WeatherItem weatherItem, RealmUtils.OnSuccessListener listener) {
+    public static void execute(WeatherItem weatherItem, RealmUtils.OnSuccessListener listener) {
         RealmUtils.SaveAll(weatherItem, listener);
     }
 
-    public void execute(List<WeatherItem> data, RealmUtils.OnSuccessListener listener) {
+    public static void execute(List<WeatherItem> data, RealmUtils.OnSuccessListener listener) {
         RealmUtils.SaveAll(data, listener);
     }
 

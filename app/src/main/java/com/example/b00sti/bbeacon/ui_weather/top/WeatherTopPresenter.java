@@ -15,7 +15,6 @@ import com.example.b00sti.bbeacon.ui_weather.top.interactors.GetWeatherFromOWMIn
 import com.example.b00sti.bbeacon.ui_weather.top.interactors.SetWeatherFromOWMInteractor;
 import com.example.b00sti.bbeacon.ui_weather.top.model.Main;
 import com.example.b00sti.bbeacon.ui_weather.top.model.WeatherFromOWM;
-import com.example.b00sti.bbeacon.utils.CLog;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -24,8 +23,6 @@ import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.UiThread;
 
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import retrofit2.HttpException;
 
 /**
@@ -75,27 +72,19 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
 
     private void getWeatherDataFromWeb() {
         addDisposable(GetWeatherFromOWMInteractor.getFromApi(getLat(), getLon())
-                .onErrorReturn(new Function<Throwable, WeatherFromOWM>() {
-                    @Override
-                    public WeatherFromOWM apply(Throwable throwable) throws Exception {
+                .onErrorReturn(throwable -> {
 
-                        if (throwable instanceof HttpException) {
-                            HttpException response = (HttpException) throwable;
-                            int code = response.code();
-                            Log.d(TAG, "Retrofit Error  - code: " + code);
-                        } else {
-                            Log.d(TAG, "Other Error - code: " + throwable.getMessage());
-                        }
-
-                        return new WeatherFromOWM();
+                    if (throwable instanceof HttpException) {
+                        HttpException response = (HttpException) throwable;
+                        int code = response.code();
+                        Log.d(TAG, "Retrofit Error  - code: " + code);
+                    } else {
+                        Log.d(TAG, "Other Error - code: " + throwable.getMessage());
                     }
+
+                    return new WeatherFromOWM();
                 })
-                .subscribe(new Consumer<WeatherFromOWM>() {
-                    @Override
-                    public void accept(WeatherFromOWM weatherFromOWM) throws Exception {
-                        onRetrievedWeatherFromApi(weatherFromOWM);
-                    }
-                }));
+                .subscribe(this::onRetrievedWeatherFromApi));
     }
 
     private double getLat() {
@@ -157,7 +146,6 @@ public class WeatherTopPresenter extends BasePresenter<WeatherTopContract.View> 
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
             updateWeatherAfterLocationChanges(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            CLog.d(TAG, "onConnected: new location defaultLat", weatherFromOWMRealm.getLat(), "defaultLon", weatherFromOWMRealm.getLon());
         } else {
             Log.d(TAG, "onConnected: Location is null");
         }

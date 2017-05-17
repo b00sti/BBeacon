@@ -1,5 +1,6 @@
 package com.example.b00sti.bbeacon;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -20,16 +21,17 @@ import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.example.b00sti.bbeacon.base.OnAnimationToolbar;
 import com.example.b00sti.bbeacon.base.RefreshableFragment;
 import com.example.b00sti.bbeacon.base.RefreshableFragmentWithToolbar;
+import com.example.b00sti.bbeacon.bluetooth.BluetoothLEManager;
+import com.example.b00sti.bbeacon.navigation.FragmentBuilder;
 import com.example.b00sti.bbeacon.navigation.NavigationManager;
-import com.example.b00sti.bbeacon.navigation.NotificationEvent;
-import com.example.b00sti.bbeacon.navigation.NotificationManager;
+import com.example.b00sti.bbeacon.navigation.NavigationNotificationEvent;
+import com.example.b00sti.bbeacon.navigation.NavigationNotificationManager;
 import com.example.b00sti.bbeacon.ui_alarm.interactors.GetAlarmInteractor;
 import com.example.b00sti.bbeacon.ui_alarm.main.AlarmItem;
 import com.example.b00sti.bbeacon.ui_scanner.interactors.GetScannerInteractor;
 import com.example.b00sti.bbeacon.ui_scanner.main.ScannerItem;
 import com.example.b00sti.bbeacon.ui_weather.interactors.GetWeatherInteractor;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
-import com.example.b00sti.bbeacon.utils.FragmentBuilder;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -40,12 +42,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function3;
 import io.reactivex.observers.DefaultObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -69,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     Fragment topFragment;
 
+    @Bean
+    BluetoothLEManager bluetoothLEManager;
+
     @AfterViews
     void init() {
         appBarLayout.addOnOffsetChangedListener(this);
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         });
 
     }
+
 
     private void handleDraggingInAppBar(int currentTab) {
         if (currentTab == 2) {
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(NotificationEvent event) {
+    public void onMessageEvent(NavigationNotificationEvent event) {
         refreshAllViews(false);
     }
 
@@ -130,6 +134,9 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     protected void onResume() {
         super.onResume();
         refreshAllViews(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            bluetoothLEManager.onResumeInit();
+        }
     }
 
     public void refreshAllViews(boolean withMainFragment) {
@@ -178,52 +185,49 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                 new GetAlarmInteractor().execute(),
                 new GetScannerInteractor().execute(),
                 new GetWeatherInteractor().execute(),
-                new Function3<List<AlarmItem>, List<ScannerItem>, List<WeatherItem>, ArrayList<Pair<AHNotification, Integer>>>() {
-                    @Override
-                    public ArrayList<Pair<AHNotification, Integer>> apply(List<AlarmItem> alarmItems, List<ScannerItem> scannerItems, List<WeatherItem> weatherItems) throws Exception {
+                (alarmItems, scannerItems, weatherItems) -> {
 
-                        ArrayList<Pair<AHNotification, Integer>> notifications = new ArrayList<>();
-                        int sizeAlarms = 0;
-                        for (AlarmItem alarmItem : alarmItems) {
-                            if (alarmItem.isEnabled()) {
-                                sizeAlarms++;
-                            }
+                    ArrayList<Pair<AHNotification, Integer>> notifications = new ArrayList<>();
+                    int sizeAlarms = 0;
+                    for (AlarmItem alarmItem : alarmItems) {
+                        if (alarmItem.isEnabled()) {
+                            sizeAlarms++;
                         }
-
-                        if (sizeAlarms == 0) {
-                            notifications.add(new Pair<>(new AHNotification(), 0));
-                        } else {
-                            notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeAlarms))), 0));
-                        }
-
-                        int sizeScanner = 0;
-                        for (ScannerItem scanner : scannerItems) {
-                            if (scanner.isEnabled()) {
-                                sizeScanner++;
-                            }
-                        }
-
-                        if (sizeScanner == 0) {
-                            notifications.add(new Pair<>(new AHNotification(), 2));
-                        } else {
-                            notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeScanner))), 2));
-                        }
-
-                        int sizeWeather = 0;
-                        for (WeatherItem weatherItem : weatherItems) {
-                            if (weatherItem.isAlarm()) {
-                                sizeWeather++;
-                            }
-                        }
-
-                        if (sizeWeather == 0) {
-                            notifications.add(new Pair<>(new AHNotification(), 1));
-                        } else {
-                            notifications.add(new Pair<>(NotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeWeather))), 1));
-                        }
-
-                        return notifications;
                     }
+
+                    if (sizeAlarms == 0) {
+                        notifications.add(new Pair<>(new AHNotification(), 0));
+                    } else {
+                        notifications.add(new Pair<>(NavigationNotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeAlarms))), 0));
+                    }
+
+                    int sizeScanner = 0;
+                    for (ScannerItem scanner : scannerItems) {
+                        if (scanner.isEnabled()) {
+                            sizeScanner++;
+                        }
+                    }
+
+                    if (sizeScanner == 0) {
+                        notifications.add(new Pair<>(new AHNotification(), 2));
+                    } else {
+                        notifications.add(new Pair<>(NavigationNotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeScanner))), 2));
+                    }
+
+                    int sizeWeather = 0;
+                    for (WeatherItem weatherItem : weatherItems) {
+                        if (weatherItem.isAlarm()) {
+                            sizeWeather++;
+                        }
+                    }
+
+                    if (sizeWeather == 0) {
+                        notifications.add(new Pair<>(new AHNotification(), 1));
+                    } else {
+                        notifications.add(new Pair<>(NavigationNotificationManager.newDefault(getApplicationContext(), String.valueOf(Integer.valueOf(sizeWeather))), 1));
+                    }
+
+                    return notifications;
                 }
         ).take(1)
                 .subscribeOn(Schedulers.io())
