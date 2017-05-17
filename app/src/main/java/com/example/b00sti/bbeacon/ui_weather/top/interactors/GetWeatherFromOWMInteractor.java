@@ -38,4 +38,5 @@ public class GetWeatherFromOWMInteractor {
         WeatherService weatherService = retrofit.create(WeatherService.class);
         return weatherService.getWeatherFromOWM(lat, lon, APPID, UNITS);
     }
+
 }

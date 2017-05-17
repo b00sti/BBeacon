@@ -15,7 +15,7 @@
     <string name="select_color">Select color</string>
     <string name="date_format_hhmm">HH:mm</string>
     <string name="to_next_alarm">Time to next alarm: %s</string>
-    <string name="last_visible_at">Last visible: 21:41 19/02/17</string>
+    <string name="last_visible_at"><b>Last visible: </b> 21:41 19/02/17</string>
     <string name="first_disable_alarm">First disable alarm !</string>
     <string name="none">-</string>
     <string name="name_intent_key">name</string>
@@ -31,7 +31,7 @@
     <string name="fri">FRI</string>
     <string name="sat">SAT</string>
     <string name="sun">SUN</string>
-    <string name="distance">Distance: 10 m</string>
+    <string name="distance"><b>Distance: </b> 10 m</string>
     <string name="celsjus">℃</string>
     <string name="no_weather_data">No alarms weather data, first configure or enable scanning your beacons…</string>
     <string name="dash">-</string>

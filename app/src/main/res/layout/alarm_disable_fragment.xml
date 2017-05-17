@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                style="@style/Match">
+
+    <ScrollView
+        style="@style/MatchWidth"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            style="@style/MatchWidth"
+            android:orientation="vertical">
+
+            <include layout="@layout/disable_alarm_main_view"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

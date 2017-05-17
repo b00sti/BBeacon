@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       tools:showIn="@layout/alarm_disable_fragment">
+
+    <LinearLayout
+        android:id="@+id/headerLL"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_header_size"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:padding="@dimen/size_16dp">
+
+        <TextView
+            android:id="@+id/alarmTitleTV"
+            style="@style/TextViewLightLargeFixed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:gravity="center"
+            android:text="Jogging"/>
+
+        <TextView
+            android:id="@+id/selectedTimeTV"
+            style="@style/TextViewLightLarge"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="@dimen/size_24dp"
+            android:text="16:09"
+            android:textSize="82dp"
+            tools:ignore="SpUsage"
+            tools:text="16:09"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <com.example.b00sti.bbeacon.utils.SwitchButton
+            android:id="@+id/switchSB"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_64dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/size_16dp"
+            android:layout_marginEnd="@dimen/size_64dp"
+            android:layout_marginStart="@dimen/size_64dp"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:layout_weight="0"
+            app:sb_checked="true"
+            app:sb_checked_color="@color/colorAccent"
+            app:sb_enable_effect="true"
+            app:sb_shadow_effect="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_8dp"
+            android:gravity="center"
+            android:text="To disable the alarm go to the beacon called:"/>
+
+        <TextView
+            android:id="@+id/beaconTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_8dp"
+            android:gravity="center"
+            android:text="Wardrobe"
+            android:textSize="@dimen/font_18sp"
+            android:textStyle="bold"/>
+
+        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+            android:id="@+id/strengthPB"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_48dp"
+            android:padding="@dimen/size_8dp"
+            app:rcBackgroundColor="@color/indigo_50"
+            app:rcBackgroundPadding="@dimen/size_8dp"
+            app:rcProgress="32"
+            app:rcProgressColor="@color/colorAccent"
+            app:rcRadius="@dimen/size_16dp"
+            app:rcReverse="false"/>
+
+        <TextView
+            android:id="@+id/distanceTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_12dp"
+            android:text="@string/distance"
+            android:textSize="@dimen/font_12sp"/>
+
+        <TextView
+            android:id="@+id/lastVisibleTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_12dp"
+            android:text="@string/last_visible_at"
+            android:textSize="@dimen/font_12sp"/>
+
+
+    </LinearLayout>
+
+</merge>
