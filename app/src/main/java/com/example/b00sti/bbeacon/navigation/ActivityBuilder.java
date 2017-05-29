@@ -10,9 +10,9 @@ import com.example.b00sti.bbeacon.ui_weather.main.WeatherItem;
 
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-04-27
-import com.example.b00sti.bbeacon.utils.FragmentBuilder;
-
-/**
+ * import com.example.b00sti.bbeacon.utils.FragmentBuilder;
+ * <p>
+ * /**
  * Created by b00sti on 28.04.2017
  */
 
@@ -23,6 +23,7 @@ public class ActivityBuilder {
         intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.DISABLE_ALARM);
         intent.putExtra("id", id);
         ctx.startActivity(intent);
+    }
 
     public static void startWeatherDetailsActivity(WeatherItem weatherItem, Context ctx) {
         Intent intent = buildStartWeatherDetailsActivityIntent(weatherItem, ctx);
@@ -46,5 +47,11 @@ public class ActivityBuilder {
         intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.BEACON_DETAILS);
         intent.putExtra("id", scannerItem.getId());
         return intent;
+    }
+
+    public static void startPollutionActivity(Context ctx) {
+        Intent intent = new Intent(ctx, BaseInnerViewActivity_.class);
+        intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.POLLUTION);
+        ctx.startActivity(intent);
     }
 }

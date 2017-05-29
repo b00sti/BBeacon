@@ -14,6 +14,7 @@ import com.example.b00sti.bbeacon.ui_scanner.main.ScannerFragment;
 import com.example.b00sti.bbeacon.ui_scanner.top.ScannerTopFragment;
 import com.example.b00sti.bbeacon.ui_weather.details.WeatherDetailsFragment;
 import com.example.b00sti.bbeacon.ui_weather.main.WeatherFragment;
+import com.example.b00sti.bbeacon.ui_weather.pollution.PollutionFragment;
 import com.example.b00sti.bbeacon.ui_weather.top.WeatherTopFragment;
 
 import org.androidannotations.annotations.EBean;
@@ -39,6 +40,7 @@ public class FragmentBuilder {
     public static final int WEATHER_DETAILS = 8;
     public static final int DISABLE_ALARM = 9;
     public static final int BEACON_DETAILS = 10;
+    public static final int POLLUTION = 11;
     public static final int EMPTY = 100;
 
     public Fragment newFragment(@FragBuild int fragmentId) {
@@ -68,6 +70,8 @@ public class FragmentBuilder {
                 return DisableAlarmFragment.newInstance();
             case BEACON_DETAILS:
                 return BeaconDetailsFragment.newInstance();
+            case POLLUTION:
+                return PollutionFragment.newInstance();
             default:
                 return EmptyFragment.newInstance();
         }
@@ -85,9 +89,9 @@ public class FragmentBuilder {
             ADD_NEW_ALARM,
             ADD_NEW_BEACON,
             WEATHER_DETAILS,
-            DISABLE_ALARM
-            WEATHER_DETAILS,
-            BEACON_DETAILS
+            DISABLE_ALARM,
+            BEACON_DETAILS,
+            POLLUTION
     })
     public @interface FragBuild {
     }

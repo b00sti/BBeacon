@@ -69,7 +69,7 @@ public class BeaconDetailsFragment extends BaseFragment<BeaconDetailsPresenter> 
         if (isAlarmed) {
             movingDetectionAlarmTV.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_priority_high_red_900_24dp, 0);
         } else {
-            movingDetectionAlarmTV.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_done_green_500_24dp, 0);
+            movingDetectionAlarmTV.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_done_green_500_36dp, 0);
         }
     }
 
