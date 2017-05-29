@@ -9,8 +9,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v13.app.ActivityCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.b00sti.bbeacon.base.BasePresenter;
+import com.example.b00sti.bbeacon.ui_weather.pollution.model.Pollution;
 import com.example.b00sti.bbeacon.ui_weather.top.WeatherFromOWMRealm;
 import com.example.b00sti.bbeacon.ui_weather.top.interactors.GetWeatherFromOWMInteractor;
 import com.example.b00sti.bbeacon.ui_weather.top.interactors.SetWeatherFromOWMInteractor;
@@ -71,6 +73,23 @@ public class PollutionPresenter extends BasePresenter<PollutionContract.View> im
         }
     }
 
+    private void getPollutionFromWeb() {
+        addDisposable(GetPollutionInteractor.getFromApi(getLat(), getLon())
+                .onErrorReturn(throwable -> {
+
+                    if (throwable instanceof HttpException) {
+                        HttpException response = (HttpException) throwable;
+                        int code = response.code();
+                        Log.d(TAG, "Retrofit Error  - code: " + code);
+                    } else {
+                        Log.d(TAG, "Other Error - code: " + throwable.getMessage());
+                    }
+
+                    return new Pollution();
+                })
+                .subscribe(this::onRetrievedPollutionFromApi));
+    }
+
     private void getWeatherDataFromWeb() {
         addDisposable(GetWeatherFromOWMInteractor.getFromApi(getLat(), getLon())
                 .onErrorReturn(throwable -> {
@@ -105,6 +124,23 @@ public class PollutionPresenter extends BasePresenter<PollutionContract.View> im
     }
 
     @UiThread
+    void onRetrievedPollutionFromApi(Pollution pollution) {
+        //if error occurs weatherFromOWM.getMain() should be null
+        Log.d(TAG, "onRetrievedPollutionFromApi: " + pollution.toString());
+        if (pollution.getStatus() != null) {
+            //Toast.makeText(ctx, "Aqi = " + pollution.getData().getAqi(), Toast.LENGTH_LONG).show();
+            Toast.makeText(ctx, "Status = " + pollution.getStatus(), Toast.LENGTH_LONG).show();
+/*            weatherFromOWMRealm = prepareWeatherToRealm(weatherFromOWM);
+            SetWeatherFromOWMInteractor.saveToRealm(weatherFromOWMRealm);
+            if (view != null) {
+                view.refreshViews(weatherFromOWMRealm);
+            }*/
+        } else {
+            Log.d(TAG, "onRetrievedWeatherFromApi: " + "pollution from API is null");
+        }
+    }
+
+    @UiThread
     void onRetrievedWeatherFromApi(WeatherFromOWM weatherFromOWM) {
         //if error occurs weatherFromOWM.getMain() should be null
         if (weatherFromOWM.getMain() != null) {
@@ -130,6 +166,7 @@ public class PollutionPresenter extends BasePresenter<PollutionContract.View> im
 
         //get actual data
         getWeatherDataFromWeb();
+        getPollutionFromWeb();
     }
 
     @Override
@@ -169,6 +206,7 @@ public class PollutionPresenter extends BasePresenter<PollutionContract.View> im
             SetWeatherFromOWMInteractor.saveToRealm(weatherFromOWMRealm);
         }
         getWeatherDataFromWeb();
+        getPollutionFromWeb();
     }
 
     private WeatherFromOWMRealm prepareWeatherToRealm(WeatherFromOWM weatherFromOWM) {

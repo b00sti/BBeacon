@@ -1,21 +1,18 @@
 package com.example.b00sti.bbeacon.ui_weather.pollution;
 
 import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
 import com.example.b00sti.bbeacon.base.OnAnimationToolbar;
-import com.example.b00sti.bbeacon.navigation.ActivityBuilder;
 import com.example.b00sti.bbeacon.ui_weather.top.WeatherFromOWMRealm;
 import com.example.b00sti.bbeacon.ui_weather.top.WeatherUtils;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
@@ -35,7 +32,6 @@ public class PollutionFragment extends BaseFragment<PollutionPresenter> implemen
     @ViewById(R.id.windTV) TextView windTV;
     @ViewById(R.id.humidityTV) TextView humidityTV;
     @ViewById(R.id.pressureTV) TextView pressureTV;
-    @ViewById(R.id.container) ViewGroup container;
 
     @Bean
     PollutionPresenter weatherTopPresenter;
@@ -86,10 +82,6 @@ public class PollutionFragment extends BaseFragment<PollutionPresenter> implemen
         }
     }
 
-    @Click(R.id.container)
-    public void onClickOnLayout() {
-        ActivityBuilder.startPollutionActivity(getContext());
-    }
 
     @Override
     public void refreshViews(WeatherFromOWMRealm weatherFromOWMRealm) {

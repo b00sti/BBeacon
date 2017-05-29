@@ -7,10 +7,12 @@ import com.example.b00sti.bbeacon.MainActivity;
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
 import com.example.b00sti.bbeacon.base.OnAnimationToolbar;
+import com.example.b00sti.bbeacon.navigation.ActivityBuilder;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
@@ -55,6 +57,11 @@ public class WeatherTopFragment extends BaseFragment<WeatherTopPresenter> implem
     public void onStop() {
         presenter.stopLocation();
         super.onStop();
+    }
+
+    @Click(R.id.container)
+    public void onClickOnLayout() {
+        ActivityBuilder.startPollutionActivity(getContext());
     }
 
     @AfterViews
