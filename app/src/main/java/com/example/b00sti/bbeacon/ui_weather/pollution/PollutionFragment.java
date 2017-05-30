@@ -84,7 +84,7 @@ public class PollutionFragment extends BaseFragment<PollutionPresenter> implemen
 
 
     @Override
-    public void refreshViews(WeatherFromOWMRealm weatherFromOWMRealm) {
+    public void refreshWeatherViews(WeatherFromOWMRealm weatherFromOWMRealm) {
         if (tempValueTV != null) {
             tempValueTV.setText(getFormattedTemp(weatherFromOWMRealm.getTemp()));
         }
@@ -112,5 +112,10 @@ public class PollutionFragment extends BaseFragment<PollutionPresenter> implemen
         } else {
             Log.i(TAG, "accept: image not available");
         }
+    }
+
+    @Override
+    public void refreshPollutionViews(PollutionRealm pollutionRealm) {
+
     }
 }

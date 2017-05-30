@@ -1,156 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/main_header_size"
-                android:background="@color/colorPrimary">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/topTopHeaderLL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:weightSum="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_weight="0.5"
-            android:gravity="center|bottom">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/main_header_size"
+                        android:background="@color/colorPrimary">
 
-            <TextView
-                android:id="@+id/tempValueTV"
-                style="@style/TextViewLightNormal"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/topTopHeaderLL"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:padding="@dimen/size_8dp"
-                android:text="@string/dash"
-                android:textSize="@dimen/size_72dp"
-                tools:ignore="SpUsage"/>
+                android:baselineAligned="false"
+                android:weightSum="1">
 
-            <TextView
-                android:id="@+id/tempUnitTV"
-                style="@style/TextViewLightLargeFixed"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center|bottom">
+
+                    <TextView
+                        android:id="@+id/tempValueTV"
+                        style="@style/TextViewLightNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:padding="@dimen/size_8dp"
+                        android:text="@string/dash"
+                        android:textSize="@dimen/size_72dp"
+                        tools:ignore="SpUsage"/>
+
+                    <TextView
+                        android:id="@+id/tempUnitTV"
+                        style="@style/TextViewLightLargeFixed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:maxLines="1"
+                        android:padding="@dimen/size_8dp"
+                        android:text="@string/celsjus"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/circleToolbarIconIV"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/weather1"
+                        app:border_color="@android:color/white"
+                        app:border_width="2dp"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/weatherBottomVG"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:maxLines="1"
-                android:padding="@dimen/size_8dp"
-                android:text="@string/celsjus"/>
+                android:layout_height="match_parent"
+                android:layout_below="@+id/topTopHeaderLL"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/pressureLL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/humidityLL"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:layout_width="0dp"
+                    <ImageView
+                        android:id="@+id/pressureIV"
+                        android:layout_width="24dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/weather3"/>
+
+                    <TextView
+                        android:id="@+id/pressureTV"
+                        style="@style/TextViewLightSmallFixed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size_8dp"
+                        tools:text="1020 hPa"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/humidityLL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/humidityIV"
+                        android:layout_width="24dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/weather2"/>
+
+                    <TextView
+                        android:id="@+id/humidityTV"
+                        style="@style/TextViewLightSmallFixed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size_8dp"
+                        tools:text="80 %"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/windLL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:orientation="horizontal"
+                    tools:ignore="RelativeOverlap,UseCompoundDrawables">
+
+                    <ImageView
+                        android:id="@+id/windIV"
+                        android:layout_width="24dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/weather4"/>
+
+                    <TextView
+                        android:id="@+id/windTV"
+                        style="@style/TextViewLightSmallFixed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size_8dp"
+                        tools:text="1.5 m/s"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/nameTV"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="32dp"
-            android:layout_weight="0.5"
-            android:gravity="center">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleToolbarIconIV"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/weather1"
-                app:border_color="@android:color/white"
-                app:border_width="2dp"
-                />
-
-        </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:text="Name"/>
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/topTopHeaderLL"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="0dp"
-        android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/pressureLL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/humidityLL"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
+</ScrollView>
 
-            <ImageView
-                android:id="@+id/pressureIV"
-                android:layout_width="24dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/weather3"/>
-
-            <TextView
-                android:id="@+id/pressureTV"
-                style="@style/TextViewLightSmallFixed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/size_8dp"
-                tools:text="1020 hPa"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/humidityLL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/humidityIV"
-                android:layout_width="24dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/weather2"/>
-
-            <TextView
-                android:id="@+id/humidityTV"
-                style="@style/TextViewLightSmallFixed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/size_8dp"
-                tools:text="80 %"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/windLL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:orientation="horizontal"
-            tools:ignore="RelativeOverlap,UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/windIV"
-                android:layout_width="24dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/weather4"/>
-
-            <TextView
-                android:id="@+id/windTV"
-                style="@style/TextViewLightSmallFixed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/size_8dp"
-                tools:text="1.5 m/s"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</RelativeLayout>

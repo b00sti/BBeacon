@@ -1,6 +1,7 @@
 package com.example.b00sti.bbeacon.ui_weather.pollution;
 
 import com.example.b00sti.bbeacon.ui_weather.pollution.model.Pollution;
+import com.example.b00sti.bbeacon.utils.RealmUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -18,6 +19,10 @@ public class GetPollutionInteractor {
     private static final String TOKEN = "71f6ff9c5bf028aed7b84222c1664b299b5217b0";
 
     private GetPollutionInteractor() {
+    }
+
+    public static PollutionRealm getFromRealm() {
+        return RealmUtils.Find(PollutionRealm.class, "id", 0); //NON-NLS
     }
 
 /*    public static WeatherFromOWMRealm getFromRealm() {

@@ -10,7 +10,9 @@ class PollutionContract {
 
     public interface View {
 
-        void refreshViews(WeatherFromOWMRealm weatherFromOWMRealm);
+        void refreshWeatherViews(WeatherFromOWMRealm weatherFromOWMRealm);
+
+        void refreshPollutionViews(PollutionRealm pollutionRealm);
 
     }
 

@@ -9,9 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v13.app.ActivityCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.b00sti.bbeacon.base.BasePresenter;
+import com.example.b00sti.bbeacon.ui_weather.pollution.model.Data;
 import com.example.b00sti.bbeacon.ui_weather.pollution.model.Pollution;
 import com.example.b00sti.bbeacon.ui_weather.top.WeatherFromOWMRealm;
 import com.example.b00sti.bbeacon.ui_weather.top.interactors.GetWeatherFromOWMInteractor;
@@ -43,6 +43,7 @@ public class PollutionPresenter extends BasePresenter<PollutionContract.View> im
     Activity ctx;
     private GoogleApiClient mGoogleApiClient = null;
     private WeatherFromOWMRealm weatherFromOWMRealm;
+    private PollutionRealm pollutionRealm;
 
     @Override
     public void onSubscribe() {
@@ -128,16 +129,32 @@ public class PollutionPresenter extends BasePresenter<PollutionContract.View> im
         //if error occurs weatherFromOWM.getMain() should be null
         Log.d(TAG, "onRetrievedPollutionFromApi: " + pollution.toString());
         if (pollution.getStatus() != null) {
-            //Toast.makeText(ctx, "Aqi = " + pollution.getData().getAqi(), Toast.LENGTH_LONG).show();
-            Toast.makeText(ctx, "Status = " + pollution.getStatus(), Toast.LENGTH_LONG).show();
-/*            weatherFromOWMRealm = prepareWeatherToRealm(weatherFromOWM);
-            SetWeatherFromOWMInteractor.saveToRealm(weatherFromOWMRealm);
+            pollutionRealm = preparePollutionToRealm(pollution);
+            SetPollutionInteractor.saveToRealm(pollutionRealm);
             if (view != null) {
-                view.refreshViews(weatherFromOWMRealm);
-            }*/
+                view.refreshPollutionViews(pollutionRealm);
+            }
         } else {
             Log.d(TAG, "onRetrievedWeatherFromApi: " + "pollution from API is null");
         }
+    }
+
+    private PollutionRealm preparePollutionToRealm(Pollution pollution) {
+
+        PollutionRealm pollutionRealm = new PollutionRealm();
+        Data data = pollution.getData();
+        pollutionRealm.setAqi(data.getAqi());
+        pollutionRealm.setIdx(data.getIdx());
+        pollutionRealm.setName(data.getCity().getName());
+        pollutionRealm.setTime(data.getTime().getS());
+        pollutionRealm.setPm25(data.getIaqi().getPm25().getV());
+        pollutionRealm.setPm10(data.getIaqi().getPm10().getV());
+        pollutionRealm.setCo(data.getIaqi().getCo().getV());
+        pollutionRealm.setP(data.getIaqi().getP().getV());
+        pollutionRealm.setH(data.getIaqi().getH().getV());
+        pollutionRealm.setNo2(data.getIaqi().getNo2().getV());
+
+        return pollutionRealm;
     }
 
     @UiThread
@@ -147,7 +164,7 @@ public class PollutionPresenter extends BasePresenter<PollutionContract.View> im
             weatherFromOWMRealm = prepareWeatherToRealm(weatherFromOWM);
             SetWeatherFromOWMInteractor.saveToRealm(weatherFromOWMRealm);
             if (view != null) {
-                view.refreshViews(weatherFromOWMRealm);
+                view.refreshWeatherViews(weatherFromOWMRealm);
             }
         } else {
             Log.d(TAG, "onRetrievedWeatherFromApi: " + "weather from OWM is null");
@@ -158,10 +175,15 @@ public class PollutionPresenter extends BasePresenter<PollutionContract.View> im
     public void initViews() {
         //get last from database
         weatherFromOWMRealm = GetWeatherFromOWMInteractor.getFromRealm();
+        pollutionRealm = GetPollutionInteractor.getFromRealm();
 
         //refresh views
         if (weatherFromOWMRealm != null) {
-            view.refreshViews(weatherFromOWMRealm);
+            view.refreshWeatherViews(weatherFromOWMRealm);
+        }
+
+        if (pollutionRealm != null) {
+            view.refreshPollutionViews(pollutionRealm);
         }
 
         //get actual data
