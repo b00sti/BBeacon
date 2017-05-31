@@ -41,6 +41,16 @@ public abstract class BaseAdapter<T, V extends View> extends RecyclerView.Adapte
         this.notifyDataSetChanged();
     }
 
+    public void addItem(T item) {
+        if (dataSet != null) {
+            dataSet.add(item);
+        } else {
+            dataSet = new ArrayList<T>();
+            dataSet.add(item);
+        }
+
+    }
+
     @Override
     public final ViewWrapper<V> onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewWrapper<V>(onCreateItemView(parent, viewType));
