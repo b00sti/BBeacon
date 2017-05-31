@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
@@ -21,8 +22,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static com.example.b00sti.bbeacon.ui_weather.top.WeatherUtils.getFormattedTemp;
 
 /**
- * Created by b00sti on 20.03.2017.
+ * Created by b00sti on 20.03.2017
  */
+//todo clean up
 @EFragment(R.layout.pollution_fragment)
 public class PollutionFragment extends BaseFragment<PollutionPresenter> implements PollutionContract.View, OnAnimationToolbar {
     public static final String TAG = "WeatherTopFragment";
@@ -32,9 +34,21 @@ public class PollutionFragment extends BaseFragment<PollutionPresenter> implemen
     @ViewById(R.id.windTV) TextView windTV;
     @ViewById(R.id.humidityTV) TextView humidityTV;
     @ViewById(R.id.pressureTV) TextView pressureTV;
+    @ViewById(R.id.titlePlaceTV) TextView titlePlaceTV;
+    @ViewById(R.id.nameTV) TextView nameTV;
+    @ViewById(R.id.timeTV) TextView timeTV;
+    @ViewById(R.id.aqiTV) TextView aqiTV;
+    @ViewById(R.id.aqiShortDeascTV) TextView aqiShortDeascTV;
+    @ViewById(R.id.aqiLongDeascTV) TextView aqiLongDeascTV;
+    @ViewById(R.id.pm25TV) TextView pm25TV;
+    @ViewById(R.id.pm10TV) TextView pm10TV;
+    @ViewById(R.id.no2TV) TextView no2TV;
+    @ViewById(R.id.coTV) TextView coTV;
+    @ViewById(R.id.backTV) TextView backTV;
+
 
     @Bean
-    PollutionPresenter weatherTopPresenter;
+    PollutionPresenter pollutionPresenter;
 
     String expandedTitle = "";
     String collapsedTitle = "";
@@ -45,8 +59,8 @@ public class PollutionFragment extends BaseFragment<PollutionPresenter> implemen
 
     @Override
     protected PollutionPresenter registerPresenter() {
-        weatherTopPresenter.attachView(this);
-        return weatherTopPresenter;
+        pollutionPresenter.attachView(this);
+        return pollutionPresenter;
     }
 
     public void onStart() {
@@ -82,6 +96,10 @@ public class PollutionFragment extends BaseFragment<PollutionPresenter> implemen
         }
     }
 
+    @Click(R.id.backTV)
+    void onBackClick() {
+        getActivity().finish();
+    }
 
     @Override
     public void refreshWeatherViews(WeatherFromOWMRealm weatherFromOWMRealm) {
@@ -101,6 +119,10 @@ public class PollutionFragment extends BaseFragment<PollutionPresenter> implemen
             windTV.setText(WeatherUtils.getFormattedWind(getContext(), weatherFromOWMRealm.getWind()));
         }
 
+        if (titlePlaceTV != null) {
+            titlePlaceTV.setText(weatherFromOWMRealm.getName());
+        }
+
         refreshToolbar(weatherFromOWMRealm.getName());
 
         expandedTitle = weatherFromOWMRealm.getName();
@@ -116,6 +138,14 @@ public class PollutionFragment extends BaseFragment<PollutionPresenter> implemen
 
     @Override
     public void refreshPollutionViews(PollutionRealm pollutionRealm) {
+        Log.d(TAG, "refreshPollutionViews: " + pollutionRealm.toString());
 
+        nameTV.setText(pollutionRealm.getName());
+        timeTV.setText(pollutionRealm.getTime());
+        aqiTV.setText("" + pollutionRealm.getAqi());
+        pm25TV.setText(pollutionRealm.getPm25() + "");
+        pm10TV.setText(pollutionRealm.getPm10() + "");
+        no2TV.setText(pollutionRealm.getNo2() + "");
+        coTV.setText(pollutionRealm.getCo() + "");
     }
 }

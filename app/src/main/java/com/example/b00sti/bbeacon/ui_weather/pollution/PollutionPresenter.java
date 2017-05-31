@@ -31,7 +31,7 @@ import retrofit2.HttpException;
 /**
  * Created by Dominik (b00sti) Pawlik on 2017-04-13
  */
-
+//todo clean up
 @EBean
 public class PollutionPresenter extends BasePresenter<PollutionContract.View> implements PollutionContract.Presenter, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "WeatherTopPresenter";
@@ -147,12 +147,25 @@ public class PollutionPresenter extends BasePresenter<PollutionContract.View> im
         pollutionRealm.setIdx(data.getIdx());
         pollutionRealm.setName(data.getCity().getName());
         pollutionRealm.setTime(data.getTime().getS());
-        pollutionRealm.setPm25(data.getIaqi().getPm25().getV());
-        pollutionRealm.setPm10(data.getIaqi().getPm10().getV());
-        pollutionRealm.setCo(data.getIaqi().getCo().getV());
-        pollutionRealm.setP(data.getIaqi().getP().getV());
-        pollutionRealm.setH(data.getIaqi().getH().getV());
-        pollutionRealm.setNo2(data.getIaqi().getNo2().getV());
+
+        if (data.getIaqi().getPm25() != null) {
+            pollutionRealm.setPm25(data.getIaqi().getPm25().getV());
+        }
+        if (data.getIaqi().getPm10() != null) {
+            pollutionRealm.setPm10(data.getIaqi().getPm10().getV());
+        }
+        if (data.getIaqi().getCo() != null) {
+            pollutionRealm.setCo(data.getIaqi().getCo().getV());
+        }
+        if (data.getIaqi().getP() != null) {
+            pollutionRealm.setP(data.getIaqi().getP().getV());
+        }
+        if (data.getIaqi().getH() != null) {
+            pollutionRealm.setH(data.getIaqi().getH().getV());
+        }
+        if (data.getIaqi().getNo2() != null) {
+            pollutionRealm.setNo2(data.getIaqi().getNo2().getV());
+        }
 
         return pollutionRealm;
     }

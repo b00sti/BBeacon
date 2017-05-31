@@ -27,4 +27,20 @@ public class PollutionRealm extends RealmObject {
     private double no2;
     private double p;
 
+    @Override
+    public String toString() {
+        return "PollutionRealm{" +
+                "id=" + id +
+                ", aqi=" + aqi +
+                ", idx=" + idx +
+                ", time='" + time + '\'' +
+                ", name='" + name + '\'' +
+                ", pm10=" + pm10 +
+                ", pm25=" + pm25 +
+                ", co=" + co +
+                ", h=" + h +
+                ", no2=" + no2 +
+                ", p=" + p +
+                '}';
+    }
 }

@@ -50,6 +50,10 @@
     <string name="get_condition_spinner_title">Select condition</string>
     <string name="get_value_get_notification">Select value</string>
     <string name="select_value">Select value</string>
+    <string name="co_ppm">CO (ppm)</string>
+    <string name="no2_ppb">NO<sub>2</sub> (ppb)</string>
+    <string name="pm_10_g_m3">Pm<sub>10</sub> (µg/m<sup>3</sup>)</string>
+    <string name="pm_25_g_m3">Pm<sub>25</sub> (µg/m<sup>3</sup>)</string>
 
     <string-array
         name="notify_parameters">
