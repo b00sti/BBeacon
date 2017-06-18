@@ -50,14 +50,14 @@ public class SetScannerInteractor {
             weatherItem.setBeaconId(scannerItem.getId());
             weatherItem.setColor(scannerItem.getColor());
             weatherItem.setHumidity((new Random().nextInt(100)) + " %");
-            weatherItem.setMessage("Do something !");
+            weatherItem.setMessage("Hide flowers ");
             weatherItem.setAlarm(scannerItem.isEnabled());
             weatherItem.setPressure((new Random().nextInt(30) + 1000) + " hPa");
-            weatherItem.setTemp(new Random().nextInt(33) + "");
+            weatherItem.setTemp((int) (Math.random() * 3) + 16 + "");
             weatherItem.setTitle(scannerItem.getTitle());
-            weatherItem.setConditionKind(WeatherConditionKind.LESS);
+            weatherItem.setConditionKind(WeatherConditionKind.MORE);
             weatherItem.setConditionParameterKind(WeatherParameterKind.WEATHER_TEMPERATURE);
-            weatherItem.setConditionParameterValue(NumUtils.toD(77));
+            weatherItem.setConditionParameterValue(NumUtils.toD(25));
             weatherItems.add(weatherItem);
         }
         SetWeatherInteractor.execute(weatherItems, null);

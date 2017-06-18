@@ -31,7 +31,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:padding="@dimen/size_24dp"
-            android:text="16:09"
+            android:text="12:57"
             android:textSize="82dp"
             tools:ignore="SpUsage"
             tools:text="16:09"/>
@@ -54,7 +54,7 @@
             android:layout_marginStart="@dimen/size_64dp"
             android:layout_marginTop="@dimen/size_16dp"
             android:layout_weight="0"
-            app:sb_checked="true"
+            app:sb_checked="false"
             app:sb_checked_color="@color/colorAccent"
             app:sb_enable_effect="true"
             app:sb_shadow_effect="true"/>
@@ -83,7 +83,7 @@
             android:padding="@dimen/size_8dp"
             app:rcBackgroundColor="@color/indigo_50"
             app:rcBackgroundPadding="@dimen/size_8dp"
-            app:rcProgress="32"
+            app:rcProgress="77"
             app:rcProgressColor="@color/colorAccent"
             app:rcRadius="@dimen/size_16dp"
             app:rcReverse="false"/>

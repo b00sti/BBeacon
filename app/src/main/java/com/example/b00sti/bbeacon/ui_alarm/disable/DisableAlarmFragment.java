@@ -1,5 +1,7 @@
 package com.example.b00sti.bbeacon.ui_alarm.disable;
 
+import android.widget.Toast;
+
 import com.example.b00sti.bbeacon.R;
 import com.example.b00sti.bbeacon.base.BaseFragment;
 
@@ -26,5 +28,9 @@ public class DisableAlarmFragment extends BaseFragment<DisableAlarmPresenter> im
         return disableAlarmPresenter;
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(getContext(), "Alarm disabled !", Toast.LENGTH_LONG).show();
+    }
 }

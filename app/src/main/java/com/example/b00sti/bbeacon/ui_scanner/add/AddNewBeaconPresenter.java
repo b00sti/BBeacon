@@ -1,6 +1,7 @@
 package com.example.b00sti.bbeacon.ui_scanner.add;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -60,10 +61,10 @@ public class AddNewBeaconPresenter extends BasePresenter<AddNewBeaconContract.Vi
             val = 0;
         } else if (val > 100) {
             val = 100;
-        } else {
-            val = 50;
         }
+
         double rand = new Random().nextDouble();
+        Log.d("tak", "storageNewItem: " + val + " / " + s + " / " + s.length());
 
         ScannerItem scannerItem = new ScannerItem();
         scannerItem.setId(view.getTitle().hashCode() + rand + "");

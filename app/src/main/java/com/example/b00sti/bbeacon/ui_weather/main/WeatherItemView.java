@@ -111,7 +111,7 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
         mChart.setViewPortOffsets(0f, 0f, 0f, 0f);
 
         // add data
-        setData(12, 25, color);
+        setData(12, 8, color);
         mChart.invalidate();
 
         // get the legend (only possible after setting data)
@@ -182,7 +182,7 @@ public class WeatherItemView extends BaseItemView<WeatherItem> {
 
         for (float x = from; x < to; x++) {
 
-            float y = getRandom(range, 10);
+            float y = getRandom(range, 12);
             if (y > maxY) {
                 indexMaxY = i;
                 maxY = y;

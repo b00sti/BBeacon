@@ -116,6 +116,16 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/size_8dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center|top"
+                    android:layout_margin="@dimen/size_8dp"
+                    android:gravity="center"
+                    android:text="Temperature"/>
+
                 <include
                     android:id="@+id/chart_toolbar"
                     layout="@layout/card_toolbar"/>
@@ -144,6 +154,16 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/size_8dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center|top"
+                    android:layout_margin="@dimen/size_8dp"
+                    android:gravity="center"
+                    android:text="Pressure"/>
+
                 <include
                     android:id="@+id/chart_toolbar"
                     layout="@layout/card_toolbar"/>
@@ -171,6 +191,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/size_4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center|top"
+                    android:layout_margin="@dimen/size_8dp"
+                    android:gravity="center"
+                    android:text="Humidity"/>
 
                 <include
                     android:id="@+id/chart_toolbar"

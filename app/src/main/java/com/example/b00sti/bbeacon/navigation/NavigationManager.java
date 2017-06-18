@@ -149,10 +149,10 @@ public class NavigationManager {
     }
 
     private void onFabClickedOnFirstPage() {
-        ActivityBuilder.startDisableAlarmActivity(ctx, "");/*
+        //ActivityBuilder.startDisableAlarmActivity(ctx, "");
         Intent intent = new Intent(ctx, BaseInnerViewActivity_.class);
         intent.putExtra(ctx.getString(R.string.bundle_fragment), FragmentBuilder.ADD_NEW_ALARM);
-        ctx.startActivity(intent);*/
+        ctx.startActivity(intent);
     }
 
     private void onFabClickedOnThirdPage() {
