@@ -1,4 +1,4 @@
 # BBeacon
 Management of my own beacon - android app [in progress]
 
-More - https://b00stiandroid.wordpress.com/category/android/bbeacon/
+<p><a href="https://b00sti.wordpress.com/category/android/bbeacon/">Read more about this project.</a></p>
